@@ -1,0 +1,28 @@
+{
+  "referenceStatus": "approved",
+  "referenceImage": "workflow/reference-images/ellen-flat2d-reference-original.png",
+  "poseReferences": {
+    "stand_masked": {
+      "status": "approved",
+      "image": "workflow/reference-images/ellen-flat2d-stand-masked-v1.png"
+    },
+    "sit_masked": {
+      "status": "approved",
+      "image": "workflow/reference-images/ellen-flat2d-sit-masked-v5.png"
+    }
+  },
+  "sourceRoot": "workflow/source-videos",
+  "jobs": [
+    { "id": "idle", "input": "idle.mp4", "mode": "green", "start": 0, "end": 2 },
+    { "id": "wave", "input": "wave.mp4", "mode": "green", "start": 0, "end": 3.5 },
+    { "id": "sleep_enter", "input": "sleep_enter.mp4", "mode": "green", "start": 0, "end": 5 },
+    { "id": "sleep_idle", "input": "sleep_idle.mp4", "mode": "green", "start": 0, "end": 2.667 },
+    { "id": "wake", "input": "wake.mp4", "mode": "green", "start": 0, "end": 5 },
+    { "id": "happy", "input": "happy.mp4", "mode": "green", "start": 0, "end": 2.833 },
+    { "id": "pet", "input": "pet.mp4", "mode": "green", "start": 0, "end": 5 },
+    { "id": "eat", "input": "eat.mp4", "mode": "green", "start": 0, "end": 6 },
+    { "id": "stretch", "input": "stretch.mp4", "mode": "green", "start": 0, "end": 5 },
+    { "id": "drag_hold", "input": "drag_hold.mp4", "mode": "green", "start": 0, "end": 5 },
+    { "id": "put_down", "input": "put_down.mp4", "mode": "green", "start": 0, "end": 3 }
+  ]
+}

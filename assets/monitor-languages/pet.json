@@ -1,0 +1,2632 @@
+{
+  "语言": [
+    "Language",
+    "語言",
+    "言語",
+    "언어",
+    "Langue",
+    "Sprache",
+    "Idioma",
+    "Язык"
+  ],
+  "任务栏指标（最多 12 项）": [
+    "Taskbar metrics (up to 12)",
+    "工作列指標（最多 12 項）",
+    "タスクバーの指標（最大 12 項目）",
+    "작업 표시줄 지표(최대 12개)",
+    "Indicateurs de la barre des tâches (12 maximum)",
+    "Taskleistenwerte (maximal 12)",
+    "Indicadores de la barra de tareas (hasta 12)",
+    "Показатели панели задач (до 12)"
+  ],
+  "功能开关即时生效；数值输入完成后按 Enter 或离开输入框保存。": [
+    "Switches apply immediately. Press Enter or leave the field to save a completed value.",
+    "功能開關即時生效；數值輸入完成後按 Enter 或離開輸入框儲存。",
+    "切り替えはすぐに反映されます。入力後に Enter を押すか、入力欄を離れると保存されます。",
+    "설정 전환은 즉시 적용됩니다. 값을 입력한 뒤 Enter를 누르거나 입력란을 벗어나면 저장됩니다.",
+    "Les options s’appliquent immédiatement. Appuyez sur Entrée ou quittez le champ pour enregistrer la valeur.",
+    "Schalter wirken sofort. Eingaben mit Enter oder beim Verlassen des Felds speichern.",
+    "Los cambios se aplican al instante. Pulsa Intro o sal del campo para guardar el valor.",
+    "Переключатели действуют сразу. Для сохранения значения нажмите Enter или выйдите из поля."
+  ],
+  "简体中文": [
+    "Simplified Chinese",
+    "簡體中文",
+    "簡体字中国語",
+    "중국어(간체)",
+    "Chinois simplifié",
+    "Chinesisch (vereinfacht)",
+    "Chino simplificado",
+    "Китайский (упрощённый)"
+  ],
+  "繁体中文": [
+    "Traditional Chinese",
+    "繁體中文",
+    "繁体字中国語",
+    "중국어(번체)",
+    "Chinois traditionnel",
+    "Chinesisch (traditionell)",
+    "Chino tradicional",
+    "Китайский (традиционный)"
+  ],
+  "英语": [
+    "English",
+    "英語",
+    "英語",
+    "영어",
+    "Anglais",
+    "Englisch",
+    "Inglés",
+    "Английский"
+  ],
+  "日语": [
+    "Japanese",
+    "日語",
+    "日本語",
+    "일본어",
+    "Japonais",
+    "Japanisch",
+    "Japonés",
+    "Японский"
+  ],
+  "韩语": [
+    "Korean",
+    "韓語",
+    "韓国語",
+    "한국어",
+    "Coréen",
+    "Koreanisch",
+    "Coreano",
+    "Корейский"
+  ],
+  "法语": [
+    "French",
+    "法語",
+    "フランス語",
+    "프랑스어",
+    "Français",
+    "Französisch",
+    "Francés",
+    "Французский"
+  ],
+  "德语": [
+    "German",
+    "德語",
+    "ドイツ語",
+    "독일어",
+    "Allemand",
+    "Deutsch",
+    "Alemán",
+    "Немецкий"
+  ],
+  "西班牙语": [
+    "Spanish",
+    "西班牙語",
+    "スペイン語",
+    "스페인어",
+    "Espagnol",
+    "Spanisch",
+    "Español",
+    "Испанский"
+  ],
+  "俄语": [
+    "Russian",
+    "俄語",
+    "ロシア語",
+    "러시아어",
+    "Russe",
+    "Russisch",
+    "Ruso",
+    "Русский"
+  ],
+  "显示 FPS": [
+    "Show FPS",
+    "顯示 FPS",
+    "FPS を表示",
+    "FPS 표시",
+    "Afficher les FPS",
+    "FPS anzeigen",
+    "Mostrar FPS",
+    "Показывать FPS"
+  ],
+  "FPS 目标（可选）": [
+    "FPS target (optional)",
+    "FPS 目標（可選）",
+    "FPS 対象（任意）",
+    "FPS 대상 (선택)",
+    "Cible FPS (facultative)",
+    "FPS-Ziel (optional)",
+    "Objetivo FPS (opcional)",
+    "Цель FPS (необязательно)"
+  ],
+  "打开游戏或其他正在渲染的窗口后显示帧率；无需测试窗口。": [
+    "FPS appears for games or other actively rendering windows; no test window is needed.",
+    "開啟遊戲或其他正在繪製的視窗後顯示幀率；無需測試視窗。",
+    "ゲームなど描画中のウィンドウの FPS を表示します。テスト画面は不要です。",
+    "게임 등 렌더링 중인 창의 FPS를 표시합니다. 테스트 창은 필요하지 않습니다.",
+    "Affiche les FPS des jeux ou fenêtres en cours de rendu, sans fenêtre de test.",
+    "FPS für Spiele oder aktiv rendernde Fenster; kein Testfenster erforderlich.",
+    "Muestra FPS de juegos o ventanas que estén renderizando; no requiere una ventana de prueba.",
+    "Показывает FPS игр и окон с активной отрисовкой; тестовое окно не требуется."
+  ],
+  "Pet 自启动设置已更新。": [
+    "Pet startup preference updated.",
+    "Pet 自動啟動設定已更新。",
+    "Pet 自動起動設定を更新しました。",
+    "Pet 자동 시작 설정을 갱신했습니다.",
+    "Démarrage de Pet mis à jour.",
+    "Pet-Autostart aktualisiert.",
+    "Inicio de Pet actualizado.",
+    "Автозапуск Pet обновлён."
+  ],
+  "自启动设置不可用。": [
+    "Startup settings unavailable.",
+    "自動啟動設定無法使用。",
+    "自動起動設定は利用できません。",
+    "자동 시작 설정을 사용할 수 없습니다.",
+    "Paramètres de démarrage indisponibles.",
+    "Autostarteinstellungen nicht verfügbar.",
+    "Ajustes de inicio no disponibles.",
+    "Настройки автозапуска недоступны."
+  ],
+  "自启动设置失败。": [
+    "Startup setting failed.",
+    "自動啟動設定失敗。",
+    "自動起動設定に失敗しました。",
+    "자동 시작 설정 실패.",
+    "Réglage du démarrage échoué.",
+    "Autostarteinstellung fehlgeschlagen.",
+    "Error al configurar inicio.",
+    "Ошибка настройки автозапуска."
+  ],
+  "任务栏指标重复或超过 12 项。": [
+    "Taskbar metrics duplicated or exceed 12 items.",
+    "工作列指標重複或超過 12 項。",
+    "タスクバー項目が重複または12項目を超えています。",
+    "작업 표시줄 지표가 중복되거나 12개를 초과합니다.",
+    "Indicateurs de barre des tâches dupliqués ou plus de 12.",
+    "Doppelte Taskleisten-Messwerte oder mehr als 12.",
+    "Métricas de barra de tareas duplicadas o más de 12.",
+    "Показатели панели задач повторяются или их больше 12."
+  ],
+  "任务栏不可用": [
+    "Taskbar unavailable",
+    "工作列無法使用",
+    "タスクバー利用不可",
+    "작업 표시줄 사용 불가",
+    "Barre des tâches indisponible",
+    "Taskleiste nicht verfügbar",
+    "Barra de tareas no disponible",
+    "Панель задач недоступна"
+  ],
+  "任务栏定位暂不可用": [
+    "Taskbar placement temporarily unavailable",
+    "工作列定位暫時無法使用",
+    "タスクバー配置は一時利用不可",
+    "작업 표시줄 위치 확인 일시 불가",
+    "Positionnement temporairement indisponible",
+    "Taskleistenposition vorübergehend nicht verfügbar",
+    "Posición de barra de tareas temporalmente no disponible",
+    "Расположение панели задач временно недоступно"
+  ],
+  "任务栏空白空间不足": [
+    "Insufficient blank taskbar space",
+    "工作列空白空間不足",
+    "タスクバーの空き領域不足",
+    "작업 표시줄 빈 공간 부족",
+    "Espace libre insuffisant dans la barre des tâches",
+    "Nicht genug freier Taskleistenplatz",
+    "Espacio libre insuficiente en la barra",
+    "Недостаточно свободного места на панели задач"
+  ],
+  "任务栏监控运行中 · 鼠标穿透": [
+    "Taskbar monitor running · click-through",
+    "工作列監控執行中 · 滑鼠穿透",
+    "タスクバー監視中 · クリック透過",
+    "작업 표시줄 모니터 실행 중 · 클릭 통과",
+    "Moniteur de barre des tâches actif · transparent aux clics",
+    "Taskleistenmonitor läuft · klickdurchlässig",
+    "Monitor de barra activo · paso de clics",
+    "Монитор панели задач работает · пропуск кликов"
+  ],
+  "等待定位任务栏": [
+    "Waiting for taskbar placement",
+    "等待定位工作列",
+    "タスクバー配置を待機中",
+    "작업 표시줄 위치 확인 대기",
+    "Attente du positionnement de la barre",
+    "Warten auf Taskleistenposition",
+    "Esperando posición de barra de tareas",
+    "Ожидание расположения панели задач"
+  ],
+  "无可用传感器": [
+    "No sensors available",
+    "無可用感測器",
+    "利用可能なセンサーなし",
+    "사용 가능한 센서 없음",
+    "Aucun capteur disponible",
+    "Keine Sensoren verfügbar",
+    "Sin sensores disponibles",
+    "Нет доступных датчиков"
+  ],
+  "后台启动或采集超时；Pet 继续运行": [
+    "Worker startup or sampling timed out; Pet keeps running",
+    "背景程序啟動或擷取逾時；Pet 繼續執行",
+    "ワーカー起動または収集が時間切れ。Pet は継続",
+    "백그라운드 시작 또는 수집 시간 초과. Pet은 계속 실행",
+    "Démarrage ou collecte expiré ; Pet continue",
+    "Workerstart oder Erfassung abgelaufen; Pet läuft weiter",
+    "Tiempo agotado al iniciar o recopilar; Pet sigue activo",
+    "Истекло время запуска или сбора; Pet продолжает работу"
+  ],
+  "已取消管理员授权；可以普通权限重新启用": [
+    "Administrator permission cancelled; enable again with ordinary permissions",
+    "已取消管理員授權；可用一般權限重新啟用",
+    "管理者権限をキャンセル。通常権限で再度有効化できます",
+    "관리자 권한 요청 취소. 일반 권한으로 다시 활성화 가능",
+    "Autorisation administrateur annulée ; réactivez avec les droits ordinaires",
+    "Administratorfreigabe abgebrochen; mit normalen Rechten erneut aktivieren",
+    "Permiso de administrador cancelado; reactiva con permisos normales",
+    "Права администратора отменены; включите снова с обычными правами"
+  ],
+  "监控不可用": [
+    "Monitoring unavailable",
+    "監控無法使用",
+    "監視利用不可",
+    "모니터링 사용 불가",
+    "Surveillance indisponible",
+    "Überwachung nicht verfügbar",
+    "Monitorización no disponible",
+    "Мониторинг недоступен"
+  ],
+  "发布包缺少内置监控后台，请保留完整程序目录": [
+    "Package lacks the monitoring worker; keep the full program directory",
+    "套件缺少內建監控背景程序，請保留完整程式目錄",
+    "監視ワーカーがありません。プログラム全体を保持してください",
+    "모니터 백그라운드가 누락되었습니다. 전체 프로그램 폴더를 유지하세요",
+    "Processus de surveillance absent ; gardez le dossier complet",
+    "Monitor-Worker fehlt; vollständiges Programmverzeichnis behalten",
+    "Falta el proceso de monitorización; conserva la carpeta completa",
+    "В пакете отсутствует процесс мониторинга; сохраните полный каталог программы"
+  ],
+  "后台未能启动": [
+    "Worker could not start",
+    "背景程序無法啟動",
+    "ワーカー起動失敗",
+    "백그라운드 시작 실패",
+    "Processus impossible à démarrer",
+    "Worker konnte nicht starten",
+    "No se pudo iniciar el proceso",
+    "Не удалось запустить фоновый процесс"
+  ],
+  "监控后台身份不匹配": [
+    "Monitoring worker identity mismatch",
+    "監控背景程序身分不符",
+    "監視ワーカーの識別不一致",
+    "모니터 백그라운드 ID 불일치",
+    "Identité du processus de surveillance incorrecte",
+    "Monitor-Worker-Identität stimmt nicht überein",
+    "Identidad del proceso de monitorización incorrecta",
+    "Идентификатор процесса мониторинга не совпадает"
+  ],
+  "后台数据中断或超出限制": [
+    "Worker data interrupted or over limit",
+    "背景資料中斷或超出限制",
+    "ワーカーデータ切断または上限超過",
+    "백그라운드 데이터 중단 또는 제한 초과",
+    "Données interrompues ou hors limites",
+    "Worker-Daten unterbrochen oder zu groß",
+    "Datos interrumpidos o fuera del límite",
+    "Данные прерваны или превышен лимит"
+  ],
+  "后台数据为空": [
+    "Worker data is empty",
+    "背景資料為空",
+    "ワーカーデータが空です",
+    "백그라운드 데이터가 비어 있습니다",
+    "Données du processus vides",
+    "Worker-Daten sind leer",
+    "Datos del proceso vacíos",
+    "Данные фонового процесса пусты"
+  ],
+  "监控后台协议或指标目录不兼容": [
+    "Worker protocol or metric catalog incompatible",
+    "背景協定或指標目錄不相容",
+    "ワーカーのプロトコルまたは項目一覧が非互換",
+    "백그라운드 프로토콜 또는 지표 목록 비호환",
+    "Protocole ou catalogue incompatible",
+    "Worker-Protokoll oder Messwertkatalog inkompatibel",
+    "Protocolo o catálogo de métricas incompatible",
+    "Протокол или каталог показателей несовместим"
+  ],
+  "历史写入失败": [
+    "History write failed",
+    "歷史寫入失敗",
+    "履歴の書き込み失敗",
+    "기록 쓰기 실패",
+    "Écriture de l'historique échouée",
+    "Verlauf konnte nicht geschrieben werden",
+    "Error al escribir historial",
+    "Ошибка записи истории"
+  ],
+  "FPS 暂不可用或正在启动。": [
+    "FPS temporarily unavailable or starting.",
+    "FPS 暫時無法使用或正在啟動。",
+    "FPS は一時利用不可または起動中。",
+    "FPS 일시 불가 또는 시작 중.",
+    "FPS temporairement indisponible ou en démarrage.",
+    "FPS vorübergehend nicht verfügbar oder startet.",
+    "FPS temporalmente no disponible o iniciándose.",
+    "FPS временно недоступен или запускается."
+  ],
+  "FPS 组件校验失败，请使用完整安装包。": [
+    "FPS component verification failed; use the full package.",
+    "FPS 元件驗證失敗，請使用完整安裝套件。",
+    "FPS 部品検証失敗。完全なパッケージを使用してください。",
+    "FPS 구성 요소 검증 실패. 전체 패키지를 사용하세요.",
+    "Vérification du composant FPS échouée ; utilisez le paquet complet.",
+    "FPS-Komponentenprüfung fehlgeschlagen; vollständiges Paket verwenden.",
+    "Error al verificar componente FPS; usa el paquete completo.",
+    "Ошибка проверки компонента FPS; используйте полный пакет."
+  ],
+  "FPS 需要管理员监控后台，其他监控继续运行。": [
+    "FPS requires an administrator worker; other monitoring continues.",
+    "FPS 需要管理員監控背景程序，其他監控繼續執行。",
+    "FPS は管理者ワーカーが必要。他の監視は継続。",
+    "FPS에는 관리자 백그라운드가 필요합니다. 다른 모니터링은 계속됩니다.",
+    "FPS nécessite un processus administrateur ; la surveillance continue.",
+    "FPS braucht einen Administrator-Worker; andere Überwachung läuft weiter.",
+    "FPS requiere proceso administrador; el resto continúa.",
+    "FPS требует процесса администратора; остальной мониторинг продолжается."
+  ],
+  "插件配置不可用，原文件保留": [
+    "Plugin configuration unavailable; original file retained",
+    "外掛設定無法使用，原檔案保留",
+    "プラグイン設定利用不可。元ファイルは保持",
+    "플러그인 설정 사용 불가. 원본 파일 유지",
+    "Configuration du plugin indisponible ; original conservé",
+    "Pluginkonfiguration nicht verfügbar; Originaldatei bleibt",
+    "Configuración de plugin no disponible; original conservado",
+    "Конфигурация плагина недоступна; исходный файл сохранён"
+  ],
+  "插件配置保存失败": [
+    "Plugin configuration save failed",
+    "外掛設定儲存失敗",
+    "プラグイン設定の保存失敗",
+    "플러그인 설정 저장 실패",
+    "Enregistrement du plugin échoué",
+    "Pluginkonfiguration konnte nicht gespeichert werden",
+    "Error al guardar configuración de plugin",
+    "Ошибка сохранения конфигурации плагина"
+  ],
+  "插件配置为空": [
+    "Plugin configuration is empty",
+    "外掛設定為空",
+    "プラグイン設定が空です",
+    "플러그인 설정이 비어 있습니다",
+    "Configuration du plugin vide",
+    "Pluginkonfiguration ist leer",
+    "Configuración de plugin vacía",
+    "Конфигурация плагина пуста"
+  ],
+  "插件配置损坏": [
+    "Plugin configuration damaged",
+    "外掛設定損壞",
+    "プラグイン設定が破損",
+    "플러그인 설정 손상",
+    "Configuration du plugin endommagée",
+    "Pluginkonfiguration beschädigt",
+    "Configuración de plugin dañada",
+    "Конфигурация плагина повреждена"
+  ],
+  "插件文件过大": [
+    "Plugin file too large",
+    "外掛檔案過大",
+    "プラグインファイルが大きすぎます",
+    "플러그인 파일이 너무 큽니다",
+    "Fichier de plugin trop volumineux",
+    "Plugindatei zu groß",
+    "Archivo de plugin demasiado grande",
+    "Файл плагина слишком большой"
+  ],
+  "插件模板为空": [
+    "Plugin template is empty",
+    "外掛範本為空",
+    "プラグインテンプレートが空です",
+    "플러그인 템플릿이 비어 있습니다",
+    "Modèle de plugin vide",
+    "Pluginvorlage ist leer",
+    "Plantilla de plugin vacía",
+    "Шаблон плагина пуст"
+  ],
+  "插件模板无效或标识已存在": [
+    "Plugin template invalid or ID already exists",
+    "外掛範本無效或識別碼已存在",
+    "プラグインテンプレート無効または ID 重複",
+    "플러그인 템플릿이 잘못되었거나 ID가 중복됩니다",
+    "Modèle invalide ou ID existant",
+    "Pluginvorlage ungültig oder ID bereits vorhanden",
+    "Plantilla no válida o ID existente",
+    "Шаблон плагина недопустим или ID уже существует"
+  ],
+  "网页监控启动失败，端口可能已占用或权限不足。": [
+    "Web display failed to start; port busy or insufficient permissions.",
+    "網頁監控啟動失敗，連接埠可能已占用或權限不足。",
+    "ウェブ監視起動失敗。ポート使用中または権限不足。",
+    "웹 모니터 시작 실패. 포트 사용 중 또는 권한 부족.",
+    "Démarrage web échoué : port occupé ou droits insuffisants.",
+    "Webmonitorstart fehlgeschlagen: Port belegt oder Rechte fehlen.",
+    "Error al iniciar monitor web: puerto ocupado o permisos insuficientes.",
+    "Ошибка запуска веб-монитора: порт занят или недостаточно прав."
+  ],
+  "该端口保留给现有服务，请选择其他端口。": [
+    "This port is reserved for existing services; choose another.",
+    "此連接埠保留給既有服務，請選擇其他連接埠。",
+    "このポートは既存サービス用です。別のポートを選んでください。",
+    "이 포트는 기존 서비스용입니다. 다른 포트를 선택하세요.",
+    "Port réservé aux services existants ; choisissez-en un autre.",
+    "Port für vorhandene Dienste reserviert; anderen wählen.",
+    "Puerto reservado para servicios existentes; elige otro.",
+    "Этот порт зарезервирован для имеющихся служб; выберите другой."
+  ],
+  "警告阈值必须低于严重阈值，且在有效范围内。": [
+    "Warning threshold must be below critical and within the valid range.",
+    "警告閾值必須低於嚴重閾值，且在有效範圍內。",
+    "警告しきい値は危険しきい値より低く、有効範囲内である必要があります。",
+    "경고 임계값은 심각 임계값보다 낮고 유효 범위 안이어야 합니다.",
+    "Seuil d'avertissement inférieur au critique et dans les limites.",
+    "Warngrenze muss unter der kritischen Grenze und im gültigen Bereich liegen.",
+    "El umbral de aviso debe ser inferior al crítico y estar en el rango válido.",
+    "Порог предупреждения должен быть ниже критического и в допустимом диапазоне."
+  ],
+  "PawnIO 已登记版本：{0}（不代表当前传感器可用）": [
+    "Registered PawnIO version: {0} (does not prove sensor availability)",
+    "PawnIO 已登記版本：{0}（不代表目前感測器可用）",
+    "登録済み PawnIO：{0}（センサーの利用可否を保証しません）",
+    "등록된 PawnIO 버전: {0} (센서 사용 가능성을 보장하지 않음)",
+    "Version PawnIO enregistrée : {0} (ne garantit pas les capteurs)",
+    "Registrierte PawnIO-Version: {0} (keine Garantie für Sensorverfügbarkeit)",
+    "Versión PawnIO registrada: {0} (no garantiza sensores disponibles)",
+    "Зарегистрированная версия PawnIO: {0} (не гарантирует доступность датчиков)"
+  ],
+  "PawnIO 文件变更等待系统重启。": [
+    "PawnIO file changes await a system restart.",
+    "PawnIO 檔案變更等待系統重新啟動。",
+    "PawnIO ファイルの変更には再起動が必要です。",
+    "PawnIO 파일 변경이 시스템 재시작을 기다립니다.",
+    "Les changements de fichiers PawnIO attendent un redémarrage.",
+    "PawnIO-Dateiänderungen warten auf Systemneustart.",
+    "Cambios de PawnIO pendientes de reinicio.",
+    "Изменения файлов PawnIO ожидают перезагрузки системы."
+  ],
+  "网页监控运行中 · 仅监听 127.0.0.1": [
+    "Web display running · 127.0.0.1 only",
+    "網頁監控執行中 · 僅監聽 127.0.0.1",
+    "ウェブ監視中 · 127.0.0.1 のみ",
+    "웹 모니터 실행 중 · 127.0.0.1만 수신",
+    "Moniteur web actif · 127.0.0.1 uniquement",
+    "Webmonitor läuft · nur 127.0.0.1",
+    "Monitor web activo · solo 127.0.0.1",
+    "Веб-монитор работает · только 127.0.0.1"
+  ],
+  "FPS 使用固定的官方 PresentMon 独立会话；管理员后台按需采集呈现帧率。共享驱动安装保持关闭，不升级或卸载 ObsUI 使用的驱动。": [
+    "FPS uses a dedicated session of the pinned official PresentMon. The administrator worker captures presented frames on demand. Shared driver installation stays off; drivers used by ObsUI are not upgraded or removed.",
+    "FPS 使用固定官方 PresentMon 的獨立工作階段；管理員背景程序按需擷取呈現幀率。共用驅動安裝保持關閉，不升級或移除 ObsUI 使用的驅動。",
+    "FPS は固定した公式 PresentMon の専用セッションを使用。管理者ワーカーが必要時に収集します。共有ドライバーのインストールは無効で、ObsUI のドライバーを更新・削除しません。",
+    "FPS는 고정된 공식 PresentMon의 전용 세션을 사용합니다. 관리자 백그라운드에서 필요 시 수집합니다. 공유 드라이버 설치는 꺼져 있으며 ObsUI 드라이버를 업그레이드하거나 제거하지 않습니다.",
+    "FPS utilise une session dédiée du PresentMon officiel fixé. Collecte à la demande par le processus administrateur. Installation partagée désactivée ; pilotes ObsUI ni mis à niveau ni supprimés.",
+    "FPS nutzt eine eigene Sitzung des festen offiziellen PresentMon. Administrator-Worker erfasst bei Bedarf. Gemeinsame Treiberinstallation bleibt aus; ObsUI-Treiber werden nicht aktualisiert oder entfernt.",
+    "FPS usa una sesión dedicada de PresentMon oficial fijado. El proceso administrador captura bajo demanda. Instalación compartida desactivada; sin actualizar ni eliminar controladores de ObsUI.",
+    "FPS использует отдельный сеанс фиксированной официальной версии PresentMon. Администраторский процесс собирает данные по запросу. Установка общих драйверов выключена; драйверы ObsUI не обновляются и не удаляются."
+  ],
+  "Pet 不自动更改共享驱动。安装可能需要管理员权限及重启；已有 ObsUI 硬件服务优先复用。仅在确认需要缺失传感器时安装官方驱动。": [
+    "Pet does not change shared drivers automatically. Installation may require administrator access and a restart. Existing ObsUI monitoring is preferred. Install the official driver only when needed for missing sensors.",
+    "Pet 不自動變更共用驅動。安裝可能需要管理員權限及重新啟動；優先重用既有 ObsUI 硬體服務。僅在確認需要缺少的感測器時安裝官方驅動。",
+    "Pet は共有ドライバーを自動変更しません。インストールには管理者権限と再起動が必要な場合があります。既存の ObsUI 監視を優先利用します。不足するセンサーが必要な場合のみ公式ドライバーをインストールしてください。",
+    "Pet은 공유 드라이버를 자동 변경하지 않습니다. 설치 시 관리자 권한과 재시작이 필요할 수 있습니다. 기존 ObsUI 모니터링을 우선 사용합니다. 누락 센서가 필요한 경우에만 공식 드라이버를 설치하세요.",
+    "Pet ne modifie pas automatiquement les pilotes partagés. Installation : droits administrateur et redémarrage possibles. La surveillance ObsUI existante est prioritaire. Installez le pilote officiel uniquement pour les capteurs nécessaires manquants.",
+    "Pet ändert gemeinsame Treiber nicht automatisch. Installation kann Administratorrechte und Neustart benötigen. Vorhandene ObsUI-Überwachung wird bevorzugt. Offiziellen Treiber nur bei benötigten fehlenden Sensoren installieren.",
+    "Pet no cambia automáticamente controladores compartidos. La instalación puede requerir administrador y reinicio. Se prioriza el monitor ObsUI existente. Instala el controlador oficial solo si necesitas sensores ausentes.",
+    "Pet не меняет общие драйверы автоматически. Установка может требовать прав администратора и перезагрузки. Имеющийся мониторинг ObsUI используется в первую очередь. Устанавливайте официальный драйвер только при необходимости отсутствующих датчиков."
+  ],
+  "颜色使用 #RRGGBB。布局尺寸为 0–120，字号为 8–32。温度、内存、显存等独立阈值可随主题 JSON 导入导出。": [
+    "Use #RRGGBB colors, layout sizes 0–120 and font sizes 8–32. Independent temperature, memory and VRAM thresholds can be imported and exported in theme JSON.",
+    "色彩使用 #RRGGBB。版面尺寸為 0–120，字級為 8–32。溫度、記憶體、顯示記憶體等獨立閾值可隨主題 JSON 匯入匯出。",
+    "色は #RRGGBB、レイアウト寸法は0–120、文字サイズは8–32。温度、メモリ、VRAM の独立しきい値はテーマ JSON で読み込み・出力できます。",
+    "색상은 #RRGGBB, 레이아웃 크기는 0–120, 글꼴 크기는 8–32입니다. 온도, 메모리, VRAM의 독립 임계값을 테마 JSON으로 가져오고 내보낼 수 있습니다.",
+    "Couleurs #RRGGBB, dimensions 0–120, police 8–32. Les seuils propres à la température, mémoire et VRAM sont importables et exportables dans le thème JSON.",
+    "Farben als #RRGGBB, Layoutgrößen 0–120, Schriftgrößen 8–32. Eigene Temperatur-, Speicher- und VRAM-Grenzen können mit dem Thema-JSON importiert und exportiert werden.",
+    "Colores #RRGGBB, tamaños de diseño 0–120 y fuente 8–32. Los umbrales independientes de temperatura, memoria y VRAM se importan y exportan en el tema JSON.",
+    "Цвета #RRGGBB, размеры компоновки 0–120, шрифт 8–32. Отдельные пороги температуры, памяти и видеопамяти можно импортировать и экспортировать с JSON темы."
+  ],
+  "临时文件由 Windows 存储设置预览和确认删除；Pet 不遍历删除其他程序的缓存。": [
+    "Preview and confirm temporary file removal in Windows Storage settings. Pet does not traverse or delete other programs' caches.",
+    "暫存檔由 Windows 儲存設定預覽並確認刪除；Pet 不遍歷刪除其他程式的快取。",
+    "Windows ストレージ設定で一時ファイルを確認して削除します。Pet は他のプログラムのキャッシュを走査・削除しません。",
+    "Windows 저장소 설정에서 임시 파일을 미리 보고 삭제를 확인합니다. Pet은 다른 프로그램의 캐시를 탐색하거나 삭제하지 않습니다.",
+    "Prévisualisez et confirmez la suppression dans les paramètres de stockage Windows. Pet ne parcourt ni ne supprime les caches des autres programmes.",
+    "Temporäre Dateien in Windows-Speichereinstellungen prüfen und löschen. Pet durchsucht oder löscht keine Caches anderer Programme.",
+    "Revisa y confirma la eliminación de temporales en Almacenamiento de Windows. Pet no recorre ni elimina cachés de otros programas.",
+    "Просматривайте и подтверждайте удаление временных файлов в настройках хранилища Windows. Pet не просматривает и не удаляет кэши других программ."
+  ],
+  "将关闭当前资源管理器窗口并短暂刷新任务栏。正在进行的文件操作可能中断，请先保存。继续？": [
+    "Current Explorer windows will close and the taskbar will refresh briefly. File operations may be interrupted. Save your work first. Continue?",
+    "將關閉目前檔案總管視窗並短暫重新整理工作列。進行中的檔案操作可能中斷，請先儲存。繼續？",
+    "現在のエクスプローラーを閉じ、タスクバーを一時更新します。ファイル操作が中断する場合があります。先に保存してください。続行しますか？",
+    "현재 탐색기 창이 닫히고 작업 표시줄이 잠시 새로 고침됩니다. 파일 작업이 중단될 수 있으니 먼저 저장하세요. 계속할까요?",
+    "Les fenêtres de l'Explorateur seront fermées et la barre des tâches actualisée. Les opérations de fichiers peuvent être interrompues. Enregistrez d'abord. Continuer ?",
+    "Explorerfenster werden geschlossen und die Taskleiste kurz aktualisiert. Dateioperationen können unterbrochen werden. Zuerst speichern. Fortfahren?",
+    "Se cerrarán las ventanas del Explorador y se actualizará la barra de tareas. Las operaciones de archivos pueden interrumpirse. Guarda primero. ¿Continuar?",
+    "Окна Проводника закроются, панель задач кратковременно обновится. Операции с файлами могут прерваться. Сначала сохраните работу. Продолжить?"
+  ],
+  "将在 {0} 分钟后请求关机。请保存所有程序的工作；可在这里取消，退出 Pet 会取消本次计划。继续？": [
+    "Request shutdown in {0} minutes. Save work in all programs. You can cancel here; exiting Pet cancels this schedule. Continue?",
+    "將在 {0} 分鐘後要求關機。請儲存所有程式的工作；可在此取消，結束 Pet 會取消本次排程。繼續？",
+    "{0} 分後にシャットダウンを要求します。すべての作業を保存してください。ここで取り消せます。Pet 終了時も予約を取り消します。続行しますか？",
+    "{0}분 후 시스템 종료를 요청합니다. 모든 프로그램의 작업을 저장하세요. 여기서 취소하거나 Pet을 종료하면 예약이 취소됩니다. 계속할까요?",
+    "Demander l'arrêt dans {0} minutes. Enregistrez tous vos travaux. Annulez ici ; fermer Pet annule cette planification. Continuer ?",
+    "In {0} Minuten Herunterfahren anfordern. Alle Arbeiten speichern. Hier abbrechbar; Pet beenden verwirft den Plan. Fortfahren?",
+    "Solicitar apagado en {0} minutos. Guarda el trabajo de todos los programas. Puedes cancelar aquí; cerrar Pet cancela el plan. ¿Continuar?",
+    "Запросить выключение через {0} минут. Сохраните работу во всех программах. Можно отменить здесь; выход из Pet отменит расписание. Продолжить?"
+  ],
+  "独立窗可拖动。靠边后移开鼠标自动收起，返回边缘展开；穿透时从宠物或托盘进入设置关闭。宠物与提醒气泡保持可操作。": [
+    "Drag the monitor window. Edge hiding collapses it after leaving; hover at the edge to restore. Disable click-through from pet or tray settings. Pet and alert controls remain usable.",
+    "獨立視窗可拖動。靠邊後移開滑鼠自動收起，返回邊緣展開；穿透時從寵物或系統匣設定關閉。寵物與提醒氣泡仍可操作。",
+    "監視ウィンドウはドラッグ可能。端に置いてマウスを離すと隠れ、端に戻すと表示。クリック透過はペットやトレイの設定で解除できます。ペットと通知は操作可能です。",
+    "모니터 창을 드래그할 수 있습니다. 가장자리에서 마우스를 벗어나면 숨겨지고 돌아오면 펼쳐집니다. 클릭 통과는 펫이나 트레이 설정에서 해제하세요. 펫과 알림은 계속 조작 가능합니다.",
+    "Fenêtre déplaçable. Au bord, elle se replie au départ de la souris et revient au survol. Désactivez la transparence aux clics dans les paramètres du compagnon ou de la zone de notification. Les alertes restent utilisables.",
+    "Monitorfenster ziehen. Am Rand klappt es ohne Maus ein und beim Überfahren auf. Klickdurchlässigkeit über Haustier- oder Tray-Einstellungen deaktivieren. Haustier und Warnungen bleiben bedienbar.",
+    "Arrastra el monitor. En el borde se oculta al salir el cursor y se abre al volver. Desactiva el paso de clics desde la mascota o bandeja. Mascota y alertas siguen utilizables.",
+    "Окно можно перетаскивать. У края оно скрывается при уходе мыши и разворачивается при возврате. Пропуск кликов отключается в настройках питомца или трея. Питомец и предупреждения остаются управляемыми."
+  ],
+  "默认不联网检查。填写可信的 HTTPS 更新清单，手动检查；仅接受完整 Pet x64 包，内置 LiteMonitor 不独立更新。": [
+    "No automatic network checks. Configure a trusted HTTPS feed and check manually. Only whole Pet x64 packages are accepted; integrated LiteMonitor does not update separately.",
+    "預設不連網檢查。填寫可信的 HTTPS 更新清單並手動檢查；僅接受完整 Pet x64 套件，內建 LiteMonitor 不獨立更新。",
+    "自動接続はしません。信頼する HTTPS 更新元を設定し手動確認。Pet x64 全体パッケージのみ対応し、LiteMonitor は個別更新しません。",
+    "자동 네트워크 확인은 없습니다. 신뢰하는 HTTPS 업데이트 소스를 설정해 수동 확인하세요. 전체 Pet x64 패키지만 지원하며 LiteMonitor는 별도 업데이트하지 않습니다.",
+    "Aucune vérification réseau automatique. Configurez une source HTTPS fiable et vérifiez manuellement. Seuls les paquets Pet x64 complets sont acceptés ; LiteMonitor ne se met pas à jour séparément.",
+    "Keine automatischen Netzprüfungen. Vertrauenswürdige HTTPS-Quelle eintragen und manuell prüfen. Nur vollständige Pet-x64-Pakete; kein separates LiteMonitor-Update.",
+    "Sin comprobaciones de red automáticas. Configura una fuente HTTPS fiable y comprueba manualmente. Solo paquetes Pet x64 completos; LiteMonitor no se actualiza por separado.",
+    "Без автоматических сетевых проверок. Укажите доверенный HTTPS-источник и проверяйте вручную. Принимаются только полные пакеты Pet x64; LiteMonitor отдельно не обновляется."
+  ],
+  "安装或替换整包前先退出 Pet；保留用户数据。下载后核对清单提供的 SHA-256。不会自动执行下载文件或替换监控组件。": [
+    "Exit Pet before replacing its package; retain user data and verify the provided SHA-256. Downloads are not automatically executed and monitoring components are not automatically replaced.",
+    "安裝或替換完整套件前先結束 Pet；保留使用者資料。下載後核對清單的 SHA-256。不會自動執行下載檔或替換監控元件。",
+    "パッケージのインストール・置換前に Pet を終了し、ユーザーデータを保持してください。ダウンロード後に SHA-256 を確認。ファイルの自動実行や監視部品の自動置換はしません。",
+    "패키지 설치 또는 교체 전에 Pet을 종료하고 사용자 데이터를 유지하세요. 다운로드 후 SHA-256을 확인하세요. 파일 자동 실행이나 모니터 구성 요소 자동 교체는 없습니다.",
+    "Fermez Pet avant de remplacer son paquet ; gardez les données utilisateur et vérifiez le SHA-256 fourni. Aucun téléchargement exécuté ni composant remplacé automatiquement.",
+    "Pet vor Installation oder Paketwechsel beenden; Nutzerdaten behalten und SHA-256 prüfen. Keine automatische Ausführung oder Ersetzung der Monitor-Komponenten.",
+    "Cierra Pet antes de instalar o reemplazar el paquete; conserva los datos y verifica SHA-256. No se ejecutan descargas ni se reemplazan componentes automáticamente.",
+    "Выйдите из Pet перед установкой или заменой пакета; сохраните данные пользователя и проверьте SHA-256. Загруженные файлы не запускаются, компоненты мониторинга не заменяются автоматически."
+  ],
+  "任务栏显示始终鼠标穿透，不遮挡点击。空间不足或无法确认空白区时暂停显示，不挤压现有程序按钮。": [
+    "Taskbar display is always click-through. It pauses when blank space cannot be verified or is too small; app buttons are unchanged.",
+    "工作列顯示始終滑鼠穿透，不阻擋點擊。空間不足或無法確認空白區時暫停顯示，不擠壓既有程式按鈕。",
+    "タスクバー表示は常にクリック透過。空き領域が確認できないか狭い場合は表示を停止し、既存のボタンを動かしません。",
+    "작업 표시줄 표시는 항상 클릭을 통과시킵니다. 빈 공간을 확인할 수 없거나 부족하면 표시를 중지하며 기존 프로그램 버튼은 유지됩니다.",
+    "Affichage toujours transparent aux clics. Il s'arrête si l'espace libre est invérifiable ou insuffisant ; les boutons restent inchangés.",
+    "Taskleistenanzeige immer klickdurchlässig. Ohne bestätigten oder ausreichenden Platz pausiert sie; Programmtasten bleiben unverändert.",
+    "La vista de barra de tareas deja pasar los clics. Se pausa si el espacio libre no se confirma o es insuficiente; los botones no cambian.",
+    "Отображение на панели задач всегда пропускает клики. При недостатке или неподтверждённом свободном месте оно приостанавливается; кнопки программ не меняются."
+  ],
+  "任务栏显示使用 Pet 自有窗口；不注入 Explorer，也不改变其他程序的任务栏布局。": [
+    "Taskbar display uses a Pet-owned window without injecting Explorer or changing other app layouts.",
+    "工作列顯示使用 Pet 自有視窗；不注入 Explorer，也不變更其他程式的工作列版面。",
+    "タスクバー表示は Pet 自身のウィンドウを使用。Explorer への注入や他のアプリの配置変更はしません。",
+    "작업 표시줄 표시는 Pet 자체 창을 사용합니다. Explorer 삽입이나 다른 앱의 작업 표시줄 배치 변경은 없습니다.",
+    "Affichage par une fenêtre propre à Pet, sans injection dans Explorer ni changement des autres applications.",
+    "Taskleistenanzeige in Pet-eigenem Fenster, ohne Explorer-Injektion oder Layoutänderung anderer Apps.",
+    "Vista en ventana propia de Pet, sin inyectar Explorer ni cambiar la disposición de otras aplicaciones.",
+    "Используется собственное окно Pet, без внедрения в Explorer и изменения расположения других программ."
+  ],
+  "更新统一使用完整 Pet 安装包或 ZIP。此内置 LiteMonitor 固定为 1.3.6，不会独立自动替换。": [
+    "Update the complete Pet installer or ZIP. Integrated LiteMonitor stays pinned to 1.3.6 and is not replaced independently.",
+    "更新統一使用完整 Pet 安裝套件或 ZIP。內建 LiteMonitor 固定為 1.3.6，不會獨立自動替換。",
+    "更新は Pet 全体のインストーラーまたは ZIP を使用。内蔵 LiteMonitor は1.3.6に固定し、個別の自動置換はしません。",
+    "업데이트는 전체 Pet 설치 패키지 또는 ZIP을 사용합니다. 내장 LiteMonitor는 1.3.6으로 고정되며 독립 자동 교체되지 않습니다.",
+    "Utilisez l'installateur ou ZIP Pet complet. LiteMonitor intégré reste en version 1.3.6 sans remplacement automatique indépendant.",
+    "Vollständiges Pet-Installationspaket oder ZIP verwenden. LiteMonitor bleibt bei 1.3.6 und wird nicht unabhängig automatisch ersetzt.",
+    "Actualiza con instalador o ZIP completo de Pet. LiteMonitor integrado queda fijado a 1.3.6 sin reemplazo automático independiente.",
+    "Обновляйте полным установщиком Pet или ZIP. Встроенный LiteMonitor зафиксирован на 1.3.6 и отдельно автоматически не заменяется."
+  ],
+  "插件仅在 Pet 普通权限进程中联网运行；默认关闭。输入配置使用当前 Windows 用户的 DPAPI 加密，不写入监控日志。": [
+    "Plugins run with ordinary Pet permissions and are off by default. Inputs use the current Windows user's DPAPI encryption and are excluded from monitoring logs.",
+    "外掛僅在 Pet 一般權限程序中連網執行；預設關閉。輸入設定使用目前 Windows 使用者的 DPAPI 加密，不寫入監控日誌。",
+    "プラグインは通常権限の Pet で接続し、初期状態は無効。入力設定は現在の Windows ユーザーの DPAPI で暗号化し、監視ログに記録しません。",
+    "플러그인은 일반 권한 Pet 프로세스에서 연결하며 기본적으로 꺼져 있습니다. 입력 설정은 현재 Windows 사용자의 DPAPI로 암호화하고 모니터 로그에 기록하지 않습니다.",
+    "Plugins avec les droits ordinaires de Pet, désactivés par défaut. Entrées chiffrées par DPAPI de l'utilisateur Windows actuel, exclues des journaux.",
+    "Plugins laufen mit normalen Pet-Rechten, standardmäßig aus. Eingaben werden per DPAPI des aktuellen Windows-Nutzers verschlüsselt und nicht protokolliert.",
+    "Plugins con permisos normales de Pet, desactivados por defecto. Entradas cifradas con DPAPI del usuario Windows actual, excluidas de los registros.",
+    "Плагины подключаются с обычными правами Pet, по умолчанию выключены. Параметры ввода шифруются DPAPI текущего пользователя Windows и не попадают в журналы мониторинга."
+  ],
+  "分类颜色阈值（不改变提醒规则）": [
+    "Category color thresholds (alert rules unchanged)",
+    "分類色彩閾值（不改變提醒規則）",
+    "分類別の色しきい値（通知ルールは変更しません）",
+    "분류별 색상 임계값 (알림 규칙 유지)",
+    "Seuils de couleur par catégorie (alertes inchangées)",
+    "Farbgrenzen nach Kategorie (Warnregeln unverändert)",
+    "Umbrales de color por categoría (alertas sin cambios)",
+    "Цветовые пороги категорий (правила предупреждений не меняются)"
+  ],
+  "使用所选分类的独立颜色阈值": [
+    "Use independent color thresholds for this category",
+    "使用所選分類的獨立色彩閾值",
+    "選択した分類の独立した色しきい値を使用",
+    "선택 분류의 독립 색상 임계값 사용",
+    "Utiliser des seuils de couleur propres à cette catégorie",
+    "Eigene Farbgrenzen dieser Kategorie verwenden",
+    "Usar umbrales de color propios de esta categoría",
+    "Использовать отдельные цветовые пороги категории"
+  ],
+  "警告 / 严重（Temp 为 ℃，NetKBps 为 MB/s，其余为 %）": [
+    "Warning / Critical (Temp: °C, NetKBps: MB/s, others: %)",
+    "警告 / 嚴重（Temp 為 ℃，NetKBps 為 MB/s，其餘為 %）",
+    "警告 / 危険（Temp: ℃、NetKBps: MB/s、その他: %）",
+    "경고 / 심각 (Temp: ℃, NetKBps: MB/s, 나머지: %)",
+    "Avertissement / Critique (Temp : °C, NetKBps : Mo/s, autres : %)",
+    "Warnung / Kritisch (Temp: °C, NetKBps: MB/s, sonst: %)",
+    "Aviso / Crítico (Temp: °C, NetKBps: MB/s, resto: %)",
+    "Предупреждение / Критический (Temp: °C, NetKBps: МБ/с, остальные: %)"
+  ],
+  "保存分类颜色阈值": [
+    "Save category color thresholds",
+    "儲存分類色彩閾值",
+    "分類の色しきい値を保存",
+    "분류 색상 임계값 저장",
+    "Enregistrer les seuils de couleur",
+    "Farbgrenzen speichern",
+    "Guardar umbrales de color",
+    "Сохранить цветовые пороги"
+  ],
+  "硬件驱动状态": [
+    "Hardware driver status",
+    "硬體驅動狀態",
+    "ドライバーの状態",
+    "하드웨어 드라이버 상태",
+    "État des pilotes",
+    "Hardwaretreiberstatus",
+    "Estado de controladores",
+    "Состояние драйвера оборудования"
+  ],
+  "刷新驱动状态": [
+    "Refresh driver status",
+    "重新整理驅動狀態",
+    "ドライバー状態を更新",
+    "드라이버 상태 새로 고침",
+    "Actualiser les pilotes",
+    "Treiberstatus aktualisieren",
+    "Actualizar estado de controladores",
+    "Обновить состояние драйвера"
+  ],
+  "打开 PawnIO 官方下载页": [
+    "Open official PawnIO download page",
+    "開啟 PawnIO 官方下載頁",
+    "PawnIO 公式ダウンロードを開く",
+    "PawnIO 공식 다운로드 열기",
+    "Ouvrir le téléchargement officiel PawnIO",
+    "Offizielle PawnIO-Downloadseite öffnen",
+    "Abrir descarga oficial de PawnIO",
+    "Открыть официальную страницу загрузки PawnIO"
+  ],
+  "未找到已登记的 PawnIO；部分温度／电压可能不可用。": [
+    "No registered PawnIO installation found; some temperatures or voltages may be unavailable.",
+    "未找到已登記的 PawnIO；部分溫度／電壓可能無法使用。",
+    "登録済み PawnIO が見つかりません。一部の温度や電圧は利用できない場合があります。",
+    "등록된 PawnIO 설치를 찾지 못했습니다. 일부 온도 또는 전압을 사용할 수 없습니다.",
+    "Aucune installation PawnIO enregistrée ; certaines températures ou tensions peuvent être indisponibles.",
+    "Keine registrierte PawnIO-Installation; einige Temperaturen oder Spannungen eventuell nicht verfügbar.",
+    "No se encontró PawnIO registrado; algunas temperaturas o voltajes pueden no estar disponibles.",
+    "Зарегистрированная установка PawnIO не найдена; некоторые температуры и напряжения могут быть недоступны."
+  ],
+  "无法读取已安装驱动状态。": [
+    "Unable to read installed driver status.",
+    "無法讀取已安裝驅動狀態。",
+    "インストール済みドライバーの状態を読み取れません。",
+    "설치된 드라이버 상태를 읽을 수 없습니다.",
+    "Impossible de lire l'état du pilote installé.",
+    "Installierter Treiberstatus nicht lesbar.",
+    "No se puede leer el estado del controlador instalado.",
+    "Не удалось прочитать состояние установленного драйвера."
+  ],
+  "请输入 1–1440 分钟。": [
+    "Enter 1–1440 minutes.",
+    "請輸入 1–1440 分鐘。",
+    "1–1440 分を入力してください。",
+    "1–1440분을 입력하세요.",
+    "Saisissez 1–1440 minutes.",
+    "1–1440 Minuten eingeben.",
+    "Introduce 1–1440 minutos.",
+    "Введите от 1 до 1440 минут."
+  ],
+  "无法更改本次睡眠请求。": [
+    "Unable to change this session's sleep request.",
+    "無法變更本次睡眠要求。",
+    "今回のスリープ要求を変更できません。",
+    "이번 절전 요청을 변경할 수 없습니다.",
+    "Impossible de changer la demande de veille de cette session.",
+    "Schlafanforderung dieser Sitzung kann nicht geändert werden.",
+    "No se puede cambiar la solicitud de suspensión de esta sesión.",
+    "Не удалось изменить запрос сна для текущего сеанса."
+  ],
+  "关机请求失败。": [
+    "Shutdown request failed.",
+    "關機要求失敗。",
+    "シャットダウン要求に失敗しました。",
+    "종료 요청 실패.",
+    "Demande d'arrêt échouée.",
+    "Herunterfahren fehlgeschlagen.",
+    "Error en solicitud de apagado.",
+    "Ошибка запроса выключения."
+  ],
+  "资源管理器重启失败。": [
+    "Explorer restart failed.",
+    "檔案總管重新啟動失敗。",
+    "エクスプローラーの再起動に失敗しました。",
+    "탐색기 다시 시작 실패.",
+    "Redémarrage de l'Explorateur échoué.",
+    "Explorer-Neustart fehlgeschlagen.",
+    "Error al reiniciar Explorador.",
+    "Ошибка перезапуска Проводника."
+  ],
+  "系统工具无法启动。": [
+    "Unable to start system tool.",
+    "系統工具無法啟動。",
+    "システムツールを起動できません。",
+    "시스템 도구를 시작할 수 없습니다.",
+    "Impossible de lancer l'outil système.",
+    "Systemwerkzeug kann nicht gestartet werden.",
+    "No se puede iniciar la herramienta del sistema.",
+    "Не удалось запустить системный инструмент."
+  ],
+  "行间距（0–30）": [
+    "Row spacing (0–30)",
+    "列間距（0–30）",
+    "行間隔（0–30）",
+    "행 간격 (0–30)",
+    "Espacement des lignes (0–30)",
+    "Zeilenabstand (0–30)",
+    "Espacio entre filas (0–30)",
+    "Интервал строк (0–30)"
+  ],
+  "以管理员权限重新启动监控": [
+    "Restart monitor as administrator",
+    "以管理員權限重新啟動監控",
+    "管理者として監視を再起動",
+    "관리자 권한으로 모니터 다시 시작",
+    "Relancer le moniteur en administrateur",
+    "Monitor als Administrator neu starten",
+    "Reiniciar monitor como administrador",
+    "Перезапустить мониторинг с правами администратора"
+  ],
+  "添加插件实例": [
+    "Add plugin instance",
+    "新增外掛實例",
+    "プラグインのインスタンスを追加",
+    "플러그인 인스턴스 추가",
+    "Ajouter une instance de plugin",
+    "Plugininstanz hinzufügen",
+    "Añadir instancia de plugin",
+    "Добавить экземпляр плагина"
+  ],
+  "导入 LiteMonitor JSON 模板": [
+    "Import LiteMonitor JSON template",
+    "匯入 LiteMonitor JSON 範本",
+    "LiteMonitor JSON テンプレートを読み込み",
+    "LiteMonitor JSON 템플릿 가져오기",
+    "Importer un modèle LiteMonitor JSON",
+    "LiteMonitor-JSON-Vorlage importieren",
+    "Importar plantilla JSON de LiteMonitor",
+    "Импорт шаблона LiteMonitor JSON"
+  ],
+  "CPU 高温提醒": [
+    "CPU temperature alerts",
+    "CPU 高溫提醒",
+    "CPU 高温通知",
+    "CPU 고온 알림",
+    "Alertes de température CPU",
+    "CPU-Temperaturwarnungen",
+    "Alertas de temperatura CPU",
+    "Предупреждения о температуре CPU"
+  ],
+  "GPU 高温提醒": [
+    "GPU temperature alerts",
+    "GPU 高溫提醒",
+    "GPU 高温通知",
+    "GPU 고온 알림",
+    "Alertes de température GPU",
+    "GPU-Temperaturwarnungen",
+    "Alertas de temperatura GPU",
+    "Предупреждения о температуре GPU"
+  ],
+  "保存 CPU 阈值": [
+    "Save CPU threshold",
+    "儲存 CPU 閾值",
+    "CPU しきい値を保存",
+    "CPU 임계값 저장",
+    "Enregistrer le seuil CPU",
+    "CPU-Grenzwert speichern",
+    "Guardar umbral CPU",
+    "Сохранить порог CPU"
+  ],
+  "保存 GPU 阈值": [
+    "Save GPU threshold",
+    "儲存 GPU 閾值",
+    "GPU しきい値を保存",
+    "GPU 임계값 저장",
+    "Enregistrer le seuil GPU",
+    "GPU-Grenzwert speichern",
+    "Guardar umbral GPU",
+    "Сохранить порог GPU"
+  ],
+  "勾选要在人物对话气泡中展示的指标": [
+    "Select metrics to display in the pet bubble",
+    "勾選要在寵物氣泡中顯示的指標",
+    "ペットの吹き出しに表示する項目を選択",
+    "펫 말풍선에 표시할 지표 선택",
+    "Choisissez les indicateurs de la bulle",
+    "Messwerte für die Blase wählen",
+    "Elige métricas para la burbuja",
+    "Выберите показатели для пузыря питомца"
+  ],
+  "网页与实用工具": [
+    "Web display and tools",
+    "網頁與實用工具",
+    "ウェブ表示とツール",
+    "웹 표시 및 도구",
+    "Affichage web et outils",
+    "Webanzeige und Werkzeuge",
+    "Vista web y herramientas",
+    "Веб-отображение и инструменты"
+  ],
+  "启用 FPS 呈现帧率采集（默认关闭，需要管理员权限）": [
+    "Enable presented FPS capture (off by default; administrator required)",
+    "啟用 FPS 呈現幀率擷取（預設關閉，需要管理員權限）",
+    "FPS 収集を有効化（初期設定：オフ、管理者権限が必要）",
+    "FPS 수집 활성화 (기본값: 꺼짐, 관리자 권한 필요)",
+    "Activer la collecte FPS (désactivée par défaut, administrateur requis)",
+    "FPS-Erfassung aktivieren (standardmäßig aus, Administrator nötig)",
+    "Activar captura FPS (desactivada por defecto; requiere administrador)",
+    "Включить сбор FPS (по умолчанию выключен; нужен администратор)"
+  ],
+  "FPS 进程 ID（留空自动选择最高活跃帧率）": [
+    "FPS process ID (empty: fastest active application)",
+    "FPS 處理程序 ID（留空自動選擇最高活躍幀率）",
+    "FPS プロセス ID（空欄：最も高いフレームレートを自動選択）",
+    "FPS 프로세스 ID (비움: 활성 프레임 속도 최댓값 자동 선택)",
+    "ID du processus FPS (vide : application active la plus rapide)",
+    "FPS-Prozess-ID (leer: höchste aktive Bildrate)",
+    "ID del proceso FPS (vacío: mayor tasa activa)",
+    "ID процесса FPS (пусто: наибольшая активная частота кадров)"
+  ],
+  "保存 FPS 进程": [
+    "Save FPS process",
+    "儲存 FPS 處理程序",
+    "FPS プロセスを保存",
+    "FPS 프로세스 저장",
+    "Enregistrer le processus FPS",
+    "FPS-Prozess speichern",
+    "Guardar proceso FPS",
+    "Сохранить процесс FPS"
+  ],
+  "定时整理 Pet 自身内存（默认关闭）": [
+    "Trim Pet memory periodically (off by default)",
+    "定時整理 Pet 自身記憶體（預設關閉）",
+    "Pet のメモリを定期整理（初期設定：オフ）",
+    "Pet 메모리 주기적 정리 (기본값: 꺼짐)",
+    "Réduire périodiquement la mémoire de Pet (désactivé par défaut)",
+    "Pet-Speicher regelmäßig bereinigen (standardmäßig aus)",
+    "Liberar memoria de Pet periódicamente (desactivado por defecto)",
+    "Периодически сокращать память Pet (по умолчанию выключено)"
+  ],
+  "整理间隔（分钟，5–1440）": [
+    "Trim interval (minutes, 5–1440)",
+    "整理間隔（分鐘，5–1440）",
+    "整理間隔（分、5–1440）",
+    "정리 간격 (분, 5–1440)",
+    "Intervalle de réduction (minutes, 5–1440)",
+    "Bereinigungsintervall (Minuten, 5–1440)",
+    "Intervalo de liberación (minutos, 5–1440)",
+    "Интервал сокращения (минуты, 5–1440)"
+  ],
+  "保存定时整理": [
+    "Save trim schedule",
+    "儲存定時整理",
+    "整理スケジュールを保存",
+    "정리 일정 저장",
+    "Enregistrer la planification",
+    "Bereinigungsplan speichern",
+    "Guardar programación",
+    "Сохранить расписание сокращения памяти"
+  ],
+  "Pet 整包更新": [
+    "Whole Pet package updates",
+    "Pet 完整套件更新",
+    "Pet パッケージ全体の更新",
+    "Pet 전체 패키지 업데이트",
+    "Mises à jour complètes de Pet",
+    "Vollständige Pet-Paketupdates",
+    "Actualizaciones completas de Pet",
+    "Обновление полного пакета Pet"
+  ],
+  "保存更新来源": [
+    "Save update source",
+    "儲存更新來源",
+    "更新元を保存",
+    "업데이트 소스 저장",
+    "Enregistrer la source",
+    "Updatequelle speichern",
+    "Guardar origen de actualización",
+    "Сохранить источник обновлений"
+  ],
+  "打开整包下载": [
+    "Open package download",
+    "開啟完整套件下載",
+    "パッケージのダウンロードを開く",
+    "전체 패키지 다운로드 열기",
+    "Ouvrir le téléchargement du paquet",
+    "Paketdownload öffnen",
+    "Abrir descarga del paquete",
+    "Открыть загрузку полного пакета"
+  ],
+  "负载警告阈值（%）": [
+    "Load warning threshold (%)",
+    "負載警告閾值（%）",
+    "負荷の警告しきい値（%）",
+    "부하 경고 임계값 (%)",
+    "Seuil d'avertissement de charge (%)",
+    "Last-Warngrenze (%)",
+    "Umbral de aviso de carga (%)",
+    "Порог предупреждения нагрузки (%)"
+  ],
+  "负载严重阈值（%）": [
+    "Load critical threshold (%)",
+    "負載嚴重閾值（%）",
+    "負荷の危険しきい値（%）",
+    "부하 심각 임계값 (%)",
+    "Seuil critique de charge (%)",
+    "Kritische Lastgrenze (%)",
+    "Umbral crítico de carga (%)",
+    "Критический порог нагрузки (%)"
+  ],
+  "网络／磁盘速率警告阈值（MB/s）": [
+    "Network/disk warning rate (MB/s)",
+    "網路／磁碟速率警告閾值（MB/s）",
+    "ネットワーク／ディスク速度の警告値（MB/s）",
+    "네트워크/디스크 속도 경고 임계값 (MB/s)",
+    "Débit réseau/disque d'avertissement (Mo/s)",
+    "Netzwerk-/Datenträger-Warngrenze (MB/s)",
+    "Umbral de aviso de red/disco (MB/s)",
+    "Порог предупреждения скорости сети/диска (МБ/с)"
+  ],
+  "网络／磁盘速率严重阈值（MB/s）": [
+    "Network/disk critical rate (MB/s)",
+    "網路／磁碟速率嚴重閾值（MB/s）",
+    "ネットワーク／ディスク速度の危険値（MB/s）",
+    "네트워크/디스크 속도 심각 임계값 (MB/s)",
+    "Débit réseau/disque critique (Mo/s)",
+    "Kritische Netzwerk-/Datenträgergrenze (MB/s)",
+    "Umbral crítico de red/disco (MB/s)",
+    "Критический порог скорости сети/диска (МБ/с)"
+  ],
+  "任务栏指标标识（逗号分隔，最多 12 项）": [
+    "Taskbar metric IDs (comma separated, up to 12)",
+    "工作列指標識別碼（逗號分隔，最多 12 項）",
+    "タスクバー項目 ID（カンマ区切り、最大12項目）",
+    "작업 표시줄 지표 ID (쉼표 구분, 최대 12개)",
+    "ID des indicateurs de barre des tâches (virgules, 12 maximum)",
+    "Taskleisten-Messwert-IDs (Kommas, maximal 12)",
+    "ID de métricas de barra de tareas (comas, máximo 12)",
+    "ID показателей панели задач (через запятую, до 12)"
+  ],
+  "端口（不占用 8085、5173）": [
+    "Port (8085 and 5173 reserved)",
+    "連接埠（不占用 8085、5173）",
+    "ポート（8085、5173 は使用しません）",
+    "포트 (8085 및 5173 제외)",
+    "Port (8085 et 5173 réservés)",
+    "Port (8085 und 5173 reserviert)",
+    "Puerto (8085 y 5173 reservados)",
+    "Порт (8085 и 5173 зарезервированы)"
+  ],
+  "应用网页设置": [
+    "Apply web settings",
+    "套用網頁設定",
+    "ウェブ設定を適用",
+    "웹 설정 적용",
+    "Appliquer les paramètres web",
+    "Webeinstellungen anwenden",
+    "Aplicar ajustes web",
+    "Применить настройки веб-службы"
+  ],
+  "下载测试 URL（最多读取 10 MB，点击后才联网）": [
+    "Download URL (up to 10 MB, starts on click)",
+    "下載測試 URL（最多讀取 10 MB，點擊後才連網）",
+    "ダウンロード URL（最大10 MB、クリック後に接続）",
+    "다운로드 URL (최대 10 MB, 클릭 후 연결)",
+    "URL de téléchargement (10 Mo maximum, connexion au clic)",
+    "Download-URL (maximal 10 MB, Verbindung erst nach Klick)",
+    "URL de descarga (máximo 10 MB, conecta al pulsar)",
+    "URL загрузки (до 10 МБ, подключение после нажатия)"
+  ],
+  "上传测试 URL（POST 1 MB，点击后才联网）": [
+    "Upload URL (POST 1 MB, starts on click)",
+    "上傳測試 URL（POST 1 MB，點擊後才連網）",
+    "アップロード URL（POST 1 MB、クリック後に接続）",
+    "업로드 URL (POST 1 MB, 클릭 후 연결)",
+    "URL d'envoi (POST 1 Mo, connexion au clic)",
+    "Upload-URL (POST 1 MB, Verbindung erst nach Klick)",
+    "URL de subida (POST 1 MB, conecta al pulsar)",
+    "URL отправки (POST 1 МБ, подключение после нажатия)"
+  ],
+  "测试下载速度": [
+    "Test download speed",
+    "測試下載速度",
+    "ダウンロード速度を測定",
+    "다운로드 속도 측정",
+    "Tester le débit de téléchargement",
+    "Downloadgeschwindigkeit testen",
+    "Probar velocidad de descarga",
+    "Измерить скорость загрузки"
+  ],
+  "测试上传速度": [
+    "Test upload speed",
+    "測試上傳速度",
+    "アップロード速度を測定",
+    "업로드 속도 측정",
+    "Tester le débit d'envoi",
+    "Uploadgeschwindigkeit testen",
+    "Probar velocidad de subida",
+    "Измерить скорость отправки"
+  ],
+  "停止测速": [
+    "Stop test",
+    "停止測速",
+    "測定を停止",
+    "측정 중지",
+    "Arrêter le test",
+    "Test stoppen",
+    "Detener prueba",
+    "Остановить измерение"
+  ],
+  "整理 Pet 自身内存": [
+    "Trim Pet memory",
+    "整理 Pet 自身記憶體",
+    "Pet のメモリを整理",
+    "Pet 메모리 정리",
+    "Réduire la mémoire de Pet",
+    "Pet-Speicher bereinigen",
+    "Liberar memoria de Pet",
+    "Сократить память Pet"
+  ],
+  "当前用户登录时启动 Pet（不创建管理员计划任务）": [
+    "Start Pet on user login (no elevated scheduled task)",
+    "目前使用者登入時啟動 Pet（不建立管理員排程工作）",
+    "ユーザーログイン時に Pet を起動（管理者タスクなし）",
+    "사용자 로그인 시 Pet 시작 (관리자 예약 작업 없음)",
+    "Lancer Pet à la connexion (sans tâche administrateur)",
+    "Pet bei Anmeldung starten (keine Administratoraufgabe)",
+    "Iniciar Pet al entrar (sin tarea con privilegios)",
+    "Запускать Pet при входе пользователя (без задания администратора)"
+  ],
+  "编辑输入": [
+    "Edit inputs",
+    "編輯輸入",
+    "入力を編集",
+    "입력 편집",
+    "Modifier les entrées",
+    "Eingaben bearbeiten",
+    "Editar entradas",
+    "Изменить параметры ввода"
+  ],
+  "移除实例": [
+    "Remove instance",
+    "移除實例",
+    "インスタンスを削除",
+    "인스턴스 제거",
+    "Supprimer l'instance",
+    "Instanz entfernen",
+    "Eliminar instancia",
+    "Удалить экземпляр"
+  ],
+  "启用此实例": [
+    "Enable instance",
+    "啟用此實例",
+    "このインスタンスを有効化",
+    "이 인스턴스 활성화",
+    "Activer cette instance",
+    "Diese Instanz aktivieren",
+    "Activar instancia",
+    "Включить экземпляр"
+  ],
+  "启用联网插件": [
+    "Enable network plugins",
+    "啟用連網外掛",
+    "ネットワークプラグインを有効化",
+    "네트워크 플러그인 활성화",
+    "Activer les plugins réseau",
+    "Netzwerkplugins aktivieren",
+    "Activar plugins de red",
+    "Включить сетевые плагины"
+  ],
+  "尚未选择展示指标。": [
+    "No metrics selected.",
+    "尚未選擇顯示指標。",
+    "表示項目が未選択です。",
+    "표시할 지표를 선택하지 않았습니다.",
+    "Aucun indicateur sélectionné.",
+    "Keine Messwerte gewählt.",
+    "Sin métricas seleccionadas.",
+    "Показатели для отображения не выбраны."
+  ],
+  "艾莲布 · 系统监控": [
+    "Ellen · System monitor",
+    "艾蓮布 · 系統監控",
+    "エレン · システム監視",
+    "엘렌 · 시스템 모니터",
+    "Ellen · Moniteur système",
+    "Ellen · Systemmonitor",
+    "Ellen · Monitor del sistema",
+    "Эллен · Системный монитор"
+  ],
+  "艾莲布 · 电脑状态": [
+    "Ellen · PC status",
+    "艾蓮布 · 電腦狀態",
+    "エレン · PC の状態",
+    "엘렌 · PC 상태",
+    "Ellen · État du PC",
+    "Ellen · PC-Status",
+    "Ellen · Estado del PC",
+    "Эллен · Состояние ПК"
+  ],
+  "LiteMonitor · 电脑状态": [
+    "LiteMonitor · PC status",
+    "LiteMonitor · 電腦狀態",
+    "LiteMonitor · PC の状態",
+    "LiteMonitor · PC 상태",
+    "LiteMonitor · État du PC",
+    "LiteMonitor · PC-Status",
+    "LiteMonitor · Estado del PC",
+    "LiteMonitor · Состояние ПК"
+  ],
+  "气泡": [
+    "Bubble",
+    "氣泡",
+    "吹き出し",
+    "말풍선",
+    "Bulle",
+    "Sprechblase",
+    "Burbuja",
+    "Пузырь"
+  ],
+  "数据气泡顺序": [
+    "Bubble item order",
+    "資料氣泡順序",
+    "吹き出しの項目順",
+    "말풍선 항목 순서",
+    "Ordre des éléments de la bulle",
+    "Reihenfolge in der Blase",
+    "Orden de elementos de burbuja",
+    "Порядок элементов в пузыре"
+  ],
+  "上移": [
+    "Move up",
+    "上移",
+    "上へ",
+    "위로 이동",
+    "Monter",
+    "Nach oben",
+    "Subir",
+    "Вверх"
+  ],
+  "下移": [
+    "Move down",
+    "下移",
+    "下へ",
+    "아래로 이동",
+    "Descendre",
+    "Nach unten",
+    "Bajar",
+    "Вниз"
+  ],
+  "当前会话": [
+    "Current session",
+    "目前工作階段",
+    "現在のセッション",
+    "현재 세션",
+    "Session actuelle",
+    "Aktuelle Sitzung",
+    "Sesión actual",
+    "Текущий сеанс"
+  ],
+  "刷新日期": [
+    "Refresh dates",
+    "重新整理日期",
+    "日付を更新",
+    "날짜 새로 고침",
+    "Actualiser les dates",
+    "Datumsangaben aktualisieren",
+    "Actualizar fechas",
+    "Обновить даты"
+  ],
+  "导出所选日期 CSV": [
+    "Export selected date as CSV",
+    "匯出所選日期 CSV",
+    "選択した日付を CSV 出力",
+    "선택 날짜 CSV 내보내기",
+    "Exporter la date en CSV",
+    "Gewähltes Datum als CSV exportieren",
+    "Exportar fecha seleccionada a CSV",
+    "Экспорт выбранной даты в CSV"
+  ],
+  "日期（当前会话实时更新）": [
+    "Date (live current session)",
+    "日期（目前工作階段即時更新）",
+    "日付（現在のセッションはリアルタイム更新）",
+    "날짜 (현재 세션 실시간 갱신)",
+    "Date (session actuelle en direct)",
+    "Datum (aktuelle Sitzung in Echtzeit)",
+    "Fecha (sesión actual en directo)",
+    "Дата (текущий сеанс обновляется в реальном времени)"
+  ],
+  "记录历史（每 10 秒，单日日志最多 32 MB）": [
+    "Record every 10 seconds (32 MB per day maximum)",
+    "記錄歷史（每 10 秒，每日日誌最多 32 MB）",
+    "履歴を10秒ごとに記録（1日最大32 MB）",
+    "기록 저장 (10초마다, 하루 최대 32 MB)",
+    "Historique toutes les 10 secondes (32 Mo par jour maximum)",
+    "Verlauf alle 10 Sekunden (maximal 32 MB pro Tag)",
+    "Registrar cada 10 segundos (máximo 32 MB al día)",
+    "Записывать каждые 10 секунд (до 32 МБ в день)"
+  ],
+  "放大最近时间段（1–10 倍）；悬停图表查看时间和值": [
+    "Zoom the latest period (1–10×); hover to inspect time and value",
+    "放大最近時段（1–10 倍）；滑鼠停留圖表查看時間和值",
+    "最近の期間を拡大（1–10倍）。グラフにマウスを置くと時刻と値を表示",
+    "최근 기간 확대 (1–10배). 차트 위에서 시간과 값 확인",
+    "Agrandir la période récente (1–10×) ; survoler pour voir heure et valeur",
+    "Letzten Zeitraum vergrößern (1–10×); Zeit und Wert per Maus anzeigen",
+    "Ampliar período reciente (1–10×); pasa el cursor para ver hora y valor",
+    "Увеличить последний период (1–10×); время и значение при наведении"
+  ],
+  "气泡使用双列布局": [
+    "Use two columns",
+    "氣泡使用雙欄版面",
+    "吹き出しを2列表示",
+    "말풍선 두 열 사용",
+    "Bulle à deux colonnes",
+    "Blase mit zwei Spalten",
+    "Burbuja de dos columnas",
+    "Два столбца в пузыре"
+  ],
+  "导入主题 JSON": [
+    "Import theme JSON",
+    "匯入主題 JSON",
+    "テーマ JSON を読み込み",
+    "테마 JSON 가져오기",
+    "Importer le thème JSON",
+    "Thema-JSON importieren",
+    "Importar tema JSON",
+    "Импорт JSON темы"
+  ],
+  "导出主题 JSON": [
+    "Export theme JSON",
+    "匯出主題 JSON",
+    "テーマ JSON を出力",
+    "테마 JSON 내보내기",
+    "Exporter le thème JSON",
+    "Thema-JSON exportieren",
+    "Exportar tema JSON",
+    "Экспорт JSON темы"
+  ],
+  "主题已应用。": [
+    "Theme applied.",
+    "主題已套用。",
+    "テーマを適用しました。",
+    "테마가 적용되었습니다.",
+    "Thème appliqué.",
+    "Thema angewendet.",
+    "Tema aplicado.",
+    "Тема применена."
+  ],
+  "主题已导入。": [
+    "Theme imported.",
+    "主題已匯入。",
+    "テーマを読み込みました。",
+    "테마를 가져왔습니다.",
+    "Thème importé.",
+    "Thema importiert.",
+    "Tema importado.",
+    "Тема импортирована."
+  ],
+  "主题已导出。": [
+    "Theme exported.",
+    "主題已匯出。",
+    "テーマを出力しました。",
+    "테마를 내보냈습니다.",
+    "Thème exporté.",
+    "Thema exportiert.",
+    "Tema exportado.",
+    "Тема экспортирована."
+  ],
+  "历史已导出。": [
+    "History exported.",
+    "歷史已匯出。",
+    "履歴を出力しました。",
+    "기록을 내보냈습니다.",
+    "Historique exporté.",
+    "Verlauf exportiert.",
+    "Historial exportado.",
+    "История экспортирована."
+  ],
+  "自启动设置已更新。": [
+    "Startup preference updated.",
+    "自動啟動設定已更新。",
+    "自動起動設定を更新しました。",
+    "자동 시작 설정을 갱신했습니다.",
+    "Préférence de démarrage mise à jour.",
+    "Autostarteinstellung aktualisiert.",
+    "Inicio automático actualizado.",
+    "Настройки автозапуска обновлены."
+  ],
+  "颜色无效，请使用 #RRGGBB。": [
+    "Invalid color; use #RRGGBB.",
+    "色彩無效，請使用 #RRGGBB。",
+    "色が無効です。#RRGGBB を使用してください。",
+    "유효하지 않은 색상. #RRGGBB를 사용하세요.",
+    "Couleur invalide ; utilisez #RRGGBB.",
+    "Ungültige Farbe; #RRGGBB verwenden.",
+    "Color no válido; usa #RRGGBB.",
+    "Недопустимый цвет; используйте #RRGGBB."
+  ],
+  "缩放或透明度范围无效。": [
+    "Scale or opacity is outside the allowed range.",
+    "縮放或透明度範圍無效。",
+    "倍率または不透明度が範囲外です。",
+    "배율 또는 불투명도가 허용 범위를 벗어났습니다.",
+    "Échelle ou opacité hors limites.",
+    "Skalierung oder Deckkraft außerhalb des Bereichs.",
+    "Escala u opacidad fuera del rango permitido.",
+    "Масштаб или прозрачность вне допустимого диапазона."
+  ],
+  "字体、间距、宽度或阈值颜色无效。": [
+    "Invalid font, spacing, width or threshold colors.",
+    "字型、間距、寬度或閾值色彩無效。",
+    "フォント、間隔、幅、しきい値の色が無効です。",
+    "글꼴, 간격, 너비 또는 임계값 색상이 유효하지 않습니다.",
+    "Police, espacement, largeur ou couleurs de seuil invalides.",
+    "Ungültige Schrift, Abstände, Breite oder Grenzwertfarben.",
+    "Fuente, espacio, ancho o colores de umbral no válidos.",
+    "Недопустимый шрифт, интервал, ширина или цвета порогов."
+  ],
+  "主题不兼容或参数无效；原主题文件保留。": [
+    "Incompatible or invalid theme; original file retained.",
+    "主題不相容或參數無效；原主題檔案保留。",
+    "テーマが非互換または無効です。元ファイルは保持します。",
+    "호환되지 않거나 잘못된 테마. 원본 파일은 유지됩니다.",
+    "Thème incompatible ou invalide ; fichier original conservé.",
+    "Inkompatibles oder ungültiges Thema; Originaldatei bleibt erhalten.",
+    "Tema incompatible o no válido; se conserva el original.",
+    "Тема несовместима или недопустима; исходный файл сохранён."
+  ],
+  "主题导出失败。": [
+    "Theme export failed.",
+    "主題匯出失敗。",
+    "テーマ出力に失敗しました。",
+    "테마 내보내기 실패.",
+    "Échec de l'export du thème.",
+    "Themaexport fehlgeschlagen.",
+    "Error al exportar tema.",
+    "Ошибка экспорта темы."
+  ],
+  "历史目录暂不可读。": [
+    "History directory unavailable.",
+    "歷史目錄暫時無法讀取。",
+    "履歴フォルダーを読み取れません。",
+    "기록 폴더를 읽을 수 없습니다.",
+    "Dossier d'historique indisponible.",
+    "Verlaufverzeichnis nicht lesbar.",
+    "Carpeta de historial no disponible.",
+    "Каталог истории недоступен."
+  ],
+  "历史读取失败，原文件保留。": [
+    "History read failed; original file retained.",
+    "歷史讀取失敗，原檔案保留。",
+    "履歴の読み込み失敗。元ファイルは保持します。",
+    "기록 읽기 실패. 원본 파일은 유지됩니다.",
+    "Lecture échouée ; fichier original conservé.",
+    "Lesen fehlgeschlagen; Originaldatei bleibt erhalten.",
+    "Error al leer historial; original conservado.",
+    "Ошибка чтения истории; исходный файл сохранён."
+  ],
+  "导出失败，原始历史未改变。": [
+    "Export failed; original history unchanged.",
+    "匯出失敗，原始歷史未變更。",
+    "出力失敗。元の履歴は変更していません。",
+    "내보내기 실패. 원본 기록은 변경되지 않았습니다.",
+    "Export échoué ; historique original inchangé.",
+    "Export fehlgeschlagen; ursprünglicher Verlauf unverändert.",
+    "Error al exportar; historial original sin cambios.",
+    "Ошибка экспорта; исходная история не изменена."
+  ],
+  "请输入 30–130 之间的温度。": [
+    "Enter a temperature from 30 to 130°C.",
+    "請輸入 30–130 之間的溫度。",
+    "30–130℃の温度を入力してください。",
+    "30–130℃ 온도를 입력하세요.",
+    "Saisissez une température de 30 à 130 °C.",
+    "Temperatur zwischen 30 und 130 °C eingeben.",
+    "Introduce una temperatura de 30 a 130 °C.",
+    "Введите температуру от 30 до 130 °C."
+  ],
+  "阈值已保存。": [
+    "Threshold saved.",
+    "閾值已儲存。",
+    "しきい値を保存しました。",
+    "임계값이 저장되었습니다.",
+    "Seuil enregistré.",
+    "Grenzwert gespeichert.",
+    "Umbral guardado.",
+    "Порог сохранён."
+  ],
+  "请输入 1024–65535 范围的独立端口。": [
+    "Choose an unused port from 1024 to 65535.",
+    "請輸入 1024–65535 範圍的獨立連接埠。",
+    "1024–65535 の未使用ポートを選んでください。",
+    "1024–65535 중 사용하지 않는 포트를 선택하세요.",
+    "Choisissez un port libre de 1024 à 65535.",
+    "Freien Port zwischen 1024 und 65535 wählen.",
+    "Elige un puerto libre de 1024 a 65535.",
+    "Выберите свободный порт от 1024 до 65535."
+  ],
+  "请先启用监控和网页服务。": [
+    "Enable monitoring and web display first.",
+    "請先啟用監控和網頁服務。",
+    "先に監視とウェブ表示を有効にしてください。",
+    "먼저 모니터링과 웹 서비스를 활성화하세요.",
+    "Activez d'abord la surveillance et le service web.",
+    "Zuerst Überwachung und Webdienst aktivieren.",
+    "Activa primero el monitor y el servicio web.",
+    "Сначала включите мониторинг и веб-службу."
+  ],
+  "无法打开默认浏览器。": [
+    "Unable to open the default browser.",
+    "無法開啟預設瀏覽器。",
+    "既定のブラウザーを開けません。",
+    "기본 브라우저를 열 수 없습니다.",
+    "Impossible d'ouvrir le navigateur par défaut.",
+    "Standardbrowser kann nicht geöffnet werden.",
+    "No se puede abrir el navegador predeterminado.",
+    "Не удалось открыть браузер по умолчанию."
+  ],
+  "当前权限无法整理工作集。": [
+    "Working set trim unavailable.",
+    "目前權限無法整理工作集。",
+    "現在の権限ではメモリを整理できません。",
+    "현재 권한으로 메모리를 정리할 수 없습니다.",
+    "Réduction de mémoire indisponible avec ces droits.",
+    "Speicherbereinigung mit aktuellen Rechten nicht möglich.",
+    "No se puede liberar memoria con estos permisos.",
+    "С текущими правами нельзя сократить рабочий набор памяти."
+  ],
+  "Pet 的工作集已整理；没有清理 ObsUI 或其他程序。": [
+    "Pet working set trimmed; ObsUI and other processes unchanged.",
+    "Pet 的工作集已整理；未清理 ObsUI 或其他程式。",
+    "Pet のメモリを整理しました。ObsUI や他のプロセスは変更していません。",
+    "Pet 메모리를 정리했습니다. ObsUI 및 다른 프로세스는 변경하지 않았습니다.",
+    "Mémoire de Pet réduite ; ObsUI et les autres processus inchangés.",
+    "Pet-Speicher bereinigt; ObsUI und andere Prozesse unverändert.",
+    "Memoria de Pet liberada; ObsUI y otros procesos sin cambios.",
+    "Рабочий набор Pet сокращён; ObsUI и другие процессы не изменены."
+  ],
+  "请输入有效 HTTP/HTTPS 地址。": [
+    "Enter a valid HTTP/HTTPS URL.",
+    "請輸入有效 HTTP/HTTPS 位址。",
+    "有効な HTTP/HTTPS URL を入力してください。",
+    "유효한 HTTP/HTTPS 주소를 입력하세요.",
+    "Saisissez une URL HTTP/HTTPS valide.",
+    "Gültige HTTP/HTTPS-Adresse eingeben.",
+    "Introduce una URL HTTP/HTTPS válida.",
+    "Введите корректный HTTP/HTTPS-адрес."
+  ],
+  "测速中…": [
+    "Testing…",
+    "測速中…",
+    "測定中…",
+    "속도 측정 중…",
+    "Test en cours…",
+    "Test läuft…",
+    "Probando…",
+    "Измерение…"
+  ],
+  "测速已停止或超时。": [
+    "Test cancelled or timed out.",
+    "測速已停止或逾時。",
+    "測定を中止または時間切れ。",
+    "측정이 중지되거나 시간이 초과되었습니다.",
+    "Test annulé ou délai dépassé.",
+    "Test abgebrochen oder Zeitlimit erreicht.",
+    "Prueba cancelada o tiempo agotado.",
+    "Измерение отменено или время истекло."
+  ],
+  "测速失败，检查地址与网络。": [
+    "Download test failed; check the URL and network.",
+    "測速失敗，請檢查位址與網路。",
+    "ダウンロード測定失敗。URL と接続を確認してください。",
+    "다운로드 측정 실패. 주소와 네트워크를 확인하세요.",
+    "Test de téléchargement échoué ; vérifiez URL et réseau.",
+    "Downloadtest fehlgeschlagen; Adresse und Netzwerk prüfen.",
+    "Error en prueba de descarga; revisa URL y red.",
+    "Ошибка измерения загрузки; проверьте адрес и сеть."
+  ],
+  "上传测试失败，检查地址与网络。": [
+    "Upload test failed; check the URL and network.",
+    "上傳測試失敗，請檢查位址與網路。",
+    "アップロード測定失敗。URL と接続を確認してください。",
+    "업로드 측정 실패. 주소와 네트워크를 확인하세요.",
+    "Test d'envoi échoué ; vérifiez URL et réseau.",
+    "Uploadtest fehlgeschlagen; Adresse und Netzwerk prüfen.",
+    "Error en prueba de subida; revisa URL y red.",
+    "Ошибка измерения отправки; проверьте адрес и сеть."
+  ],
+  "网页监控未运行": [
+    "Web display stopped",
+    "網頁監控未執行",
+    "ウェブ監視停止中",
+    "웹 모니터 중지됨",
+    "Moniteur web arrêté",
+    "Webmonitor gestoppt",
+    "Monitor web detenido",
+    "Веб-монитор остановлен"
+  ],
+  "{0} 条记录；跳过 {1} 行。": [
+    "{0} records; {1} lines skipped.",
+    "{0} 筆記錄；略過 {1} 行。",
+    "{0} 件の記録、{1} 行をスキップ。",
+    "기록 {0}개, {1}줄 건너뜀.",
+    "{0} enregistrements ; {1} lignes ignorées.",
+    "{0} Einträge; {1} Zeilen übersprungen.",
+    "{0} registros; {1} líneas omitidas.",
+    "{0} записей; пропущено строк: {1}."
+  ],
+  "下载：{0} Mbps · 读取 {1} MB": [
+    "Download: {0} Mbps · read {1} MB",
+    "下載：{0} Mbps · 讀取 {1} MB",
+    "ダウンロード：{0} Mbps · {1} MB 読み込み",
+    "다운로드: {0} Mbps · {1} MB 읽음",
+    "Téléchargement : {0} Mbps · {1} Mo lus",
+    "Download: {0} Mbps · {1} MB gelesen",
+    "Descarga: {0} Mbps · {1} MB leídos",
+    "Загрузка: {0} Мбит/с · прочитано {1} МБ"
+  ],
+  "上传：{0} Mbps（含服务端响应时间）": [
+    "Upload: {0} Mbps (including server response time)",
+    "上傳：{0} Mbps（含伺服器回應時間）",
+    "アップロード：{0} Mbps（サーバー応答時間を含む）",
+    "업로드: {0} Mbps (서버 응답 시간 포함)",
+    "Envoi : {0} Mbps (temps de réponse du serveur inclus)",
+    "Upload: {0} Mbps (inklusive Serverantwortzeit)",
+    "Subida: {0} Mbps (incluye respuesta del servidor)",
+    "Отправка: {0} Мбит/с (включая время ответа сервера)"
+  ],
+  "{0} 持续高温：{1}": [
+    "{0} sustained high temperature: {1}",
+    "{0} 持續高溫：{1}",
+    "{0} の高温が継続：{1}",
+    "{0} 고온 지속: {1}",
+    "{0} température élevée persistante : {1}",
+    "{0} anhaltend hohe Temperatur: {1}",
+    "{0} temperatura alta persistente: {1}",
+    "{0}: длительная высокая температура: {1}"
+  ],
+  "艾莲布 · 高温提醒": [
+    "Ellen · Temperature alert",
+    "艾蓮布 · 高溫提醒",
+    "エレン · 高温通知",
+    "엘렌 · 고온 알림",
+    "Ellen · Alerte de température",
+    "Ellen · Temperaturwarnung",
+    "Ellen · Alerta de temperatura",
+    "Эллен · Предупреждение о температуре"
+  ],
+  "硬件监控权限": [
+    "Hardware monitoring permissions",
+    "硬體監控權限",
+    "ハードウェア監視の権限",
+    "하드웨어 모니터링 권한",
+    "Autorisations de surveillance matérielle",
+    "Berechtigungen für Hardwareüberwachung",
+    "Permisos de monitorización de hardware",
+    "Разрешения мониторинга оборудования"
+  ],
+  "仅提升本次硬件／已启用 FPS 采集的权限，Pet 和联网插件保持普通权限。不安装驱动，也不修改 ObsUI。继续？": [
+    "Elevate only this hardware and enabled FPS session. Pet and network plugins keep ordinary permissions. No drivers are installed and ObsUI is unchanged. Continue?",
+    "僅提升本次硬體／已啟用 FPS 擷取的權限，Pet 和連網外掛保持一般權限。不安裝驅動，也不修改 ObsUI。繼續？",
+    "今回のハードウェア監視と有効な FPS 収集のみ昇格します。Pet とネットワークプラグインは通常権限のままです。ドライバーのインストールや ObsUI の変更はありません。続行しますか？",
+    "이번 하드웨어 및 활성 FPS 수집만 관리자 권한으로 실행합니다. Pet과 네트워크 플러그인은 일반 권한을 유지합니다. 드라이버 설치나 ObsUI 변경은 없습니다. 계속할까요?",
+    "Élever uniquement cette session matérielle et FPS activée. Pet et les plugins réseau gardent leurs droits ordinaires. Aucun pilote installé, ObsUI inchangé. Continuer ?",
+    "Nur diese Hardware- und aktivierte FPS-Sitzung erhöhen. Pet und Netzwerkplugins behalten normale Rechte. Keine Treiberinstallation oder ObsUI-Änderung. Fortfahren?",
+    "Elevar solo esta sesión de hardware y FPS activados. Pet y los plugins de red mantienen permisos normales. Sin instalar controladores ni cambiar ObsUI. ¿Continuar?",
+    "Повысить права только для текущего сбора данных оборудования и включённого FPS. Pet и сетевые плагины сохранят обычные права. Драйверы не устанавливаются, ObsUI не меняется. Продолжить?"
+  ],
+  "CSV 文件": [
+    "CSV files",
+    "CSV 檔案",
+    "CSV ファイル",
+    "CSV 파일",
+    "Fichiers CSV",
+    "CSV-Dateien",
+    "Archivos CSV",
+    "Файлы CSV"
+  ],
+  "主题 JSON": [
+    "Theme JSON",
+    "主題 JSON",
+    "テーマ JSON",
+    "테마 JSON",
+    "Thème JSON",
+    "Thema-JSON",
+    "Tema JSON",
+    "JSON темы"
+  ],
+  "JSON 模板": [
+    "JSON templates",
+    "JSON 範本",
+    "JSON テンプレート",
+    "JSON 템플릿",
+    "Modèles JSON",
+    "JSON-Vorlagen",
+    "Plantillas JSON",
+    "Шаблоны JSON"
+  ],
+  "编辑": [
+    "Edit",
+    "編輯",
+    "編集",
+    "편집",
+    "Modifier",
+    "Bearbeiten",
+    "Editar",
+    "Изменить"
+  ],
+  "模板已导入，尚未启用。": [
+    "Template imported; not enabled yet.",
+    "範本已匯入，尚未啟用。",
+    "テンプレートを読み込みました。まだ無効です。",
+    "템플릿을 가져왔습니다. 아직 비활성화 상태입니다.",
+    "Modèle importé, pas encore activé.",
+    "Vorlage importiert, noch nicht aktiviert.",
+    "Plantilla importada; aún desactivada.",
+    "Шаблон импортирован; пока не включён."
+  ],
+  "导入失败：模板损坏、过大或标识已存在。": [
+    "Import failed: damaged or oversized template, or duplicate ID.",
+    "匯入失敗：範本損壞、過大或識別碼已存在。",
+    "読み込み失敗：破損、サイズ超過、または ID 重複。",
+    "가져오기 실패: 손상되거나 너무 큰 템플릿 또는 중복 ID.",
+    "Import échoué : modèle endommagé, trop volumineux ou ID existant.",
+    "Import fehlgeschlagen: beschädigte oder zu große Vorlage oder doppelte ID.",
+    "Error al importar: plantilla dañada, demasiado grande o ID duplicado.",
+    "Ошибка импорта: шаблон повреждён, слишком большой или ID уже существует."
+  ],
+  "移除插件": [
+    "Remove plugin",
+    "移除外掛",
+    "プラグインを削除",
+    "플러그인 제거",
+    "Supprimer le plugin",
+    "Plugin entfernen",
+    "Eliminar plugin",
+    "Удалить плагин"
+  ],
+  "移除此插件实例及其保存的输入配置？模板保留。": [
+    "Remove this plugin instance and its saved inputs? Keep the template.",
+    "移除此外掛實例及其儲存的輸入設定？範本保留。",
+    "このプラグインのインスタンスと保存済み入力を削除しますか？テンプレートは保持します。",
+    "이 플러그인 인스턴스와 저장된 입력 설정을 제거할까요? 템플릿은 유지됩니다.",
+    "Supprimer cette instance et ses entrées enregistrées ? Le modèle est conservé.",
+    "Diese Plugininstanz und ihre gespeicherten Eingaben entfernen? Die Vorlage bleibt erhalten.",
+    "¿Eliminar esta instancia y sus entradas guardadas? Se conserva la plantilla.",
+    "Удалить этот экземпляр плагина и сохранённые параметры ввода? Шаблон останется."
+  ],
+  "插件保存失败。": [
+    "Plugin save failed.",
+    "外掛儲存失敗。",
+    "プラグインの保存に失敗しました。",
+    "플러그인 저장 실패.",
+    "Échec de l'enregistrement du plugin.",
+    "Plugin konnte nicht gespeichert werden.",
+    "Error al guardar el plugin.",
+    "Не удалось сохранить плагин."
+  ],
+  "插件实例或输入配置超出上限。": [
+    "Plugin instances or input settings exceed the limit.",
+    "外掛實例或輸入設定超出上限。",
+    "プラグイン数または入力設定が上限を超えています。",
+    "플러그인 인스턴스 또는 입력 설정이 한도를 초과했습니다.",
+    "Limite des instances ou des entrées dépassée.",
+    "Grenze für Plugininstanzen oder Eingaben überschritten.",
+    "Instancias o entradas del plugin superan el límite.",
+    "Превышен лимит экземпляров плагина или параметров ввода."
+  ],
+  "请输入不含用户凭据的 HTTPS 地址。": [
+    "Enter an HTTPS URL without user credentials.",
+    "請輸入不含使用者憑證的 HTTPS 位址。",
+    "認証情報を含まない HTTPS URL を入力してください。",
+    "사용자 인증 정보가 없는 HTTPS 주소를 입력하세요.",
+    "Saisissez une URL HTTPS sans identifiants.",
+    "HTTPS-Adresse ohne Zugangsdaten eingeben.",
+    "Introduce una URL HTTPS sin credenciales.",
+    "Введите HTTPS-адрес без учётных данных."
+  ],
+  "更新来源已保存。": [
+    "Update source saved.",
+    "更新來源已儲存。",
+    "更新元を保存しました。",
+    "업데이트 소스를 저장했습니다.",
+    "Source de mise à jour enregistrée.",
+    "Updatequelle gespeichert.",
+    "Origen de actualización guardado.",
+    "Источник обновлений сохранён."
+  ],
+  "尚未配置更新来源。": [
+    "No update source configured.",
+    "尚未設定更新來源。",
+    "更新元が未設定です。",
+    "업데이트 소스가 설정되지 않았습니다.",
+    "Aucune source de mise à jour configurée.",
+    "Keine Updatequelle eingerichtet.",
+    "No hay origen de actualización configurado.",
+    "Источник обновлений не настроен."
+  ],
+  "正在检查…": [
+    "Checking…",
+    "正在檢查…",
+    "確認中…",
+    "확인 중…",
+    "Vérification…",
+    "Wird geprüft…",
+    "Comprobando…",
+    "Проверка…"
+  ],
+  "已是当前版本。": [
+    "Already up to date.",
+    "已是目前版本。",
+    "最新バージョンです。",
+    "최신 버전입니다.",
+    "Déjà à jour.",
+    "Bereits aktuell.",
+    "Ya está actualizado.",
+    "Установлена актуальная версия."
+  ],
+  "更新检查失败，当前 Pet 继续运行。": [
+    "Update check failed; Pet keeps running.",
+    "更新檢查失敗，目前 Pet 繼續執行。",
+    "更新確認に失敗しました。Pet は動作を続けます。",
+    "업데이트 확인 실패. Pet은 계속 실행됩니다.",
+    "Vérification échouée ; Pet continue de fonctionner.",
+    "Updateprüfung fehlgeschlagen; Pet läuft weiter.",
+    "Error al comprobar actualizaciones; Pet sigue funcionando.",
+    "Ошибка проверки обновлений; Pet продолжает работать."
+  ],
+  "请先检查可用更新。": [
+    "Check for an available update first.",
+    "請先檢查可用更新。",
+    "先に更新を確認してください。",
+    "먼저 사용 가능한 업데이트를 확인하세요.",
+    "Vérifiez d'abord les mises à jour.",
+    "Zuerst nach Updates suchen.",
+    "Comprueba primero las actualizaciones.",
+    "Сначала проверьте доступные обновления."
+  ],
+  "请输入 5–1440 分钟。": [
+    "Enter 5–1440 minutes.",
+    "請輸入 5–1440 分鐘。",
+    "5–1440 分を入力してください。",
+    "5–1440분을 입력하세요.",
+    "Saisissez 5–1440 minutes.",
+    "5–1440 Minuten eingeben.",
+    "Introduce 5–1440 minutos.",
+    "Введите от 5 до 1440 минут."
+  ],
+  "正在启动监控…": [
+    "Starting monitor…",
+    "正在啟動監控…",
+    "監視を開始中…",
+    "모니터 시작 중…",
+    "Démarrage du moniteur…",
+    "Monitor wird gestartet…",
+    "Iniciando monitor…",
+    "Запуск мониторинга…"
+  ],
+  "基础采集运行中；未安装或修改驱动": [
+    "Basic sampling running; no drivers installed or changed",
+    "基本擷取執行中；未安裝或修改驅動",
+    "基本収集中。ドライバーの変更なし",
+    "기본 수집 실행 중. 드라이버 변경 없음",
+    "Collecte de base active ; pilotes inchangés",
+    "Basiserfassung läuft; Treiber unverändert",
+    "Recopilación básica activa; controladores sin cambios",
+    "Базовый сбор работает; драйверы не изменены"
+  ],
+  "运行中 · 只读复用现有 8085 采集服务": [
+    "Running · read-only reuse of the existing 8085 provider",
+    "執行中 · 唯讀重用現有 8085 擷取服務",
+    "動作中 · 既存の 8085 サービスを読み取り専用で利用",
+    "실행 중 · 기존 8085 수집 서비스 읽기 전용 재사용",
+    "Actif · réutilisation en lecture seule du service 8085",
+    "Läuft · vorhandener 8085-Dienst wird nur gelesen",
+    "Activo · reutiliza servicio 8085 en modo de solo lectura",
+    "Работает · служба 8085 используется только для чтения"
+  ],
+  "运行中 · LibreHardwareMonitor 0.9.6；缺失传感器显示不可用": [
+    "Running · LibreHardwareMonitor 0.9.6; missing sensors show unavailable",
+    "執行中 · LibreHardwareMonitor 0.9.6；缺少的感測器顯示無法使用",
+    "動作中 · LibreHardwareMonitor 0.9.6。欠落センサーは利用不可と表示",
+    "실행 중 · LibreHardwareMonitor 0.9.6. 없는 센서는 사용 불가로 표시",
+    "Actif · LibreHardwareMonitor 0.9.6 ; capteurs absents indisponibles",
+    "Läuft · LibreHardwareMonitor 0.9.6; fehlende Sensoren nicht verfügbar",
+    "Activo · LibreHardwareMonitor 0.9.6; sensores ausentes no disponibles",
+    "Работает · LibreHardwareMonitor 0.9.6; отсутствующие датчики недоступны"
+  ],
+  "基础采集可用；等待现有硬件服务恢复，不重复打开驱动": [
+    "Basic sampling available; waiting for existing hardware provider recovery",
+    "基本擷取可用；等待現有硬體服務恢復，不重複開啟驅動",
+    "基本収集は利用可能。既存の監視サービスの復旧を待ち、ドライバーを再度開きません",
+    "기본 수집 가능. 기존 하드웨어 서비스 복구 대기, 드라이버 중복 사용 없음",
+    "Collecte de base disponible ; attente du service existant sans rouvrir les pilotes",
+    "Basiserfassung verfügbar; wartet auf vorhandenen Dienst, ohne Treiber erneut zu öffnen",
+    "Recopilación básica disponible; espera servicio existente sin reabrir controladores",
+    "Базовый сбор доступен; ожидание службы оборудования без повторного открытия драйвера"
+  ],
+  "部分温度等传感器需要管理员权限；取消授权仍可使用基础监控。": [
+    "Some sensors require administrator access. Basic monitoring remains available if permission is cancelled.",
+    "部分溫度等感測器需要管理員權限；取消授權仍可使用基本監控。",
+    "一部の温度センサーには管理者権限が必要です。許可をキャンセルしても基本監視は利用できます。",
+    "일부 센서는 관리자 권한이 필요합니다. 권한 요청을 취소해도 기본 모니터링은 사용 가능합니다.",
+    "Certains capteurs nécessitent des droits administrateur. La surveillance de base reste disponible si vous annulez.",
+    "Einige Sensoren brauchen Administratorrechte. Bei Abbruch bleibt die Basisüberwachung verfügbar.",
+    "Algunos sensores requieren permisos de administrador. Al cancelar, la monitorización básica sigue disponible.",
+    "Некоторым датчикам нужны права администратора. При отмене базовый мониторинг остаётся доступен."
+  ],
+  "单击宠物打开。鼠标在宠物或气泡内保持显示，离开后 5 秒收起。人物动作继续运行。": [
+    "Click the pet to open. Hover over the pet or bubble to keep it visible; it closes 5 seconds after leaving. Animations continue.",
+    "點擊寵物開啟。滑鼠在寵物或氣泡內保持顯示，離開後 5 秒收起。人物動作繼續執行。",
+    "ペットをクリックして表示。ペットか吹き出しにマウスを置くと表示が続き、離れて5秒後に閉じます。アニメーションは継続します。",
+    "펫을 클릭해 엽니다. 펫이나 말풍선 위에 마우스를 두면 유지되고, 벗어난 뒤 5초 후 닫힙니다. 애니메이션은 계속됩니다.",
+    "Cliquez sur le compagnon. Survolez-le ou la bulle pour la garder ouverte ; elle se ferme 5 secondes après votre départ. Les animations continuent.",
+    "Zum Öffnen auf das Haustier klicken. Über Haustier oder Blase bleibt sie sichtbar, sonst schließt sie nach 5 Sekunden. Animationen laufen weiter.",
+    "Haz clic en la mascota. Mantén el cursor en ella o en la burbuja para verla; se cierra 5 segundos después de salir. Las animaciones continúan.",
+    "Нажмите на питомца. Пока курсор над ним или пузырём, он остаётся видимым; после ухода закрывается через 5 секунд. Анимация продолжается."
+  ],
+  "连续超温 10 秒提醒一次；低于阈值 5℃并保持 60 秒后，才允许再次提醒。持续高温、断线和重启不会反复提醒。": [
+    "Alert once after 10 seconds above threshold. Rearm after 60 seconds at least 5°C below it. Continuous heat, disconnects and restarts do not repeat alerts.",
+    "連續超溫 10 秒提醒一次；低於閾值 5℃並保持 60 秒後，才允許再次提醒。持續高溫、斷線和重啟不會反覆提醒。",
+    "しきい値超過が10秒続くと一度通知。しきい値より5℃以上低い状態が60秒続くと再通知可能。高温継続、切断、再起動で通知は繰り返しません。",
+    "임계값을 10초간 초과하면 한 번 알립니다. 임계값보다 5℃ 이상 낮은 상태가 60초 지속되면 다시 알릴 수 있습니다. 고온 지속, 연결 끊김, 재시작으로 반복 알림이 발생하지 않습니다.",
+    "Une alerte après 10 secondes au-dessus du seuil. Réactivation après 60 secondes à au moins 5 °C en dessous. Chaleur persistante, déconnexions et redémarrages ne répètent pas l'alerte.",
+    "Einmalige Warnung nach 10 Sekunden über dem Grenzwert. Nach 60 Sekunden mindestens 5 °C darunter wieder bereit. Anhaltende Hitze, Verbindungsabbrüche und Neustarts wiederholen sie nicht.",
+    "Una alerta tras 10 segundos sobre el umbral. Se reactiva tras 60 segundos al menos 5 °C por debajo. Calor continuo, desconexiones y reinicios no repiten alertas.",
+    "Одно предупреждение после 10 секунд выше порога. Повторное разрешается после 60 секунд минимум на 5 °C ниже порога. Постоянный перегрев, обрывы связи и перезапуски не повторяют предупреждение."
+  ],
+  "安静模式不自动弹出，也不会在解除后补发旧提醒。CPU 使用封装温度或最高有效核心温度；GPU 使用核心温度。": [
+    "Quiet mode suppresses popups without replay. CPU uses package temperature or the highest valid core; GPU uses core temperature.",
+    "安靜模式不自動彈出，也不會在解除後補發舊提醒。CPU 使用封裝溫度或最高有效核心溫度；GPU 使用核心溫度。",
+    "静音モードは通知を表示せず、解除後も過去の通知を再送しません。CPU はパッケージまたは有効なコアの最高温度、GPU はコア温度を使用します。",
+    "조용한 모드에서는 알림을 표시하지 않으며 해제 후 이전 알림도 재전송하지 않습니다. CPU는 패키지 또는 유효한 코어의 최고 온도, GPU는 코어 온도를 사용합니다.",
+    "Le mode silencieux masque les alertes sans les rejouer. CPU : température du package ou du cœur valide le plus chaud ; GPU : température du cœur.",
+    "Ruhemodus unterdrückt Popups ohne spätere Wiederholung. CPU: Pakettemperatur oder höchste gültige Kerntemperatur; GPU: Kerntemperatur.",
+    "El modo silencioso evita avisos sin reenviarlos después. CPU: temperatura del paquete o núcleo válido más caliente; GPU: temperatura del núcleo.",
+    "Тихий режим подавляет уведомления без повторной отправки. CPU: температура пакета или самого горячего действующего ядра; GPU: температура ядра."
+  ],
+  "日志仅保存监控运行期间的数据。断线与缺失值显示为断点；损坏行跳过并标记，原文件保留。": [
+    "History covers active monitoring only. Missing data creates gaps; corrupt lines are skipped and counted without changing the file.",
+    "日誌僅儲存監控執行期間的資料。斷線與缺少值顯示為斷點；損壞行略過並標記，原檔案保留。",
+    "履歴は監視中のデータのみ保存。切断や欠損はグラフの空白にし、破損行はスキップして数えます。元ファイルは保持します。",
+    "기록은 모니터링 실행 중 데이터만 저장합니다. 연결 끊김과 누락값은 그래프 간격으로 표시하며 손상된 줄은 건너뛰고 집계합니다. 원본 파일은 유지됩니다.",
+    "L'historique couvre la surveillance active. Les données manquantes créent des interruptions ; les lignes corrompues sont ignorées et comptées sans modifier le fichier.",
+    "Verlauf nur während aktiver Überwachung. Fehlende Daten erzeugen Lücken; beschädigte Zeilen werden übersprungen und gezählt, die Datei bleibt erhalten.",
+    "El historial cubre solo la monitorización activa. Los datos ausentes crean huecos; se omiten y cuentan las líneas dañadas conservando el archivo.",
+    "История содержит данные только за время мониторинга. Отсутствующие значения дают разрывы; повреждённые строки пропускаются и учитываются, исходный файл сохраняется."
+  ],
+  "局域网访问需要系统允许网络连接。仅分享给信任的设备；链接包含本次运行的访问凭证。Pet 不修改防火墙。": [
+    "LAN access requires the system to allow network connections. Share only with trusted devices; the link contains this run's access token. Pet does not change the firewall.",
+    "區域網路存取需要系統允許網路連線。僅分享給信任的裝置；連結包含本次執行的存取憑證。Pet 不修改防火牆。",
+    "LAN アクセスにはシステムの接続許可が必要です。リンクは今回のアクセストークンを含むため、信頼する機器のみと共有してください。Pet はファイアウォールを変更しません。",
+    "LAN 접근은 시스템에서 연결을 허용해야 합니다. 링크에 이번 실행의 접근 토큰이 포함되므로 신뢰하는 기기에만 공유하세요. Pet은 방화벽을 변경하지 않습니다.",
+    "Le système doit autoriser les connexions LAN. Partagez seulement avec des appareils fiables ; le lien contient le jeton de cette session. Pet ne modifie pas le pare-feu.",
+    "Das System muss LAN-Verbindungen erlauben. Nur mit vertrauenswürdigen Geräten teilen; der Link enthält das Sitzungstoken. Pet ändert die Firewall nicht.",
+    "El sistema debe permitir conexiones LAN. Comparte solo con dispositivos de confianza; el enlace contiene el token de esta sesión. Pet no modifica el cortafuegos.",
+    "Для доступа по LAN система должна разрешать подключения. Делитесь только с доверенными устройствами: ссылка содержит токен текущего запуска. Pet не меняет брандмауэр."
+  ],
+  "请启用局域网网页监控并选择已监听的地址。": [
+    "Enable LAN monitoring and choose a listening address.",
+    "請啟用區域網路網頁監控並選擇已監聽的位址。",
+    "LAN 監視を有効にし、待ち受けアドレスを選択してください。",
+    "LAN 웹 모니터링을 활성화하고 수신 주소를 선택하세요.",
+    "Activez le moniteur LAN et choisissez une adresse d'écoute.",
+    "LAN-Überwachung aktivieren und eine aktive Adresse wählen.",
+    "Activa el monitor LAN y elige una dirección de escucha.",
+    "Включите веб-мониторинг по LAN и выберите адрес прослушивания."
+  ],
+  "访问链接已复制；本次退出后失效。": [
+    "Link copied; it expires when Pet exits.",
+    "存取連結已複製；本次結束後失效。",
+    "リンクをコピーしました。Pet 終了時に無効になります。",
+    "링크가 복사되었습니다. Pet 종료 후 만료됩니다.",
+    "Lien copié ; il expire à la fermeture de Pet.",
+    "Link kopiert; er verfällt beim Beenden von Pet.",
+    "Enlace copiado; caduca al cerrar Pet.",
+    "Ссылка скопирована; она истечёт после выхода из Pet."
+  ],
+  "剪贴板暂不可用。": [
+    "Clipboard temporarily unavailable.",
+    "剪貼簿暫時無法使用。",
+    "クリップボードは一時的に利用できません。",
+    "클립보드를 일시적으로 사용할 수 없습니다.",
+    "Presse-papiers temporairement indisponible.",
+    "Zwischenablage vorübergehend nicht verfügbar.",
+    "Portapapeles temporalmente no disponible.",
+    "Буфер обмена временно недоступен."
+  ],
+  "这次高温只提醒一次，恢复后才会再次提醒。": [
+    "One alert per episode. Alerts rearm after recovery.",
+    "這次高溫只提醒一次，恢復後才會再次提醒。",
+    "今回の高温では一度だけ通知します。回復後に再通知可能です。",
+    "이번 고온 상태는 한 번만 알립니다. 회복 후 다시 알릴 수 있습니다.",
+    "Une alerte par épisode. Réactivation après refroidissement.",
+    "Eine Warnung pro Episode. Nach Abkühlung wieder bereit.",
+    "Una alerta por episodio. Se reactiva tras recuperarse.",
+    "Одно предупреждение за эпизод. Повторное возможно после охлаждения."
+  ],
+  "收起": [
+    "Close",
+    "收起",
+    "閉じる",
+    "닫기",
+    "Fermer",
+    "Schließen",
+    "Cerrar",
+    "Закрыть"
+  ],
+  "暂停提醒 1 小时": [
+    "Pause alerts for 1 hour",
+    "暫停提醒 1 小時",
+    "通知を1時間停止",
+    "알림 1시간 일시 중지",
+    "Suspendre les alertes pendant 1 heure",
+    "Warnungen für 1 Stunde pausieren",
+    "Pausar alertas 1 hora",
+    "Приостановить предупреждения на 1 час"
+  ],
+  "本次高温不再提示": [
+    "Dismiss this episode",
+    "本次高溫不再提示",
+    "今回の高温通知を停止",
+    "이번 고온 알림 해제",
+    "Ignorer cet épisode",
+    "Diese Episode ausblenden",
+    "Ignorar este episodio",
+    "Отключить уведомления об этом эпизоде"
+  ],
+  "打开监控": [
+    "Open monitor",
+    "開啟監控",
+    "モニターを開く",
+    "모니터 열기",
+    "Ouvrir le moniteur",
+    "Monitor öffnen",
+    "Abrir monitor",
+    "Открыть мониторинг"
+  ],
+  "独立监控窗置顶": [
+    "Keep monitor window on top",
+    "獨立監控窗置頂",
+    "モニターを最前面に表示",
+    "모니터 창을 항상 위에 표시",
+    "Garder le moniteur au premier plan",
+    "Monitorfenster im Vordergrund halten",
+    "Mantener monitor encima",
+    "Окно мониторинга поверх других"
+  ],
+  "限制独立监控窗拖出屏幕": [
+    "Keep monitor window inside the screen",
+    "限制獨立監控窗拖出螢幕",
+    "モニターを画面内に収める",
+    "모니터 창을 화면 안에 유지",
+    "Garder le moniteur dans l'écran",
+    "Monitorfenster innerhalb des Bildschirms halten",
+    "Mantener monitor dentro de la pantalla",
+    "Удерживать окно мониторинга в пределах экрана"
+  ],
+  "高级主题与布局": [
+    "Advanced theme and layout",
+    "進階主題與版面",
+    "詳細なテーマとレイアウト",
+    "고급 테마 및 레이아웃",
+    "Thème et disposition avancés",
+    "Erweitertes Thema und Layout",
+    "Tema y diseño avanzados",
+    "Расширенная тема и компоновка"
+  ],
+  "内容边距": [
+    "Content padding",
+    "內容邊距",
+    "内容の余白",
+    "내용 여백",
+    "Marge intérieure",
+    "Innenabstand",
+    "Margen interior",
+    "Внутренний отступ"
+  ],
+  "指标行最小高度（0 为自动）": [
+    "Minimum row height (0: auto)",
+    "指標列最小高度（0 為自動）",
+    "行の最小高さ（0：自動）",
+    "최소 행 높이 (0: 자동)",
+    "Hauteur minimale (0 : auto)",
+    "Minimale Zeilenhöhe (0: automatisch)",
+    "Altura mínima (0: automática)",
+    "Минимальная высота строки (0: авто)"
+  ],
+  "边框圆角（0 保留像素外观）": [
+    "Corner radius (0: pixel style)",
+    "邊框圓角（0 保留像素外觀）",
+    "角の半径（0：ピクセル表示）",
+    "모서리 반경 (0: 픽셀 스타일)",
+    "Rayon des coins (0 : style pixel)",
+    "Eckenradius (0: Pixelstil)",
+    "Radio de esquinas (0: estilo píxel)",
+    "Радиус углов (0: пиксельный стиль)"
+  ],
+  "显示设备分组": [
+    "Show device groups",
+    "顯示裝置分組",
+    "デバイスのグループを表示",
+    "장치 그룹 표시",
+    "Afficher les groupes",
+    "Gerätegruppen anzeigen",
+    "Mostrar grupos de dispositivos",
+    "Показывать группы устройств"
+  ],
+  "分组圆角": [
+    "Group corner radius",
+    "分組圓角",
+    "グループの角の半径",
+    "그룹 모서리 반경",
+    "Rayon des groupes",
+    "Gruppen-Eckenradius",
+    "Radio de los grupos",
+    "Радиус углов группы"
+  ],
+  "分组内边距": [
+    "Group padding",
+    "分組內邊距",
+    "グループ内の余白",
+    "그룹 내부 여백",
+    "Marge intérieure des groupes",
+    "Gruppen-Innenabstand",
+    "Margen interior del grupo",
+    "Внутренний отступ группы"
+  ],
+  "分组间距": [
+    "Group spacing",
+    "分組間距",
+    "グループ間の余白",
+    "그룹 간격",
+    "Espacement des groupes",
+    "Gruppenabstand",
+    "Espacio entre grupos",
+    "Расстояние между группами"
+  ],
+  "分组标题下边距": [
+    "Group title bottom margin",
+    "分組標題下邊距",
+    "グループ名の下余白",
+    "그룹 제목 아래 여백",
+    "Marge sous le titre du groupe",
+    "Abstand unter dem Gruppentitel",
+    "Margen inferior del título",
+    "Отступ под заголовком группы"
+  ],
+  "分组标题上边距": [
+    "Group title top margin",
+    "分組標題上邊距",
+    "グループ名の上余白",
+    "그룹 제목 위 여백",
+    "Marge au-dessus du titre",
+    "Abstand über dem Gruppentitel",
+    "Margen superior del título",
+    "Отступ над заголовком группы"
+  ],
+  "数值字体": [
+    "Value font",
+    "數值字型",
+    "数値のフォント",
+    "값 글꼴",
+    "Police des valeurs",
+    "Werteschrift",
+    "Fuente de los valores",
+    "Шрифт значений"
+  ],
+  "标题字号": [
+    "Title font size",
+    "標題字級",
+    "タイトルの文字サイズ",
+    "제목 글꼴 크기",
+    "Taille du titre",
+    "Titelschriftgröße",
+    "Tamaño del título",
+    "Размер шрифта заголовка"
+  ],
+  "分组字号": [
+    "Group font size",
+    "分組字級",
+    "グループ名の文字サイズ",
+    "그룹 글꼴 크기",
+    "Taille des groupes",
+    "Gruppenschriftgröße",
+    "Tamaño del grupo",
+    "Размер шрифта группы"
+  ],
+  "数值字号": [
+    "Value font size",
+    "數值字級",
+    "数値の文字サイズ",
+    "값 글꼴 크기",
+    "Taille des valeurs",
+    "Werteschriftgröße",
+    "Tamaño de los valores",
+    "Размер шрифта значений"
+  ],
+  "字体加粗": [
+    "Bold font",
+    "字型加粗",
+    "太字",
+    "굵은 글꼴",
+    "Police en gras",
+    "Fettschrift",
+    "Negrita",
+    "Жирный шрифт"
+  ],
+  "标题颜色": [
+    "Title color",
+    "標題顏色",
+    "タイトルの色",
+    "제목 색상",
+    "Couleur du titre",
+    "Titelfarbe",
+    "Color del título",
+    "Цвет заголовка"
+  ],
+  "分组标题颜色": [
+    "Group title color",
+    "分組標題顏色",
+    "グループ名の色",
+    "그룹 제목 색상",
+    "Couleur du titre du groupe",
+    "Gruppentitelfarbe",
+    "Color del título del grupo",
+    "Цвет заголовка группы"
+  ],
+  "分组背景颜色": [
+    "Group background",
+    "分組背景顏色",
+    "グループの背景色",
+    "그룹 배경색",
+    "Fond du groupe",
+    "Gruppenhintergrund",
+    "Fondo del grupo",
+    "Фон группы"
+  ],
+  "显示可比较指标的进度条": [
+    "Show comparable metric bars",
+    "顯示可比較指標的進度條",
+    "比較可能な数値のバーを表示",
+    "비교 가능한 지표 막대 표시",
+    "Afficher les barres des valeurs comparables",
+    "Balken für vergleichbare Werte anzeigen",
+    "Mostrar barras de métricas comparables",
+    "Показывать полосы сравнимых показателей"
+  ],
+  "进度条背景颜色": [
+    "Bar background",
+    "進度條背景顏色",
+    "バーの背景色",
+    "막대 배경색",
+    "Fond des barres",
+    "Balkenhintergrund",
+    "Fondo de las barras",
+    "Фон полосы"
+  ],
+  "进度条正常颜色": [
+    "Normal bar color",
+    "進度條正常顏色",
+    "通常時のバーの色",
+    "정상 막대 색상",
+    "Couleur normale des barres",
+    "Normale Balkenfarbe",
+    "Color normal de la barra",
+    "Цвет полосы в норме"
+  ],
+  "进度条警告颜色": [
+    "Warning bar color",
+    "進度條警告顏色",
+    "警告時のバーの色",
+    "경고 막대 색상",
+    "Couleur d'avertissement",
+    "Balken-Warnfarbe",
+    "Color de advertencia",
+    "Цвет предупреждения"
+  ],
+  "进度条严重颜色": [
+    "Critical bar color",
+    "進度條嚴重顏色",
+    "危険時のバーの色",
+    "위험 막대 색상",
+    "Couleur critique",
+    "Kritische Balkenfarbe",
+    "Color crítico",
+    "Цвет критического уровня"
+  ],
+  "数值平滑过渡（提醒仍使用原始数据）": [
+    "Smooth values (alerts use raw data)",
+    "數值平滑過渡（提醒仍使用原始資料）",
+    "数値を滑らかに表示（通知は生データを使用）",
+    "값 부드럽게 표시 (알림은 원시 데이터 사용)",
+    "Lisser les valeurs (alertes sur données brutes)",
+    "Werte glätten (Warnungen nutzen Rohdaten)",
+    "Suavizar valores (alertas con datos sin procesar)",
+    "Сглаживать значения (оповещения по исходным данным)"
+  ],
+  "过渡时长（50–2000 毫秒）": [
+    "Transition duration (50–2000 ms)",
+    "過渡時間（50–2000 毫秒）",
+    "遷移時間（50–2000 ミリ秒）",
+    "전환 시간 (50–2000밀리초)",
+    "Durée de transition (50–2000 ms)",
+    "Übergangsdauer (50–2000 ms)",
+    "Duración de transición (50–2000 ms)",
+    "Длительность перехода (50–2000 мс)"
+  ],
+  "应用高级主题": [
+    "Apply advanced theme",
+    "套用進階主題",
+    "詳細テーマを適用",
+    "고급 테마 적용",
+    "Appliquer le thème avancé",
+    "Erweitertes Thema anwenden",
+    "Aplicar tema avanzado",
+    "Применить расширенную тему"
+  ],
+  "主题参数无效，未应用。": [
+    "Invalid theme settings; not applied.",
+    "主題參數無效，未套用。",
+    "テーマ設定が無効です。適用されませんでした。",
+    "잘못된 테마 설정입니다. 적용되지 않았습니다.",
+    "Paramètres invalides, thème non appliqué.",
+    "Ungültige Themeneinstellungen, nicht angewendet.",
+    "Tema no aplicado: ajustes no válidos.",
+    "Недопустимые настройки темы; не применены."
+  ],
+  "允许局域网访问（默认关闭）": [
+    "Allow LAN access (off by default)",
+    "允許區域網路存取（預設關閉）",
+    "LAN アクセスを許可（初期設定：オフ）",
+    "LAN 접근 허용 (기본값: 꺼짐)",
+    "Autoriser le réseau local (désactivé par défaut)",
+    "LAN-Zugriff erlauben (standardmäßig aus)",
+    "Permitir acceso LAN (desactivado por defecto)",
+    "Разрешить доступ по LAN (по умолчанию выключен)"
+  ],
+  "同时监听 IPv6": [
+    "Also listen on IPv6",
+    "同時監聽 IPv6",
+    "IPv6 でも待ち受ける",
+    "IPv6도 수신",
+    "Écouter également sur IPv6",
+    "Auch über IPv6 lauschen",
+    "Escuchar también en IPv6",
+    "Также принимать подключения IPv6"
+  ],
+  "分享地址": [
+    "Share address",
+    "分享位址",
+    "共有アドレス",
+    "공유 주소",
+    "Adresse de partage",
+    "Freigabeadresse",
+    "Dirección para compartir",
+    "Адрес для доступа"
+  ],
+  "复制局域网访问链接": [
+    "Copy LAN access link",
+    "複製區域網路存取連結",
+    "LAN アクセスリンクをコピー",
+    "LAN 접근 링크 복사",
+    "Copier le lien d'accès LAN",
+    "LAN-Zugriffslink kopieren",
+    "Copiar enlace de acceso LAN",
+    "Скопировать ссылку доступа по LAN"
+  ],
+  "网页监控运行中 · 允许局域网访问": [
+    "Web monitor running · LAN enabled",
+    "網頁監控執行中 · 允許區域網路存取",
+    "ウェブ監視中 · LAN アクセス有効",
+    "웹 모니터 실행 중 · LAN 허용",
+    "Moniteur web actif · LAN autorisé",
+    "Webmonitor läuft · LAN erlaubt",
+    "Monitor web activo · LAN permitido",
+    "Веб-монитор работает · LAN разрешена"
+  ],
+  "网页监控运行中 · 仅本机访问": [
+    "Web monitor running · local access only",
+    "網頁監控執行中 · 僅本機存取",
+    "ウェブ監視中 · この PC のみ",
+    "웹 모니터 실행 중 · 로컬 접근만 허용",
+    "Moniteur web actif · accès local uniquement",
+    "Webmonitor läuft · nur lokal",
+    "Monitor web activo · solo acceso local",
+    "Веб-монитор работает · только локально"
+  ],
+  "系统工具": [
+    "System tools",
+    "系統工具",
+    "システムツール",
+    "시스템 도구",
+    "Outils système",
+    "Systemwerkzeuge",
+    "Herramientas del sistema",
+    "Системные инструменты"
+  ],
+  "本次运行期间阻止自动睡眠和熄屏": [
+    "Prevent automatic sleep and display off for this run",
+    "本次執行期間防止自動睡眠和關閉螢幕",
+    "今回の起動中は自動スリープと画面オフを防ぐ",
+    "이번 실행 중 자동 절전 및 화면 꺼짐 방지",
+    "Empêcher la veille et l'extinction pendant cette session",
+    "Ruhezustand und Bildschirmabschaltung für diesen Lauf verhindern",
+    "Evitar suspensión y apagado de pantalla durante esta sesión",
+    "Запретить автоматический сон и выключение экрана на время работы"
+  ],
+  "关闭显示器": [
+    "Turn off display",
+    "關閉顯示器",
+    "画面をオフにする",
+    "화면 끄기",
+    "Éteindre l'écran",
+    "Bildschirm ausschalten",
+    "Apagar pantalla",
+    "Выключить экран"
+  ],
+  "打开任务管理器": [
+    "Open Task Manager",
+    "開啟工作管理員",
+    "タスクマネージャーを開く",
+    "작업 관리자 열기",
+    "Ouvrir le Gestionnaire des tâches",
+    "Task-Manager öffnen",
+    "Abrir Administrador de tareas",
+    "Открыть Диспетчер задач"
+  ],
+  "刷新桌面图标": [
+    "Refresh desktop icons",
+    "重新整理桌面圖示",
+    "デスクトップアイコンを更新",
+    "바탕 화면 아이콘 새로 고침",
+    "Actualiser les icônes du bureau",
+    "Desktopsymbole aktualisieren",
+    "Actualizar iconos del escritorio",
+    "Обновить значки рабочего стола"
+  ],
+  "清理系统临时文件": [
+    "Clean system temporary files",
+    "清理系統暫存檔",
+    "一時ファイルを削除",
+    "시스템 임시 파일 정리",
+    "Nettoyer les fichiers temporaires",
+    "Temporäre Systemdateien bereinigen",
+    "Limpiar archivos temporales",
+    "Очистить временные файлы"
+  ],
+  "重启资源管理器": [
+    "Restart Explorer",
+    "重新啟動檔案總管",
+    "エクスプローラーを再起動",
+    "탐색기 다시 시작",
+    "Redémarrer l'Explorateur",
+    "Explorer neu starten",
+    "Reiniciar Explorador",
+    "Перезапустить Проводник"
+  ],
+  "关机延时（1–1440 分钟）": [
+    "Shutdown delay (1–1440 minutes)",
+    "關機延遲（1–1440 分鐘）",
+    "シャットダウンまでの時間（1–1440 分）",
+    "종료 지연 (1–1440분)",
+    "Délai d'arrêt (1–1440 minutes)",
+    "Verzögerung bis zum Herunterfahren (1–1440 Minuten)",
+    "Retraso de apagado (1–1440 minutos)",
+    "Задержка выключения (1–1440 минут)"
+  ],
+  "设置定时关机": [
+    "Schedule shutdown",
+    "設定定時關機",
+    "シャットダウンを予約",
+    "시스템 종료 예약",
+    "Programmer l'arrêt",
+    "Herunterfahren planen",
+    "Programar apagado",
+    "Запланировать выключение"
+  ],
+  "取消本程序的定时关机": [
+    "Cancel Pet shutdown schedule",
+    "取消本程式的定時關機",
+    "Pet のシャットダウン予約を取り消す",
+    "Pet 종료 예약 취소",
+    "Annuler l'arrêt programmé par Pet",
+    "Pet-Abschaltplan abbrechen",
+    "Cancelar apagado de Pet",
+    "Отменить выключение, запланированное Pet"
+  ],
+  "未设置定时关机": [
+    "No shutdown scheduled",
+    "未設定定時關機",
+    "シャットダウン予約なし",
+    "종료 예약 없음",
+    "Aucun arrêt programmé",
+    "Kein Herunterfahren geplant",
+    "Sin apagado programado",
+    "Выключение не запланировано"
+  ],
+  "定时关机剩余 {0} 秒": [
+    "Shutdown in {0} seconds",
+    "定時關機剩餘 {0} 秒",
+    "シャットダウンまで {0} 秒",
+    "종료까지 {0}초",
+    "Arrêt dans {0} secondes",
+    "Herunterfahren in {0} Sekunden",
+    "Apagado en {0} segundos",
+    "Выключение через {0} секунд"
+  ],
+  "设备已离线 · {0}": [
+    "Device offline · {0}",
+    "裝置已離線 · {0}",
+    "デバイス切断 · {0}",
+    "장치 오프라인 · {0}",
+    "Appareil hors ligne · {0}",
+    "Gerät offline · {0}",
+    "Dispositivo sin conexión · {0}",
+    "Устройство отключено · {0}"
+  ],
+  "{0} 高温事件（已记录，等待恢复）": [
+    "{0} high-temperature episode (recorded, waiting for recovery)",
+    "{0} 高溫事件（已記錄，等待恢復）",
+    "{0} 高温状態（記録済み、回復待ち）",
+    "{0} 고온 상태 (기록됨, 복구 대기)",
+    "{0} en surchauffe (enregistrée, attente du refroidissement)",
+    "{0} Überhitzung (erfasst, Abkühlung abwarten)",
+    "{0} sobrecalentado (registrado, esperando recuperación)",
+    "{0}: перегрев (зарегистрирован, ожидание охлаждения)"
+  ],
+  "今日流量：上传 {0} MB · 下载 {1} MB（本程序运行期间）": [
+    "Today's traffic: up {0} MB · down {1} MB (while Pet runs)",
+    "今日流量：上傳 {0} MB · 下載 {1} MB（本程式執行期間）",
+    "本日の通信：送信 {0} MB · 受信 {1} MB（Pet 起動中）",
+    "오늘 트래픽: 업로드 {0} MB · 다운로드 {1} MB (Pet 실행 중)",
+    "Trafic du jour : envoi {0} Mo · réception {1} Mo (Pet actif)",
+    "Heutiger Datenverkehr: Upload {0} MB · Download {1} MB (Pet-Laufzeit)",
+    "Tráfico de hoy: subida {0} MB · bajada {1} MB (durante Pet)",
+    "Трафик за сегодня: отправлено {0} МБ · получено {1} МБ (за время работы Pet)"
+  ],
+  "不可用": [
+    "Unavailable",
+    "無法使用",
+    "利用不可",
+    "사용 불가",
+    "Indisponible",
+    "Nicht verfügbar",
+    "No disponible",
+    "Недоступно"
+  ],
+  "已断开": [
+    "Disconnected",
+    "已中斷",
+    "切断",
+    "연결 끊김",
+    "Déconnecté",
+    "Getrennt",
+    "Desconectado",
+    "Отключено"
+  ],
+  "未启用": [
+    "Disabled",
+    "未啟用",
+    "無効",
+    "비활성화",
+    "Désactivé",
+    "Deaktiviert",
+    "Desactivado",
+    "Выключено"
+  ],
+  "任务栏背景不透明度（0–1）": [
+    "Taskbar background opacity (0–1)",
+    "工作列背景不透明度（0–1）",
+    "タスクバー背景の不透明度（0–1）",
+    "작업 표시줄 배경 불투명도 (0–1)",
+    "Opacité du fond de la barre des tâches (0–1)",
+    "Hintergrunddeckkraft der Taskleiste (0–1)",
+    "Opacidad del fondo de la barra de tareas (0–1)",
+    "Непрозрачность фона панели задач (0–1)"
+  ],
+  "恢复任务栏自动定位": [
+    "Restore automatic taskbar placement",
+    "恢復工作列自動定位",
+    "タスクバーの自動配置に戻す",
+    "작업 표시줄 자동 배치 복원",
+    "Rétablir le placement automatique",
+    "Automatische Taskleistenposition wiederherstellen",
+    "Restaurar posición automática",
+    "Восстановить автоматическое размещение"
+  ],
+  "拖动调整位置 · 双击刷新 · 右键设置": [
+    "Drag to move · Double-click to refresh · Right-click for settings",
+    "拖曳調整位置 · 按兩下重新整理 · 右鍵設定",
+    "ドラッグで移動 · ダブルクリックで更新 · 右クリックで設定",
+    "드래그로 이동 · 두 번 클릭하여 새로 고침 · 오른쪽 클릭으로 설정",
+    "Glisser pour déplacer · Double-clic pour actualiser · Clic droit pour les réglages",
+    "Ziehen zum Verschieben · Doppelklick zum Aktualisieren · Rechtsklick für Einstellungen",
+    "Arrastrar para mover · Doble clic para actualizar · Clic derecho para ajustes",
+    "Перетаскивание · Двойной щелчок для обновления · Правый щелчок для настроек"
+  ],
+  "0 为透明，1 为不透明；同时调整填充和边框，文字保持清晰。拖动监控条调整位置，双击刷新，右键打开设置。": [
+    "0 is transparent and 1 is opaque. Fill and border fade together; text stays clear. Drag to move, double-click to refresh, right-click for settings.",
+    "0 為透明，1 為不透明；同時調整填充和邊框，文字保持清晰。拖曳監控條調整位置，按兩下重新整理，右鍵開啟設定。",
+    "0 は透明、1 は不透明です。背景と枠を同時に調整し、文字は鮮明に保ちます。ドラッグで移動、ダブルクリックで更新、右クリックで設定を開きます。",
+    "0은 투명, 1은 불투명입니다. 배경과 테두리를 함께 조절하며 글자는 선명하게 유지됩니다. 드래그로 이동, 두 번 클릭으로 새로 고침, 오른쪽 클릭으로 설정을 엽니다.",
+    "0 est transparent, 1 opaque. Le fond et la bordure varient ensemble, le texte reste net. Glissez pour déplacer, double-cliquez pour actualiser, clic droit pour les réglages.",
+    "0 ist transparent, 1 ist deckend. Hintergrund und Rahmen werden gemeinsam angepasst; Text bleibt klar. Ziehen zum Verschieben, Doppelklick zum Aktualisieren, Rechtsklick für Einstellungen.",
+    "0 es transparente y 1 opaco. El fondo y el borde cambian juntos; el texto sigue claro. Arrastre para mover, doble clic para actualizar y clic derecho para ajustes.",
+    "0 — прозрачный, 1 — непрозрачный. Фон и рамка меняются вместе, текст остаётся чётким. Перетащите для перемещения, двойной щелчок для обновления, правый щелчок для настроек."
+  ],
+  "任务栏支持拖动、双击刷新和右键设置；背景透明度与指标选择在进阶功能中。自动定位时空间不足会暂停显示。": [
+    "Drag the taskbar monitor, double-click to refresh, or right-click for settings. Background opacity and metrics are in Advanced features. Automatic placement pauses if space is insufficient.",
+    "工作列支援拖曳、按兩下重新整理和右鍵設定；背景透明度與指標選擇在進階功能中。自動定位時空間不足會暫停顯示。",
+    "タスクバー表示はドラッグ、ダブルクリック更新、右クリック設定に対応します。背景の不透明度と指標は詳細機能で設定します。自動配置で空きが不足すると表示を停止します。",
+    "작업 표시줄 모니터는 드래그, 두 번 클릭 새로 고침, 오른쪽 클릭 설정을 지원합니다. 배경 불투명도와 지표는 고급 기능에서 설정합니다. 자동 배치 공간이 부족하면 표시를 멈춥니다.",
+    "Glissez le moniteur, double-cliquez pour actualiser ou faites un clic droit pour les réglages. Opacité et indicateurs sont dans les fonctions avancées. Le placement automatique se suspend si la place manque.",
+    "Taskleistenmonitor ziehen, per Doppelklick aktualisieren, per Rechtsklick einstellen. Deckkraft und Messwerte finden Sie in den erweiterten Funktionen. Bei Platzmangel pausiert die automatische Anzeige.",
+    "Arrastre el monitor, haga doble clic para actualizar o clic derecho para ajustes. Opacidad e indicadores están en funciones avanzadas. La posición automática pausa la vista si falta espacio.",
+    "Монитор можно перетаскивать, обновлять двойным щелчком и настраивать правым щелчком. Прозрачность и показатели находятся в дополнительных функциях. При нехватке места автоматическое размещение приостанавливает показ."
+  ],
+  "任务栏背景不透明度": [
+    "Taskbar background opacity",
+    "工作列背景不透明度",
+    "タスクバー背景の不透明度",
+    "작업 표시줄 배경 불투명도",
+    "Opacité du fond de la barre des tâches",
+    "Hintergrunddeckkraft der Taskleiste",
+    "Opacidad del fondo de la barra de tareas",
+    "Непрозрачность фона панели задач"
+  ],
+  "0% 为透明，100% 为不透明；只改变填充和边框，文字保持清晰。": [
+    "0% is transparent and 100% is opaque. Only the fill and border change; text stays clear.",
+    "0% 為透明，100% 為不透明；只改變填充和邊框，文字保持清晰。",
+    "0% は透明、100% は不透明です。背景と枠だけが変わり、文字は鮮明に保たれます。",
+    "0%는 투명, 100%는 불투명입니다. 배경과 테두리만 바뀌며 글자는 선명하게 유지됩니다.",
+    "0% est transparent et 100% opaque. Seuls le fond et la bordure changent ; le texte reste net.",
+    "0% ist transparent, 100% ist deckend. Nur Hintergrund und Rahmen ändern sich; Text bleibt klar.",
+    "0% es transparente y 100% opaco. Solo cambian el fondo y el borde; el texto sigue claro.",
+    "0% — прозрачный, 100% — непрозрачный. Меняются только фон и рамка, текст остаётся чётким."
+  ],
+  "拖动任务栏监控条调整位置，双击刷新，右键打开设置；指标选择与自动定位在进阶功能中。": [
+    "Drag the taskbar monitor to move it, double-click to refresh, or right-click for settings. Metrics and automatic placement are in Advanced features.",
+    "拖曳工作列監控條調整位置，按兩下重新整理，右鍵開啟設定；指標選擇與自動定位在進階功能中。",
+    "タスクバー表示をドラッグして移動、ダブルクリックで更新、右クリックで設定を開きます。指標と自動配置は詳細機能で設定します。",
+    "작업 표시줄 모니터를 드래그하여 이동하고, 두 번 클릭하여 새로 고침하거나 오른쪽 클릭으로 설정을 엽니다. 지표와 자동 배치는 고급 기능에 있습니다.",
+    "Glissez le moniteur pour le déplacer, double-cliquez pour actualiser ou faites un clic droit pour les réglages. Indicateurs et placement automatique sont dans les fonctions avancées.",
+    "Taskleistenmonitor ziehen, per Doppelklick aktualisieren, per Rechtsklick einstellen. Messwerte und automatische Position finden Sie in den erweiterten Funktionen.",
+    "Arrastre el monitor para moverlo, haga doble clic para actualizar o clic derecho para ajustes. Indicadores y posición automática están en funciones avanzadas.",
+    "Перетащите монитор, обновите двойным щелчком или откройте настройки правым щелчком. Показатели и автоматическое размещение находятся в дополнительных функциях."
+  ]
+}

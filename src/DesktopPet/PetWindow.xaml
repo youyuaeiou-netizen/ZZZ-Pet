@@ -1,0 +1,19 @@
+<Window x:Class="DesktopPet.PetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DesktopPet" Icon="assets/app-icon.ico" WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent" Topmost="True"
+        ShowInTaskbar="False" Focusable="True">
+    <Grid>
+        <Image x:Name="SpriteImage" Stretch="Fill" SnapsToDevicePixels="True"
+               RenderOptions.BitmapScalingMode="HighQuality"
+               RenderTransformOrigin="0.5,0.5" />
+        <TextBlock x:Name="SleepIndicator" Text="Z" FontFamily="Segoe UI"
+                   FontWeight="SemiBold" Foreground="#EEF0F2" Visibility="Collapsed"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#24303B" BlurRadius="3" ShadowDepth="1" Opacity="0.8" />
+            </TextBlock.Effect>
+        </TextBlock>
+    </Grid>
+</Window>

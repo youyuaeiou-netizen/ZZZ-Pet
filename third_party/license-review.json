@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "status": "verified",
+  "reason": "Fixed LiteMonitor MIT declaration, original runtime/package notices, unmodified library binaries and five corresponding source archives verified. Twelve embedded modules match official PawnIO.Modules 0.2.2; excluded installer, driver and compiler tool binaries are not redistributed. Hardware and cross-machine acceptance remain separate.",
+  "excludedExecutables": [
+    "LiteMonitorFPS.exe",
+    "PawnIO_setup.exe",
+    "driver.zip",
+    "LiteMonitor.Updater.exe"
+  ],
+  "verifiedComponents": {
+    "LiteMonitor": {
+      "receipt": "third_party/LiteMonitor/upstream.json",
+      "version": "1.3.6",
+      "license": "MIT",
+      "notice": "third_party/LiteMonitor/MIT-NOTICE.txt",
+      "evidence": "pinned README explicit use/modification/distribution declaration and author attribution"
+    },
+    "PresentMon": {
+      "receipt": "third_party/PresentMon/upstream.json",
+      "version": "1.10.0",
+      "source": "official release",
+      "license": "MIT"
+    },
+    "HardwareDependencies": {
+      "receipt": "third_party/HardwareDependencies/source-receipt.json",
+      "instructions": "third_party/HardwareDependencies/BUILDING.md",
+      "scope": "pinned unchanged NuGet binaries; full referenced license notices; five source archives; no shared driver"
+    }
+  }
+}

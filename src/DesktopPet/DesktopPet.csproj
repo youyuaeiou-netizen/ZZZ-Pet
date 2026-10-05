@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <ApplicationIcon>..\..\assets\app-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="DesktopPet.MonitorUi" />
+    <InternalsVisibleTo Include="DesktopPet.Search.Tests" />
+    <ProjectReference Include="../DesktopPet.Monitoring/DesktopPet.Monitoring.csproj" />
+    <ProjectReference Include="../DesktopPet.Plugins/DesktopPet.Plugins.csproj" />
+    <ProjectReference Include="../DesktopPet.MonitorWorker/DesktopPet.MonitorWorker.csproj" ReferenceOutputAssembly="false" />
+    <Resource Include="..\..\assets\app-icon.ico" Link="assets/app-icon.ico" />
+    <Content Include="../../assets/monitor-plugins/*.json" Link="monitor-plugins/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../../assets/monitor-languages/*.json" Link="monitor-languages/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="..\..\assets\app-icon.ico" LogicalName="DesktopPet.AppIcon.ico" />
+    <EmbeddedResource Include="../../third_party/CC-CEDICT/cedict_1_0_ts_utf-8_mdbg.txt.gz" LogicalName="DesktopPet.CC-CEDICT.gz" />
+    <Content Include="..\..\characters\ellen-flat2d\**\character.json;..\..\characters\ellen-flat2d\**\*.png" Exclude="..\..\characters\**\masters\**\*"
+             Link="characters\ellen-flat2d\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest">
+      <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' != 'true'">PreserveNewest</CopyToPublishDirectory>
+      <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' == 'true'">Never</CopyToPublishDirectory>
+    </Content>
+    <Content Include="..\..\docs\朋友试用说明.md;..\..\docs\更新记录.md"
+             Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="CopyMonitorWorker" AfterTargets="Build">
+    <MSBuild Projects="../DesktopPet.MonitorWorker/DesktopPet.MonitorWorker.csproj" Targets="GetMonitorOutput" Properties="Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" ItemName="MonitorWorkerAssembly" />
+    </MSBuild>
+    <PropertyGroup><MonitorWorkerDirectory>@(MonitorWorkerAssembly->'%(RootDir)%(Directory)')</MonitorWorkerDirectory></PropertyGroup>
+    <Error Condition="'$(MonitorWorkerDirectory)' == ''" Text="Monitor worker output directory was not resolved." />
+    <ItemGroup><MonitorWorkerFiles Include="$(MonitorWorkerDirectory)/**/*" Exclude="$(MonitorWorkerDirectory)/**/*.pdb" /></ItemGroup>
+    <Copy SourceFiles="@(MonitorWorkerFiles)" DestinationFiles="@(MonitorWorkerFiles->'$(TargetDir)monitor/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

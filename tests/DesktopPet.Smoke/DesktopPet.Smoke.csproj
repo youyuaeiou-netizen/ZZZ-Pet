@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\src\DesktopPet\Tools\ToolsState.cs;..\..\src\DesktopPet\Tools\ToolsStore.cs;..\..\src\DesktopPet\Tools\ToolsService.cs;..\..\src\DesktopPet\Tools\NoticeQueue.cs" Link="Tools\%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\assets\app-icon.ico" LogicalName="DesktopPet.AppIcon.ico" />
+    <Compile Include="..\..\src\DesktopPet\Character\*.cs" Link="Character\%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\DesktopPet\Behavior\*.cs" Link="Behavior\%(Filename)%(Extension)" />
+    <Compile Include="..\..\src\DesktopPet\SettingsStore.cs" Link="SettingsStore.cs" />
+    <Compile Include="..\..\src\DesktopPet\TrayService.cs" Link="TrayService.cs" />
+    <Compile Include="..\..\src\DesktopPet\AppInfo.cs;..\..\src\DesktopPet\RuntimePaths.cs;..\..\src\DesktopPet\DiagnosticLog.cs;..\..\src\DesktopPet\SingleInstanceGuard.cs" Link="%(Filename)%(Extension)" />
+    <Content Include="..\..\characters\ellen-flat2d\**\*" Link="characters\ellen-flat2d\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

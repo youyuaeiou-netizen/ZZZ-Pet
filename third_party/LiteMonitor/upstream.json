@@ -1,0 +1,187 @@
+{
+  "repository": "https://github.com/Diorser/LiteMonitor",
+  "commit": "169e90a2ccaa68ca29d0b549d10c6c59634c1b49",
+  "version": "1.3.6",
+  "licenseEvidence": "Pinned README explicitly declares MIT, permits use/modification/distribution, and identifies author Diorser; see MIT-NOTICE.txt and UPSTREAM-README.md",
+  "redistribution": "verified-mit-source-declaration",
+  "bundledUpstreamExecutables": false,
+  "adaptations": [
+    "normal-privilege plugin host",
+    "removed TLS certificate validation bypasses",
+    "redacted exception messages in debug logs",
+    "disposed HTTP responses",
+    "removed unused event",
+    "bounded HTTP response buffers",
+    "bounded regex processing"
+  ],
+  "files": [
+    {
+      "path": "third_party/LiteMonitor/HardwareRules.cs",
+      "upstreamPath": "src/System/HardwareServices/HardwareRules.cs",
+      "upstreamSha256": "b2156e5c2423d722bbbec7d1b44960c29e2ce3574ff67d726601515ee7edd51e",
+      "localSha256": "b2156e5c2423d722bbbec7d1b44960c29e2ce3574ff67d726601515ee7edd51e",
+      "adapted": false
+    },
+    {
+      "path": "third_party/LiteMonitor/UPSTREAM-README.md",
+      "upstreamPath": "README.md",
+      "upstreamSha256": "7e17c8b03771321d4783598e1456ec3a201054598324544171c0fe67d6a3df22",
+      "localSha256": "7e17c8b03771321d4783598e1456ec3a201054598324544171c0fe67d6a3df22",
+      "adapted": false
+    },
+    {
+      "path": "third_party/LiteMonitor/PLUGIN_DEV_GUIDE.md",
+      "upstreamPath": "resources/plugins/PLUGIN_DEV_GUIDE.md",
+      "upstreamSha256": "8ae2023fbee62b32f7bdf33061b29528e9c4eb6725dc118d445fa4a67f4a4812",
+      "localSha256": "8ae2023fbee62b32f7bdf33061b29528e9c4eb6725dc118d445fa4a67f4a4812",
+      "adapted": false
+    },
+    {
+      "path": "third_party/LiteMonitor/PluginModels.cs",
+      "upstreamPath": "src/Plugins/PluginModels.cs",
+      "upstreamSha256": "69a7e0377785a5b0ae2af4eae6f97a762fcc4566e92b7131f8b567be65373b79",
+      "localSha256": "69a7e0377785a5b0ae2af4eae6f97a762fcc4566e92b7131f8b567be65373b79",
+      "adapted": false
+    },
+    {
+      "path": "third_party/LiteMonitor/PluginConstants.cs",
+      "upstreamPath": "src/Plugins/PluginConstants.cs",
+      "upstreamSha256": "40980a173367ac67c7561ee26f41b1b4249511383c46a909fbd5855660911150",
+      "localSha256": "40980a173367ac67c7561ee26f41b1b4249511383c46a909fbd5855660911150",
+      "adapted": false
+    },
+    {
+      "path": "third_party/LiteMonitor/PluginProcessor.cs",
+      "upstreamPath": "src/Plugins/PluginProcessor.cs",
+      "upstreamSha256": "c9eab673777ac69033f363ad7eebfed5538276b1c6b3349d8e9dea18803ae335",
+      "localSha256": "b7289b582038614bd7053f8dbb2236c0d6a0ee96e88f502955b6b0fd10620922",
+      "adapted": true
+    },
+    {
+      "path": "third_party/LiteMonitor/PluginExecutor.cs",
+      "upstreamPath": "src/Plugins/PluginExecutor.cs",
+      "upstreamSha256": "85b409abffaf0ba4c068473b398f5c5f7becf4749f27056e44b1532f7c5e813d",
+      "localSha256": "4ba03514b1b014693c7126c8864dc2371db53514efbe8d525cf4ab6d56a613dc",
+      "adapted": true
+    },
+    {
+      "path": "third_party/LiteMonitor/CityCodeResolver.cs",
+      "upstreamPath": "src/Plugins/Native/CityCodeResolver.cs",
+      "upstreamSha256": "524be80e499a17beab5ea073625bd0dc42ad394b7a15cbcc58e3fd46a01262e3",
+      "localSha256": "116f5fa033adde8c35ef084be51419ccd94245cac26dfd2e2922bfa0c4cfb627",
+      "adapted": true
+    },
+    {
+      "path": "third_party/LiteMonitor/CryptoNative.cs",
+      "upstreamPath": "src/Plugins/Native/CryptoNative.cs",
+      "upstreamSha256": "c554d2341f3c15c9519077a5be74fa8da1d3a7a4d74aed9df99d7712a7477e90",
+      "localSha256": "0b94866ef11164da550aa624d1628377830576484249b6312e7495a2ed827483",
+      "adapted": true
+    },
+    {
+      "path": "assets/monitor-plugins/Bilibili.json",
+      "upstreamSha256": "2d0bd908ce22a96d35547fd25cb1928fc633bae4daa2c3ee3ce80f1f492fb620",
+      "localSha256": "2d0bd908ce22a96d35547fd25cb1928fc633bae4daa2c3ee3ce80f1f492fb620"
+    },
+    {
+      "path": "assets/monitor-plugins/Crypto.json",
+      "upstreamSha256": "96bdab63dc1f1c8d275d20672500972e6084805f8628ec73fe54174a0528045d",
+      "localSha256": "96bdab63dc1f1c8d275d20672500972e6084805f8628ec73fe54174a0528045d"
+    },
+    {
+      "path": "assets/monitor-plugins/Exchange.json",
+      "upstreamSha256": "91158b5636dfeb55226b85e3d603be5c6a86d71b31013c89ca1e7c52b356198f",
+      "localSha256": "91158b5636dfeb55226b85e3d603be5c6a86d71b31013c89ca1e7c52b356198f"
+    },
+    {
+      "path": "assets/monitor-plugins/GitHub.json",
+      "upstreamSha256": "f4feb24797f3aadb3c3e091bfba15fcf8e0653fa38be81130baa7a43ce3d2a92",
+      "localSha256": "f4feb24797f3aadb3c3e091bfba15fcf8e0653fa38be81130baa7a43ce3d2a92"
+    },
+    {
+      "path": "assets/monitor-plugins/Hitokoto.json",
+      "upstreamSha256": "476860d83760055294b2a8d34bec5e078357c07e9d84863bba9d728e3b3707c4",
+      "localSha256": "476860d83760055294b2a8d34bec5e078357c07e9d84863bba9d728e3b3707c4"
+    },
+    {
+      "path": "assets/monitor-plugins/Holiday.json",
+      "upstreamSha256": "359352f3d748d35fe69e7eeddaf91a19d2690adf0e9b836aeca5dfc4483c8c07",
+      "localSha256": "359352f3d748d35fe69e7eeddaf91a19d2690adf0e9b836aeca5dfc4483c8c07"
+    },
+    {
+      "path": "assets/monitor-plugins/ProxyLatency.json",
+      "upstreamSha256": "5a9d9d8e76efa8cc40993427171d3bfb11696b8518b2553147cf0069cfdc2ab1",
+      "localSha256": "5a9d9d8e76efa8cc40993427171d3bfb11696b8518b2553147cf0069cfdc2ab1"
+    },
+    {
+      "path": "assets/monitor-plugins/PublicIP.json",
+      "upstreamSha256": "f2e06707b5a6e621d23a81b5ba5181a39202e42f319351c432a1ca7dca66ac13",
+      "localSha256": "f2e06707b5a6e621d23a81b5ba5181a39202e42f319351c432a1ca7dca66ac13"
+    },
+    {
+      "path": "assets/monitor-plugins/Stock.json",
+      "upstreamSha256": "f38cbd2bdf95a6e758a4591aade5f492d381a9f431103dd47657d48623ba4e9c",
+      "localSha256": "f38cbd2bdf95a6e758a4591aade5f492d381a9f431103dd47657d48623ba4e9c"
+    },
+    {
+      "path": "assets/monitor-plugins/UniversalAPI.json",
+      "upstreamSha256": "52092467f220755ef4cefeeaa95844d7b9877c973baab9e2a97a1778b9141ca4",
+      "localSha256": "52092467f220755ef4cefeeaa95844d7b9877c973baab9e2a97a1778b9141ca4"
+    },
+    {
+      "path": "assets/monitor-plugins/Weather.json",
+      "upstreamSha256": "2e5da7ffb7b29aff4f346d1308901327467b74f44bc9d29e2121c3452009235c",
+      "localSha256": "2e5da7ffb7b29aff4f346d1308901327467b74f44bc9d29e2121c3452009235c"
+    },
+    {
+      "path": "assets/monitor-plugins/WeiboHot.json",
+      "upstreamSha256": "5f658783579a767283d72c91e8b7a12a8cba78a614ff979618322d6a5e4baf76",
+      "localSha256": "5f658783579a767283d72c91e8b7a12a8cba78a614ff979618322d6a5e4baf76"
+    },
+    {
+      "path": "assets/monitor-languages/de.json",
+      "upstreamSha256": "8b1f99d37e39bad4aa44cd9fe11c3c70e839e7af80942a500088add1d17c8cdb",
+      "localSha256": "8b1f99d37e39bad4aa44cd9fe11c3c70e839e7af80942a500088add1d17c8cdb"
+    },
+    {
+      "path": "assets/monitor-languages/en.json",
+      "upstreamSha256": "a744f0dd21e6210a568d240dbbb81c3a58120985b967baf74cdaa122dac826e8",
+      "localSha256": "a744f0dd21e6210a568d240dbbb81c3a58120985b967baf74cdaa122dac826e8"
+    },
+    {
+      "path": "assets/monitor-languages/es.json",
+      "upstreamSha256": "aaa9b26f3617a417375c7cc2af43a2bd947183d87df450c1c5d713ace03bcb95",
+      "localSha256": "aaa9b26f3617a417375c7cc2af43a2bd947183d87df450c1c5d713ace03bcb95"
+    },
+    {
+      "path": "assets/monitor-languages/fr.json",
+      "upstreamSha256": "c2d2d53246afd1ec2885615129eea01c2c571b6db3a2613d967d3cfb67fa53db",
+      "localSha256": "c2d2d53246afd1ec2885615129eea01c2c571b6db3a2613d967d3cfb67fa53db"
+    },
+    {
+      "path": "assets/monitor-languages/ja.json",
+      "upstreamSha256": "3eff4e3a8a424cd41cbe9b88d4fc93c3c4f14be4697a1c76aba9c84f2384bff9",
+      "localSha256": "3eff4e3a8a424cd41cbe9b88d4fc93c3c4f14be4697a1c76aba9c84f2384bff9"
+    },
+    {
+      "path": "assets/monitor-languages/ko.json",
+      "upstreamSha256": "edf7089e131891515168c70948e67a661ecfc83a100e853f5f17ce8aae921f88",
+      "localSha256": "edf7089e131891515168c70948e67a661ecfc83a100e853f5f17ce8aae921f88"
+    },
+    {
+      "path": "assets/monitor-languages/ru.json",
+      "upstreamSha256": "51753e7ae33866a4cbe39a737c9cf08dcfb397ec0eb2a4ad079c7f8855c1621f",
+      "localSha256": "51753e7ae33866a4cbe39a737c9cf08dcfb397ec0eb2a4ad079c7f8855c1621f"
+    },
+    {
+      "path": "assets/monitor-languages/zh-tw.json",
+      "upstreamSha256": "1e480d95b3c049a8f1ccb299c1b03c4d22484a3ebbd51cd4cdd3ae0f57d8fb19",
+      "localSha256": "1e480d95b3c049a8f1ccb299c1b03c4d22484a3ebbd51cd4cdd3ae0f57d8fb19"
+    },
+    {
+      "path": "assets/monitor-languages/zh.json",
+      "upstreamSha256": "6a8fee69c165169c8596cc08ef7602123ceb35eead2e4e5caa25f618643866c8",
+      "localSha256": "6a8fee69c165169c8596cc08ef7602123ceb35eead2e4e5caa25f618643866c8"
+    }
+  ]
+}

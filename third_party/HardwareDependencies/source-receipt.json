@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "archives": [
+    {
+      "component": "LibreHardwareMonitor",
+      "repository": "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor",
+      "commit": "3d331e3370efb858411f19511373eff65a218701",
+      "download": "https://codeload.github.com/LibreHardwareMonitor/LibreHardwareMonitor/zip/3d331e3370efb858411f19511373eff65a218701",
+      "upstreamArchiveSha256": "5a83ee3f504a85efb6afee4112447e60caca1b7ec2e2d71f4651570b8b9b4230",
+      "sourceArchive": "sources/LibreHardwareMonitor-source.zip",
+      "sourceArchiveSha256": "80027bbe2402d04ec858ad84c058d3b9dcb1d4f70cc089ac24949cce1f903018",
+      "files": 420,
+      "excludedBinaryTools": [
+        "LibreHardwareMonitor/Resources/PawnIO_setup.exe"
+      ]
+    },
+    {
+      "component": "BlackSharp",
+      "repository": "https://github.com/Blacktempel/BlackSharp",
+      "commit": "c70b735c6cec123ee8a046ac4a0bc6c606f52cf0",
+      "download": "https://codeload.github.com/Blacktempel/BlackSharp/zip/c70b735c6cec123ee8a046ac4a0bc6c606f52cf0",
+      "upstreamArchiveSha256": "ab50d38c8cfec1cc041d924730bc417b6d9c81b5b0ff542572a03ad9163cdc1e",
+      "sourceArchive": "sources/BlackSharp-source.zip",
+      "sourceArchiveSha256": "fd4e4ff35362b2056d588a02f3da5af14f62dbae66e434924d5b40036022792a",
+      "files": 103,
+      "excludedBinaryTools": []
+    },
+    {
+      "component": "DiskInfoToolkit",
+      "repository": "https://github.com/Blacktempel/DiskInfoToolkit",
+      "commit": "25319eae5781e75bcf141e844ceab2afe94d40ea",
+      "download": "https://codeload.github.com/Blacktempel/DiskInfoToolkit/zip/25319eae5781e75bcf141e844ceab2afe94d40ea",
+      "upstreamArchiveSha256": "2df4f067370fc3bb338ce60bdee12879c67ee5377d72e6cc8d79167001039102",
+      "sourceArchive": "sources/DiskInfoToolkit-source.zip",
+      "sourceArchiveSha256": "d02bb83164f5dde4b94290de9eb736131fabeb54cefa2555ed823884cac373f2",
+      "files": 192,
+      "excludedBinaryTools": []
+    },
+    {
+      "component": "RAMSPDToolkit",
+      "repository": "https://github.com/Blacktempel/RAMSPDToolkit",
+      "commit": "3b47b960e0830fef344624ad5e389675d5f0a1ce",
+      "download": "https://codeload.github.com/Blacktempel/RAMSPDToolkit/zip/3b47b960e0830fef344624ad5e389675d5f0a1ce",
+      "upstreamArchiveSha256": "a1a0b3c3e94fea2d88a70abb74a08776a7602866b1e2d6ea6c3ab262dda925ba",
+      "sourceArchive": "sources/RAMSPDToolkit-source.zip",
+      "sourceArchiveSha256": "b9098d5b174e3d54f0936a0d1f8027b7995b1bffd054bb6686daadacb0973e7b",
+      "files": 115,
+      "excludedBinaryTools": [
+        "RAMSPDToolkit/Resources/Binaries/WinRing0.dll",
+        "RAMSPDToolkit/Resources/Binaries/WinRing0.sys",
+        "RAMSPDToolkit/Resources/Binaries/WinRing0x64.dll",
+        "RAMSPDToolkit/Resources/Binaries/WinRing0x64.sys",
+        "RAMSPDToolkit/Resources/SmbusI801.gz",
+        "RAMSPDToolkit/Resources/SmbusNCT6793.gz",
+        "RAMSPDToolkit/Resources/SmbusPIIX4.gz",
+        "RAMSPDToolkit/Resources/WinRing0.dll.gz",
+        "RAMSPDToolkit/Resources/WinRing0.sys.gz",
+        "RAMSPDToolkit/Resources/WinRing0x64.dll.gz",
+        "RAMSPDToolkit/Resources/WinRing0x64.sys.gz"
+      ]
+    },
+    {
+      "component": "PawnIO.Modules",
+      "repository": "https://github.com/namazso/PawnIO.Modules",
+      "commit": "e12a858d952461ee2e919897cacbff7f905fe370",
+      "download": "https://codeload.github.com/namazso/PawnIO.Modules/zip/e12a858d952461ee2e919897cacbff7f905fe370",
+      "upstreamArchiveSha256": "bf64a7dd05f5d634fe2b38ade90e82d7e4fc4bb97958cdc2275806f215d31cf7",
+      "sourceArchive": "sources/PawnIO.Modules-source.zip",
+      "sourceArchiveSha256": "17656694723a4cb3f2f98f581e810f51f66db4540f65cf03ebe36be8ce9fe322",
+      "files": 27,
+      "excludedBinaryTools": [
+        "_pawn/pawn-4.1.7152-1.el9.src.rpm",
+        "_pawn/pawn-4.1.7152-1.el9.x86_64.rpm"
+      ]
+    },
+    {
+      "component": "Mono.Posix.NETStandard",
+      "version": "1.0.0",
+      "licenseSource": "https://raw.githubusercontent.com/mono/mono/0f53e9e151d92944cacab3e24ac359410c606df6/LICENSE",
+      "packageLicenseUrl": "https://go.microsoft.com/fwlink/?linkid=869050",
+      "licenseRedirectVerified": "https://github.com/mono/mono/blob/main/LICENSE",
+      "copyright": "© Microsoft Corporation. All rights reserved. (original NuGet metadata)",
+      "notice": "Mono-Posix-LICENSE.txt",
+      "noticeSha256": "844242559dbdb96cb9cbe103b06c2bc8a349f19ad0b89d5c3cf830a8914333f6",
+      "sourceVersionClaim": "License URL snapshot, not a claim that this commit built the 2018 package"
+    }
+  ],
+  "pawnModules": {
+    "version": "0.2.2",
+    "commit": "e12a858d952461ee2e919897cacbff7f905fe370",
+    "signedReleaseUrl": "https://github.com/namazso/PawnIO.Modules/releases/tag/0.2.2",
+    "releaseSha256": "b9e05e52c07fd76b7f9db3da0f542b710d55511dc995d4f4ca08e9179b4c4032",
+    "modules": [
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/AMDFamily0F.bin",
+        "sha256": "1788550c02100ad6bbc91604399ed6e055058ea0f6c0c828c02d9b01a09ad27f",
+        "source": "AMDFamily0F.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/AMDFamily10.bin",
+        "sha256": "79be1396621aa44eb149c5dc6d1bab4519b9cfa49a32af5e022cb9f9ca887658",
+        "source": "AMDFamily10.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/AMDFamily17.bin",
+        "sha256": "099dc01d6db97ea997fec4a461e191cc64b9d7ce47c9d2153c451c56c2adcf50",
+        "source": "AMDFamily17.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/IntelMSR.bin",
+        "sha256": "ed41a0d0de082f4668a9caccb9681ebbad97a8ed3452c41918dda1eb454b77a9",
+        "source": "IntelMSR.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/IsaBridgeEC.bin",
+        "sha256": "7218c633384bd019cce09e8df91f74996f980765ac44dde0f22b0b5318c20f03",
+        "source": "IsaBridgeEC.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/LpcACPIEC.bin",
+        "sha256": "c38fd116e7aff4d1fdb0a494e296be0a6708e5a22fc72f14587442fb7f8f7906",
+        "source": "LpcACPIEC.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/LpcCrOSEC.bin",
+        "sha256": "277ed6ce6b5f647d5dae9b06c83ed39e904974b06f95598d49f4737237974776",
+        "source": "LpcCrOSEC.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/LpcIO.bin",
+        "sha256": "3dcf8b2bc80ff642d97c4608511a818642b5bf315ff53df3df393d043e71d101",
+        "source": "LpcIO.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/RyzenSMU.bin",
+        "sha256": "0cf0fe1296c5c38f4bee0f96352b35f14d32ab97cb58fd17600646d98507d8aa",
+        "source": "RyzenSMU.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/SmbusI801.bin",
+        "sha256": "76b082a144027244fe7bbf3ca0e987e7dfa279aa87e0ccc2a6a918e10e2038e1",
+        "source": "SmbusI801.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/SmbusNCT6793.bin",
+        "sha256": "385bd1b229faa44aefe2eb1f938ac629f6d897f1a4931dab5341b18b3bd432c1",
+        "source": "SmbusNCT6793.p"
+      },
+      {
+        "resource": "LibreHardwareMonitorLib/Resources/PawnIo/SmbusPIIX4.bin",
+        "sha256": "3f8b44c93eb030d59fb68c6fdc6857c61313eab2b6aa0ed64595396d71bf3ea3",
+        "source": "SmbusPIIX4.p"
+      }
+    ],
+    "note": "Pinned LHM README says 0.1.6; binary SHA-256 comparison establishes 0.2.2 for all twelve modules. No driver or compiler is installed or redistributed."
+  }
+}

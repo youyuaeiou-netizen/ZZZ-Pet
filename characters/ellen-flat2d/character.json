@@ -1,0 +1,2409 @@
+{
+  "schemaVersion": 1,
+  "id": "ellen-flat2d",
+  "name": "艾莲布 · 十一动作拖放预览",
+  "packVersion": "0.4.1",
+  "minimumAppVersion": "0.3.1",
+  "immediateClick": true,
+  "defaultActionId": "idle",
+  "defaultScale": 0.75,
+  "canvasWidth": 308,
+  "canvasHeight": 328,
+  "anchorX": 154,
+  "anchorY": 315,
+  "randomIntervalMs": 12000,
+  "sleepThresholdMs": 15000,
+  "wakeActionId": "wake",
+  "avoidRepeatedActions": true,
+  "actions": [
+    {
+      "id": "idle",
+      "displayName": "待机呼吸",
+      "category": "日常",
+      "frames": [
+        {
+          "path": "animations/idle/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/idle/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/idle/0023.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [],
+      "weight": 1,
+      "priority": 0,
+      "loop": true,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout",
+        "random"
+      ]
+    },
+    {
+      "id": "wave",
+      "displayName": "打招呼",
+      "category": "回应",
+      "frames": [
+        {
+          "path": "animations/wave/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wave/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wave/0041.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "click",
+        "double_click",
+        "random",
+        "notification"
+      ],
+      "weight": 2,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "nextActionId": "idle"
+    },
+    {
+      "id": "sleep_enter",
+      "displayName": "戴眼罩入睡",
+      "category": "休息",
+      "frames": [
+        {
+          "path": "animations/sleep_enter/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_enter/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_enter/0059.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "idle_timeout"
+      ],
+      "weight": 1,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "nextActionId": "sleep_idle"
+    },
+    {
+      "id": "sleep_idle",
+      "displayName": "睡眠循环",
+      "category": "休息",
+      "frames": [
+        {
+          "path": "animations/sleep_idle/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/sleep_idle/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/sleep_idle/0031.png",
+          "durationMs": 84
+        }
+      ],
+      "triggers": [],
+      "weight": 1,
+      "priority": 10,
+      "loop": true,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "showSleepIndicator": true
+    },
+    {
+      "id": "wake",
+      "displayName": "醒来",
+      "category": "休息",
+      "frames": [
+        {
+          "path": "animations/wake/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/wake/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/wake/0059.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [],
+      "weight": 1,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "nextActionId": "idle"
+    },
+    {
+      "id": "happy",
+      "displayName": "开心回应",
+      "category": "回应",
+      "frames": [
+        {
+          "path": "animations/happy/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/happy/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/happy/0033.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "click",
+        "random"
+      ],
+      "weight": 3,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ]
+    },
+    {
+      "id": "pet",
+      "displayName": "被抚摸",
+      "category": "回应",
+      "frames": [
+        {
+          "path": "animations/pet/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/pet/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/pet/0059.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "click"
+      ],
+      "weight": 2,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ]
+    },
+    {
+      "id": "eat",
+      "displayName": "喂食",
+      "category": "日常",
+      "frames": [
+        {
+          "path": "animations/eat-replacement/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0059.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0060.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0061.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0062.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0063.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0064.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0065.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0066.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0067.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0068.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0069.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/eat-replacement/0070.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/eat-replacement/0071.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [],
+      "weight": 1,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ]
+    },
+    {
+      "id": "stretch",
+      "displayName": "伸懒腰",
+      "category": "日常",
+      "frames": [
+        {
+          "path": "animations/stretch/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/stretch/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/stretch/0059.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "random"
+      ],
+      "weight": 2,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 8000,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ]
+    },
+    {
+      "id": "drag_hold",
+      "displayName": "拖起悬空",
+      "category": "日常",
+      "frames": [
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0035.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0036.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0037.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0038.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0039.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0040.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0041.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0042.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0043.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0044.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0045.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0046.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0047.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0048.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0049.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0050.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0051.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0052.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0053.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0054.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0055.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0056.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0057.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0058.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/drag_hold/0059.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "drag_start"
+      ],
+      "weight": 1,
+      "priority": 10,
+      "loop": true,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "drag_release"
+      ]
+    },
+    {
+      "id": "put_down",
+      "displayName": "放下坐稳再站起",
+      "category": "日常",
+      "frames": [
+        {
+          "path": "animations/drag-color-beta2/put_down/0000.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0001.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0002.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0003.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0004.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0005.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0006.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0007.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0008.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0009.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0010.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0011.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0012.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0013.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0014.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0015.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0016.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0017.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0018.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0019.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0020.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0021.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0022.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0023.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0024.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0025.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0026.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0027.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0028.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0029.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0030.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0031.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0032.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0033.png",
+          "durationMs": 83
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0034.png",
+          "durationMs": 84
+        },
+        {
+          "path": "animations/drag-color-beta2/put_down/0035.png",
+          "durationMs": 83
+        }
+      ],
+      "triggers": [
+        "drag_release"
+      ],
+      "weight": 1,
+      "priority": 10,
+      "loop": false,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "nextActionId": "idle"
+    }
+  ]
+}

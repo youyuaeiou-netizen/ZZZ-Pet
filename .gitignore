@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+.harness/
+build/
+**/__pycache__/
+*.user
+characters/*/masters/
+tests/art_probe.py
+tests/*_art_probe.py

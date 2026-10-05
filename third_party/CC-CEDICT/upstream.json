@@ -1,0 +1,12 @@
+{
+  "component": "CC-CEDICT",
+  "source": "https://www.mdbg.net/chinese/dictionary?page=cc-cedict",
+  "download": "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz",
+  "publishedAt": "2026-10-03T08:59:08Z",
+  "entries": 125173,
+  "license": "CC-BY-SA-4.0",
+  "sourceFile": "cedict_1_0_ts_utf-8_mdbg.txt.gz",
+  "sha256": "c01e6d2d7f7545b4a29e08da17e7ec77a1b1fd1531009269e74e42f391fb2c1d",
+  "licenseSha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5",
+  "modified": false
+}
