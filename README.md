@@ -6,7 +6,7 @@ Windows 桌面 Q 宠，当前便携版本为 **0.3.1-beta.3**。它使用用户�
 
 ## 下载与运行
 
-从 [0.3.1-beta.3 ZIP 发布页](https://github.com/youyuaeiou-netizen/ZZZ-Pet/releases/tag/v0.3.1-beta.3) 下载 `DesktopPet-0.3.1-beta.3-win-x64.zip`，退出旧桌宠，解压到一个新文件夹后运行 `DesktopPet.exe` 或 `Start-2D-Pet.cmd`。这是自包含包，适合在 Windows 上直接解压使用。发布页附 SHA-256 校验文件。
+从 [0.3.1-beta.3 ZIP 发布页](https://github.com/youyuaeiou-netizen/ZZZ-Pet/releases/tag/v0.3.1-beta.3) 下载 `DesktopPet-0.3.1-beta.3-win-x64.zip`，退出正在运行的桌宠，解压到一个新文件夹后运行 `DesktopPet.exe` 或 `Start-2D-Pet.cmd`。这是自包含包，适合在 Windows 上直接解压使用。发布页附 SHA-256 校验文件。
 
 便携包只包含批准的 2D 角色。请完整解压到一个新文件夹；程序会保留已有用户数据。
 
