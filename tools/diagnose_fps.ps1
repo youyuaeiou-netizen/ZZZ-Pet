@@ -46,7 +46,10 @@ if ($Offline) {
     $providerLines | Set-Content -LiteralPath $providers -Encoding ascii
     $created = $false
     try {
-        $startLog = & logman.exe create trace $session -o $etl -f bincirc -max 16 -bs 64 -nb 256 1024 -ft 1 -ct perf -pf $providers -ets 2>&1
+        # Preserve the beginning of the trace: circular files can overwrite startup
+        # and frame events before offline analysis. Keep a bounded sequential file.
+        $traceLimitMb = 128
+        $startLog = & logman.exe create trace $session -o $etl -f bin -max $traceLimitMb -bs 64 -nb 256 1024 -ft 1 -ct perf -pf $providers -ets 2>&1
         $startLog | Set-Content -LiteralPath (Join-Path $output 'trace-start.txt')
         if ($LASTEXITCODE -ne 0) { throw "文件模式采集启动失败：$startLog" }
         $created = $true
@@ -75,11 +78,15 @@ if ($Offline) {
     $lost = [regex]::Match($summary, 'Total Events\s+Lost\s+(\d+)')
     $presentEvents = @($events | Where-Object { $_.'Event Name' -eq 'Microsoft-Windows-DXGI' -and [int]$_.'Event ID' -in 42,43,55,56 }).Count
     $kernelEvents = @($events | Where-Object { $_.'Event Name' -eq 'Microsoft-Windows-DxgKrnl' -and [int]$_.'Event ID' -in 168,171,172,184,215 }).Count
+    $traceSizeBytes = (Get-Item -LiteralPath $etl).Length
+    $traceLimitReached = $traceSizeBytes -ge ($traceLimitMb * 1MB)
     $results += [pscustomobject]@{ Mode=$(if ($Kernel) { 'kernel-offline' } else { 'offline' }); ExitCode=$exitCode; TimedOut=$timedOut; Rows=$rows.Count; RawEvents=$events.Count
         EventsLost=$(if ($lost.Success) { [long]$lost.Groups[1].Value } else { $null }); PresentEvents=$presentEvents; KernelPresentEvents=$kernelEvents
+        TraceSizeBytes=$traceSizeBytes; TraceLimitReached=$traceLimitReached
         DecodeExitCode=$decodeExit; Arguments=$arguments; Applications=@($rows.Application | Sort-Object -Unique)
         Error=(Get-Content -LiteralPath $errorFile -Raw) }
 }
 $results | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $output 'result.json') -Encoding utf8
 $results | Select-Object Mode, ExitCode, TimedOut, Rows, EventsLost, RawEvents, PresentEvents, KernelPresentEvents | Format-Table
+if ($Offline -and $traceLimitReached) { Write-Warning '跟踪文件已达到容量上限，采集可能不完整；零帧结果不能证明系统不支持 FPS。' }
 Write-Host "诊断结果：$output"
