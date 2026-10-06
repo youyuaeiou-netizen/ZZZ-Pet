@@ -11,11 +11,11 @@ namespace DesktopPet.MonitorWorker;
 
 internal static class FpsAgent
 {
-    internal const string HelperSha256 = "e57a2f8ee1de1ef1a5516d875f1b115e881943cd729fe9c5a2f88b1dc79a8a3b";
+    internal const string HelperSha256 = "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af";
     internal static ProcessStartInfo CreateHelperStartInfo(string executable, string session)
     {
         var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-        foreach (var arg in new[] { "-session_name", session, "-output_stdout", "-no_top", "-exclude", "DesktopPet.exe", "-exclude", "DesktopPet.MonitorUi.exe", "-exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
+        foreach (var arg in new[] { "--session_name", session, "--output_stdout", "--no_console_stats", "--v1_metrics", "--exclude", "DesktopPet.exe", "--exclude", "DesktopPet.MonitorUi.exe", "--exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
         return start;
     }
     public static async Task Run(string[] args)

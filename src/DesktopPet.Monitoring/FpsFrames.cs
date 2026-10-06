@@ -37,7 +37,7 @@ public sealed class FpsFrames
             .GroupBy(p => p.Key.Pid).Select(g => g.OrderBy(p => p.Value.Times.Average()).First())
             .Select(p => new MonitorMetric("FPS." + p.Key.Pid, p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? "桌面 FPS" : p.Value.Name + " · FPS",
                 p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? "desktop" : "process/" + p.Key.Pid, "FPS", "FPS",
-                1000 / p.Value.Times.Average(), "PresentMon 1.10.0 · presented frames · fastest active swapchain" +
+                1000 / p.Value.Times.Average(), "PresentMon 2.6.0 · presented frames · fastest active swapchain" +
                     (p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? " · 桌面合成呈现帧率，不是视频源帧率" : ""), SampledAt: p.Value.At)).ToList();
     }
     private static string[] Csv(string line)

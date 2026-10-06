@@ -1,9 +1,9 @@
 {
   "repository": "https://github.com/GameTechDev/PresentMon",
-  "version": "1.10.0",
-  "commit": "2ce1158783e570539119f577d894252b395cadca",
-  "download": "https://github.com/GameTechDev/PresentMon/releases/download/v1.10.0/PresentMon-1.10.0-x64.exe",
-  "sha256": "e57a2f8ee1de1ef1a5516d875f1b115e881943cd729fe9c5a2f88b1dc79a8a3b",
+  "version": "2.6.0",
+  "commit": "e13fce6acdb55a808fd8318175a56863e532d95f",
+  "download": "https://github.com/GameTechDev/PresentMon/releases/download/v2.6.0/PresentMon-2.6.0-x64.exe",
+  "sha256": "b2a706bc6ad475749e3b7e3409263aa1e6906d45bdcf993f6dbc0f660188f1af",
   "license": "MIT",
   "licenseFile": "LICENSE.txt",
   "redistribution": "verified-for-this-unmodified-official-cli"

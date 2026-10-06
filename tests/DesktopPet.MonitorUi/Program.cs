@@ -155,12 +155,12 @@ internal static class Program
         var create = workerAssembly.GetType("DesktopPet.MonitorWorker.FpsAgent")!.GetMethod("CreateHelperStartInfo", BindingFlags.NonPublic | BindingFlags.Static)!;
         var start = (ProcessStartInfo)create.Invoke(null, [Path.Combine(AppContext.BaseDirectory, "monitor", "fps", "PresentMon.exe"), "DesktopPet.FPS." + Guid.NewGuid().ToString("N")])!;
         Check(!start.ArgumentList.Contains("dwm.exe") && start.ArgumentList.Contains("DesktopPet.exe"), "desktop compositor is captured while pet itself remains excluded");
-        start.ArgumentList.Add("-help"); // Usage only: validate the actual pinned CLI without starting an ETW session.
+        start.ArgumentList.Add("--help"); // Usage only: validate the actual pinned CLI without starting an ETW session.
         using var process = Process.Start(start)!;
         var stdout = process.StandardOutput.ReadToEndAsync(); var stderr = process.StandardError.ReadToEndAsync();
         if (!process.WaitForExit(10000)) { process.Kill(); throw new Exception("PresentMon CLI validation timed out"); }
         var text = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
-        Check(text.Contains("PresentMon 1.10.0") && !text.Contains("unrecognized argument", StringComparison.OrdinalIgnoreCase), "production FPS arguments accepted by pinned PresentMon CLI without starting capture");
+        Check(text.Contains("PresentMon 2.6.0") && !text.Contains("unrecognized argument", StringComparison.OrdinalIgnoreCase) && process.ExitCode == 1, "production FPS arguments accepted by pinned PresentMon CLI without starting capture");
     }
     private static void Localization()
     {
