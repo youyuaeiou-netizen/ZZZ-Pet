@@ -15,7 +15,7 @@ internal static class FpsAgent
     internal static ProcessStartInfo CreateHelperStartInfo(string executable, string session)
     {
         var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-        foreach (var arg in new[] { "-session_name", session, "-output_stdout", "-no_top", "-exclude", "DesktopPet.exe", "-exclude", "DesktopPet.MonitorUi.exe", "-exclude", "dwm.exe", "-exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
+        foreach (var arg in new[] { "-session_name", session, "-output_stdout", "-no_top", "-exclude", "DesktopPet.exe", "-exclude", "DesktopPet.MonitorUi.exe", "-exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
         return start;
     }
     public static async Task Run(string[] args)

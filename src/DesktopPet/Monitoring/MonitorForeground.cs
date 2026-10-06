@@ -87,11 +87,12 @@ internal sealed class MonitorForegroundTracker
     }
     internal IReadOnlyList<int> Select(int foreground, int pet, IReadOnlyDictionary<int, (int Parent, string File)> processes, Func<int, long?> started)
     {
-        // Pet clicks, desktop/taskbar activation and transient no-foreground states do not select a new app.
+        if (processes.TryGetValue(foreground, out var shell) &&
+            (shell.File.Equals("explorer.exe", StringComparison.OrdinalIgnoreCase) || shell.File.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase)))
+        { _last = null; return []; }
+        // Pet clicks and transient no-foreground states preserve the application being inspected.
         if (foreground == pet || foreground <= 0 || !processes.TryGetValue(foreground, out var candidate) ||
             candidate.File.StartsWith("DesktopPet", StringComparison.OrdinalIgnoreCase) ||
-            candidate.File.Equals("explorer.exe", StringComparison.OrdinalIgnoreCase) ||
-            candidate.File.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ||
             candidate.File.Equals("PresentMon.exe", StringComparison.OrdinalIgnoreCase))
         {
             if (_last is not { } previous || !processes.ContainsKey(previous.Pid) || started(previous.Pid) != previous.Started)

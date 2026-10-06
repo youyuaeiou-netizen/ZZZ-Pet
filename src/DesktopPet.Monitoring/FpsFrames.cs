@@ -19,7 +19,7 @@ public sealed class FpsFrames
         if (!int.TryParse(Field("ProcessID"), out var pid) || pid <= 0 ||
             !double.TryParse(Field("MsBetweenPresents"), NumberStyles.Float, CultureInfo.InvariantCulture, out var ms) || !double.IsFinite(ms) || ms is <= 0 or > 10000) return;
         var name = Field("Application");
-        if (name.StartsWith("DesktopPet", StringComparison.OrdinalIgnoreCase) || name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase)
+        if (name.StartsWith("DesktopPet", StringComparison.OrdinalIgnoreCase)
             || name.Equals("explorer.exe", StringComparison.OrdinalIgnoreCase) || name.Equals("PresentMon.exe", StringComparison.OrdinalIgnoreCase)) return;
         lock (_lock)
         {
@@ -35,8 +35,10 @@ public sealed class FpsFrames
     {
         lock (_lock) return _samples.Where(p => now - p.Value.At <= TimeSpan.FromSeconds(3) && p.Value.Times.Count >= 2)
             .GroupBy(p => p.Key.Pid).Select(g => g.OrderBy(p => p.Value.Times.Average()).First())
-            .Select(p => new MonitorMetric("FPS." + p.Key.Pid, p.Value.Name + " · FPS", "process/" + p.Key.Pid, "FPS", "FPS",
-                1000 / p.Value.Times.Average(), "PresentMon 1.10.0 · presented frames · fastest active swapchain", SampledAt: p.Value.At)).ToList();
+            .Select(p => new MonitorMetric("FPS." + p.Key.Pid, p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? "桌面 FPS" : p.Value.Name + " · FPS",
+                p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? "desktop" : "process/" + p.Key.Pid, "FPS", "FPS",
+                1000 / p.Value.Times.Average(), "PresentMon 1.10.0 · presented frames · fastest active swapchain" +
+                    (p.Value.Name.Equals("dwm.exe", StringComparison.OrdinalIgnoreCase) ? " · 桌面合成呈现帧率，不是视频源帧率" : ""), SampledAt: p.Value.At)).ToList();
     }
     private static string[] Csv(string line)
     {

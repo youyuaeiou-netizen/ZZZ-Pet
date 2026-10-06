@@ -24,7 +24,8 @@ internal static class Program
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
         try
         {
-            if (args.Skip(1).Contains("--usage-live")) UsageLive();
+            if (args.Skip(1).Contains("--desktop-fps-only")) { FpsCli(); DesktopFpsDisplay(); PetInteraction(); }
+            else if (args.Skip(1).Contains("--usage-live")) UsageLive();
             else if (args.Skip(1).Contains("--quota-only")) QuotaAndDismissal();
             else if (args.Skip(1).Contains("--interaction-only")) PetInteraction();
             else if (args.Skip(1).Contains("--pet-only")) PetVisibility();
@@ -38,6 +39,25 @@ internal static class Program
         finally { foreach (Window w in app.Windows.Cast<Window>().ToArray()) w.Close(); app.Shutdown(); }
     }
     private static void Check(bool value, string name) { if (!value) throw new Exception(name); Passed.Add(name); }
+    private static void DesktopFpsDisplay()
+    {
+        using var service = new MonitorService(Path.Combine(_output, "desktop-fps"), Dispatcher.CurrentDispatcher, () => true);
+        service.Config.FpsEnabled = true; service.Config.HistoryEnabled = false;
+        service.Config.TaskbarMetrics = ["FPS"]; service.Config.TaskbarLeft = 30; service.Config.TaskbarTop = 30;
+        service.FpsTargets = () => [];
+        var now = DateTimeOffset.UtcNow;
+        var desktop = new MonitorMetric("FPS.101", "桌面 FPS", "desktop", "FPS", "FPS", 60, "PresentMon · DWM", SampledAt: now);
+        typeof(MonitorService).GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(service,
+            [new MonitorSnapshot(now, [], [desktop], "fixture", Capabilities: new() { ["fps-helper"] = "running" })]);
+        var taskbar = new MonitorTaskbarWindow(service); taskbar.Show(); taskbar.Refresh(); Pump(100);
+        try
+        {
+            var text = string.Join(' ', Find<W.TextBlock>(taskbar).Select(t => t.Text));
+            Check(text.Contains("桌面 FPS") && text.Contains("60") && !text.Contains("等待"), "taskbar shows explicitly labelled desktop FPS number");
+            Capture(taskbar, "desktop-fps-taskbar.png");
+        }
+        finally { taskbar.Close(); }
+    }
     private static CodexUsage UsageFixture()
     {
         using var document = JsonDocument.Parse(JsonSerializer.Serialize(new { rateLimits = new { primary = new { usedPercent = 99 } },
@@ -134,6 +154,7 @@ internal static class Program
         var workerAssembly = Assembly.LoadFrom(Path.Combine(AppContext.BaseDirectory, "monitor", "DesktopPet.MonitorWorker.dll"));
         var create = workerAssembly.GetType("DesktopPet.MonitorWorker.FpsAgent")!.GetMethod("CreateHelperStartInfo", BindingFlags.NonPublic | BindingFlags.Static)!;
         var start = (ProcessStartInfo)create.Invoke(null, [Path.Combine(AppContext.BaseDirectory, "monitor", "fps", "PresentMon.exe"), "DesktopPet.FPS." + Guid.NewGuid().ToString("N")])!;
+        Check(!start.ArgumentList.Contains("dwm.exe") && start.ArgumentList.Contains("DesktopPet.exe"), "desktop compositor is captured while pet itself remains excluded");
         start.ArgumentList.Add("-help"); // Usage only: validate the actual pinned CLI without starting an ETW session.
         using var process = Process.Start(start)!;
         var stdout = process.StandardOutput.ReadToEndAsync(); var stderr = process.StandardError.ReadToEndAsync();
@@ -385,8 +406,14 @@ internal static class Program
         var processes = new Dictionary<int, (int, string)> { [10] = (0, "video.exe"), [11] = (10, "video.exe"),
             [20] = (0, "game.exe"), [30] = (0, "explorer.exe"), [31] = (0, "dwm.exe"), [32] = (0, "PresentMon.exe"), [99] = (0, "DesktopPet.exe") };
         tracker.Select(10, 99, processes, _ => 100);
-        foreach (var foreground in new[] { 30, 0, 31, 32, 99 })
+        foreach (var foreground in new[] { 0, 32, 99 })
             Check(tracker.Select(foreground, 99, processes, _ => 100).SequenceEqual(new[] { 10, 11 }), "Pet shell and transient foreground preserve valid FPS target " + foreground);
+        foreach (var foreground in new[] { 30, 31 })
+        {
+            tracker.Select(10, 99, processes, _ => 100);
+            Check(tracker.Select(foreground, 99, processes, _ => 100).Count == 0 && tracker.Select(99, 99, processes, _ => 100).Count == 0,
+                "desktop foreground clears previous application so desktop FPS is selected " + foreground);
+        }
         Check(tracker.Select(20, 99, processes, _ => 100).SequenceEqual(new[] { 20 }), "real external application switch still replaces FPS target");
         Check(tracker.Select(0, 99, processes, _ => 101).Count == 0, "retained FPS target clears on PID reuse during transient foreground");
         tracker.Select(10, 99, processes, _ => 100); processes.Remove(10);

@@ -3,6 +3,22 @@ using DesktopPet.Monitoring;
 
 var count = 0;
 void Check(bool condition, string name) { if (!condition) throw new Exception(name); count++; Console.WriteLine("PASS " + name); }
+var deskNow = DateTimeOffset.UtcNow;
+var desk = new MonitorMetric("FPS.Desktop", "桌面 FPS", "desktop", "FPS", "FPS", 30, "DWM", SampledAt: deskNow);
+var desktopSnapshot = new MonitorSnapshot(deskNow, [], [desk], "test", Capabilities: new() { ["fps-foreground"] = "42", ["fps-helper"] = "running" });
+var deskConfig = new MonitorConfig { FpsEnabled = true };
+var selectedDesk = MonitorSelection.Resolve(desktopSnapshot, deskConfig).Single(m => m.Id == "FPS");
+Check(selectedDesk.Value == 30 && selectedDesk.Name == "桌面 FPS" && desktopSnapshot.ForDisplay(selectedDesk, deskNow).Valid, "missing video frames use labelled measured desktop FPS without waiting");
+var application = desk with { Id = "FPS.42", DeviceId = "process/42", Value = 24, Source = "PresentMon" };
+Check(MonitorSelection.Resolve(desktopSnapshot with { Metrics = [desk, application] }, deskConfig).Single(m => m.Id == "FPS").Value == 24, "video application frames take priority over desktop FPS");
+Check(MonitorSelection.Resolve(desktopSnapshot with { Metrics = [desk, application with { SampledAt = deskNow.AddSeconds(-4) }] }, deskConfig).Single(m => m.Id == "FPS").DeviceId == "desktop", "expired application frames fall back to fresh desktop FPS");
+Check(!MonitorSelection.Resolve(desktopSnapshot with { Metrics = [desk with { SampledAt = deskNow.AddSeconds(-4) }] }, deskConfig).Single(m => m.Id == "FPS").Valid, "expired desktop frames never remain numeric");
+Check(MonitorSelection.Resolve(desktopSnapshot, new()).All(m => m.Id != "FPS"), "FPS switch disables desktop fallback too");
+Check(MonitorSelection.Resolve(desktopSnapshot with { Timestamp = deskNow.AddMilliseconds(-100) }, deskConfig, history: true).Single(m => m.Id == "FPS").Value == 30,
+    "history accepts frame sampled just after hardware snapshot timestamp");
+var desktopParser = new FpsFrames(); desktopParser.Read("Application,ProcessID,msBetweenPresents", deskNow);
+desktopParser.Read("dwm.exe,101,16.6667", deskNow); desktopParser.Read("dwm.exe,101,16.6667", deskNow);
+Check(desktopParser.Metrics(deskNow).Single() is { DeviceId: "desktop", Name: "桌面 FPS" } measured && Math.Abs(measured.Value!.Value - 60) < .1, "DWM presents produce labelled measured desktop FPS");
 var start = DateTimeOffset.UtcNow;
 var liveMetric = new MonitorMetric("MEM.Load", "内存", "memory", "MEM.Load", "%", 50, "fixture");
 foreach (var interval in new[] { 500, 1000, 2000, 5000 })
@@ -164,7 +180,7 @@ Check(officialFrames.Metrics(start.AddMilliseconds(17)).Count == 1 && Math.Abs(o
 frames.Read("game.exe,42,16.6666667", start); frames.Read("game.exe,42,16.6666667", start.AddMilliseconds(17));
 Check(Math.Abs(frames.Metrics(start.AddMilliseconds(17)).Single().Value!.Value - 60) < .01, "PresentMon frames converted to presented FPS");
 frames.Read("DesktopPet.exe,100,1", start); frames.Read("dwm.exe,101,1", start); frames.Read("game.exe,42,NaN", start);
-Check(frames.Metrics(start.AddSeconds(1)).Count == 1, "FPS excludes pet desktop compositor and invalid values");
+Check(frames.Metrics(start.AddSeconds(1)).Count == 1, "FPS excludes pet invalid values and incomplete desktop samples");
 Check(frames.Metrics(start.AddSeconds(5)).Count == 0, "FPS stale frames are unavailable rather than reused");
 var foregroundFrames = new MonitorSnapshot(start, [], [new("FPS.1", "background", "process/1", "FPS", "FPS", 100, "test"),
     new("FPS.2", "foreground", "process/2", "FPS", "FPS", 60, "test"), new("FPS.3", "renderer", "process/3", "FPS", "FPS", 90, "test")],

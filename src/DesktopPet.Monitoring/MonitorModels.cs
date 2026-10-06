@@ -131,12 +131,17 @@ public static class MonitorSelection
             // Foreground targets are stamped by the ordinary UI process, not persisted as a manual PID.
             if (key == "FPS")
             {
+                var frameNow = history ? snapshot.Timestamp : DateTimeOffset.UtcNow;
                 var targets = (snapshot.Capabilities?.GetValueOrDefault("fps-foreground") ?? "").Split(',')
                     .Where(s => int.TryParse(s, out var pid) && pid > 0).Select(s => "process/" + s).ToArray();
-                candidates = candidates.Where(m => targets.Contains(m.DeviceId) && m.Valid).ToList();
+                candidates = candidates.Where(m => targets.Contains(m.DeviceId) && m.Valid &&
+                    (m.SampledAt is not DateTimeOffset t || t <= frameNow.AddSeconds(history ? 3 : 0) && frameNow - t <= TimeSpan.FromSeconds(3))).ToList();
                 preferred = targets.FirstOrDefault();
                 // The window process wins; shared renderers from the same process tree are a fallback.
                 candidates = candidates.OrderBy(m => m.DeviceId == preferred ? 0 : 1).ThenByDescending(m => m.Value).ToList();
+                if (candidates.Count == 0 && snapshot.Metrics.FirstOrDefault(m => m.Kind == "FPS" && m.DeviceId == "desktop" && m.Valid &&
+                    m.SampledAt is DateTimeOffset t && t <= frameNow.AddSeconds(history ? 3 : 0) && frameNow - t <= TimeSpan.FromSeconds(3)) is { } desktop)
+                    candidates.Add(desktop);
                 if (history && snapshot.Capabilities?.ContainsKey("fps-foreground") != true)
                 {
                     // Old history predates foreground selection; preserve its former target semantics only here.
@@ -148,7 +153,7 @@ public static class MonitorSelection
             var chosen = key == "CPU.Temp" ? candidates.OrderBy(m => IsPackageTemperature(m.Source) ? 0 : 1)
                 .ThenByDescending(m => m.Value).FirstOrDefault(m => m.Valid) : candidates.FirstOrDefault();
             all.Add(chosen is null ? new(key, name, preferred ?? "", key, key == "MEM.Used" ? "GB" : key.EndsWith("Temp") ? "℃" : kind is "NET" or "DISK" ? "B/s" : kind == "FPS" ? "FPS" : "%", null, "无可用传感器")
-                : chosen with { Id = key, Name = name, Source = chosen.Source + (snapshot.Devices.FirstOrDefault(d => d.Id == chosen.DeviceId) is MonitorDevice device ? " · " + device.Name : "") });
+                : chosen with { Id = key, Name = key == "FPS" && chosen.DeviceId == "desktop" ? "桌面 FPS" : name, Source = chosen.Source + (snapshot.Devices.FirstOrDefault(d => d.Id == chosen.DeviceId) is MonitorDevice device ? " · " + device.Name : "") });
         }
         return all;
     }
