@@ -1,6 +1,7 @@
 [CmdletBinding()]
-param([switch]$Offline)
+param([switch]$Offline, [switch]$Kernel)
 $ErrorActionPreference = 'Stop'
+if ($Kernel -and -not $Offline) { throw '-Kernel 需要同时指定 -Offline。' }
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 if (-not ([Security.Principal.WindowsPrincipal]::new($identity)).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     throw '请由用户在管理员 PowerShell 中运行此脚本。脚本不会自行提权。'
@@ -35,11 +36,17 @@ if ($Offline) {
     $session = 'DesktopPet.FPS.' + [guid]::NewGuid().ToString('N')
     $etl = Join-Path $output 'frames.etl'
     $providers = Join-Path $output 'providers.txt'
-    @('{CA11C036-0102-4A2D-A6AD-F03CFED5D3C9} 0x2 5',
-      '{783ACA0A-790E-4D7F-8451-AA850511C6B9} 0xffffffffffffffff 5') | Set-Content -LiteralPath $providers -Encoding ascii
+    $providerLines = @('{CA11C036-0102-4A2D-A6AD-F03CFED5D3C9} 0x8000000000000002 5',
+      '{783ACA0A-790E-4D7F-8451-AA850511C6B9} 0x8000000000000002 5')
+    if ($Kernel) {
+        # Match PresentMon's Base/Present flags, omitting its unsafe Performance keyword.
+        $providerLines += '{802EC45A-1E99-4B83-9920-87C98277BA9D} 0x8000001 5'
+        $providerLines += '{9E9BBA3C-2E38-40CB-99F4-9E8281425164} 0x81 5'
+    }
+    $providerLines | Set-Content -LiteralPath $providers -Encoding ascii
     $created = $false
     try {
-        $startLog = & logman.exe create trace $session -o $etl -f bincirc -max 16 -bs 64 -nb 16 64 -pf $providers -ets 2>&1
+        $startLog = & logman.exe create trace $session -o $etl -f bincirc -max 16 -bs 64 -nb 256 1024 -ft 1 -ct perf -pf $providers -ets 2>&1
         $startLog | Set-Content -LiteralPath (Join-Path $output 'trace-start.txt')
         if ($LASTEXITCODE -ne 0) { throw "文件模式采集启动失败：$startLog" }
         $created = $true
@@ -52,7 +59,8 @@ if ($Offline) {
     }
     $csv = Join-Path $output 'offline.csv'
     $errorFile = Join-Path $output 'offline.stderr.txt'
-    $arguments = @('--etl_file', $etl, '--output_stdout', '--no_console_stats', '--v1_metrics', '--no_track_gpu', '--no_track_input', '--no_track_display')
+    $arguments = @('--etl_file', $etl, '--output_stdout', '--no_console_stats', '--v1_metrics', '--no_track_gpu', '--no_track_input')
+    if (-not $Kernel) { $arguments += '--no_track_display' }
     $process = Start-Process -FilePath $helper -ArgumentList $arguments -WindowStyle Hidden -RedirectStandardOutput $csv -RedirectStandardError $errorFile -PassThru
     $timedOut = -not $process.WaitForExit(25000)
     if ($timedOut) { $process.Kill(); $process.WaitForExit() }
@@ -61,11 +69,17 @@ if ($Offline) {
     $eventsCsv = Join-Path $output 'events.csv'
     & tracerpt.exe $etl -o $eventsCsv -of CSV -summary (Join-Path $output 'events-summary.txt') -y 2>&1 | Set-Content -LiteralPath (Join-Path $output 'events-decode.txt')
     $decodeExit = $LASTEXITCODE
-    $rawEvents = if (Test-Path -LiteralPath $eventsCsv) { @(Import-Csv -LiteralPath $eventsCsv).Count } else { 0 }
-    $results += [pscustomobject]@{ Mode='offline'; ExitCode=$exitCode; TimedOut=$timedOut; Rows=$rows.Count; RawEvents=$rawEvents
+    $events = if (Test-Path -LiteralPath $eventsCsv) { @(Import-Csv -LiteralPath $eventsCsv) } else { @() }
+    $summaryFile = Join-Path $output 'events-summary.txt'
+    $summary = if (Test-Path -LiteralPath $summaryFile) { Get-Content -LiteralPath $summaryFile -Raw } else { '' }
+    $lost = [regex]::Match($summary, 'Total Events\s+Lost\s+(\d+)')
+    $presentEvents = @($events | Where-Object { $_.'Event Name' -eq 'Microsoft-Windows-DXGI' -and [int]$_.'Event ID' -in 42,43,55,56 }).Count
+    $kernelEvents = @($events | Where-Object { $_.'Event Name' -eq 'Microsoft-Windows-DxgKrnl' -and [int]$_.'Event ID' -in 168,171,172,184,215 }).Count
+    $results += [pscustomobject]@{ Mode=$(if ($Kernel) { 'kernel-offline' } else { 'offline' }); ExitCode=$exitCode; TimedOut=$timedOut; Rows=$rows.Count; RawEvents=$events.Count
+        EventsLost=$(if ($lost.Success) { [long]$lost.Groups[1].Value } else { $null }); PresentEvents=$presentEvents; KernelPresentEvents=$kernelEvents
         DecodeExitCode=$decodeExit; Arguments=$arguments; Applications=@($rows.Application | Sort-Object -Unique)
         Error=(Get-Content -LiteralPath $errorFile -Raw) }
 }
 $results | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $output 'result.json') -Encoding utf8
-$results | Select-Object Mode, ExitCode, TimedOut, Rows, EventsLost, RawEvents | Format-Table
+$results | Select-Object Mode, ExitCode, TimedOut, Rows, EventsLost, RawEvents, PresentEvents, KernelPresentEvents | Format-Table
 Write-Host "诊断结果：$output"
