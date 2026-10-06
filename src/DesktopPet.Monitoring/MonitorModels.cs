@@ -144,15 +144,21 @@ public static class MonitorSelection
             if (key == "FPS")
             {
                 var frameNow = history ? snapshot.Timestamp : DateTimeOffset.UtcNow;
+                bool HasRecentFrame(MonitorMetric metric) => metric.Valid &&
+                    (metric.SampledAt is not DateTimeOffset sampledAt || sampledAt <= frameNow.AddSeconds(history ? 3 : 0) &&
+                     frameNow - sampledAt <= TimeSpan.FromSeconds(3));
                 var targets = (snapshot.Capabilities?.GetValueOrDefault("fps-foreground") ?? "").Split(',')
                     .Where(s => int.TryParse(s, out var pid) && pid > 0).Select(s => "process/" + s).ToArray();
-                candidates = candidates.Where(m => targets.Contains(m.DeviceId) && m.Valid &&
-                    (m.SampledAt is not DateTimeOffset t || t <= frameNow.AddSeconds(history ? 3 : 0) && frameNow - t <= TimeSpan.FromSeconds(3))).ToList();
+                candidates = candidates.Where(m => targets.Contains(m.DeviceId) && HasRecentFrame(m)).ToList();
                 preferred = targets.FirstOrDefault();
                 // The window process wins; shared renderers from the same process tree are a fallback.
                 candidates = candidates.OrderBy(m => m.DeviceId == preferred ? 0 : 1).ThenByDescending(m => m.Value).ToList();
-                if (candidates.Count == 0 && snapshot.Metrics.FirstOrDefault(m => m.Kind == "FPS" && m.DeviceId == "desktop" && m.Valid &&
-                    m.SampledAt is DateTimeOffset t && t <= frameNow.AddSeconds(history ? 3 : 0) && frameNow - t <= TimeSpan.FromSeconds(3)) is { } desktop)
+                // If the foreground app has no presents, keep tracking another active app
+                // instead of dropping its fresh sample. DWM is the final desktop fallback.
+                if (candidates.Count == 0)
+                    candidates = snapshot.Metrics.Where(m => m.Kind == "FPS" && m.DeviceId.StartsWith("process/", StringComparison.Ordinal) && HasRecentFrame(m))
+                        .OrderByDescending(m => m.SampledAt).ThenByDescending(m => m.Value).ToList();
+                if (candidates.Count == 0 && snapshot.Metrics.FirstOrDefault(m => m.Kind == "FPS" && m.DeviceId == "desktop" && HasRecentFrame(m)) is { } desktop)
                     candidates.Add(desktop);
                 if (history && snapshot.Capabilities?.ContainsKey("fps-foreground") != true)
                 {
