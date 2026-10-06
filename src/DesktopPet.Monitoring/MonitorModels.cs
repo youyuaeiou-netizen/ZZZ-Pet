@@ -29,7 +29,9 @@ public sealed record MonitorSnapshot(DateTimeOffset Timestamp, List<MonitorDevic
         if (metric.Kind == "FPS" && !metric.Valid)
         {
             var helper = Capabilities?.GetValueOrDefault("fps-helper");
+            if (helper == "recovering") return metric with { Text = "FPS 采集正在恢复", Source = "长时间未收到帧，正在重新连接系统帧事件。" };
             if (helper == "running") return metric with { Text = "等待帧数据", Source = "当前应用暂无可读取的连续帧；查看 Pet 时继续跟踪之前的应用。" };
+            if (helper == "no-frames") return metric with { Text = "FPS 采集无数据", Source = "采集器运行超过十秒仍无有效帧。可能是应用没有连续呈现或 ETW 采集异常；不代表 FPS 为零。" };
             if (helper == "starting") return metric with { Text = "FPS 正在启动", Source = "正在启动帧率采集组件。" };
             if (helper == "requires-elevation") return metric with { Text = "FPS 需要管理员权限" };
             if (helper is "unavailable" or "helper-integrity-error") return metric with { Text = "FPS 采集不可用" };

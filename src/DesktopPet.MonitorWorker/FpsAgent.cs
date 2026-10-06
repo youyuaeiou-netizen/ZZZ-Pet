@@ -15,7 +15,7 @@ internal static class FpsAgent
     internal static ProcessStartInfo CreateHelperStartInfo(string executable, string session)
     {
         var start = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };
-        foreach (var arg in new[] { "--session_name", session, "--output_stdout", "--no_console_stats", "--v1_metrics", "--exclude", "DesktopPet.exe", "--exclude", "DesktopPet.MonitorUi.exe", "--exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
+        foreach (var arg in new[] { "--session_name", session, "--output_stdout", "--no_console_stats", "--v1_metrics", "--no_track_gpu", "--no_track_input", "--exclude", "DesktopPet.exe", "--exclude", "DesktopPet.MonitorUi.exe", "--exclude", "explorer.exe" }) start.ArgumentList.Add(arg);
         return start;
     }
     public static async Task Run(string[] args)
@@ -32,23 +32,49 @@ internal static class FpsAgent
         { Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "helper-integrity-error"), MonitorJson.Options)); return; }
         using var lifetime = new CancellationTokenSource(); using var job = new OwnedJob();
         Process? helper = null;
+        var session = args[3];
         try
         {
-            var start = CreateHelperStartInfo(executable, args[3]);
             // No -stop_existing_session: this helper owns a fresh, random session name.
             // Join before launch: children inherit this non-breakaway job, avoiding
             // a helper launch/assignment gap if this supervisor is terminated.
             using (var current = Process.GetCurrentProcess()) job.Assign(current);
-            helper = Process.Start(start) ?? throw new IOException();
             _ = Task.Run(async () => { try { while (!lifetime.IsCancellationRequested) { if (owner.HasExited) { lifetime.Cancel(); return; } await Task.Delay(300, lifetime.Token); } } catch (OperationCanceledException) { } });
             _ = Task.Run(async () => { await Console.In.ReadLineAsync(); lifetime.Cancel(); });
             var frames = new FpsFrames();
-            var output = Task.Run(async () =>
-            { try { while (await helper.StandardOutput.ReadLineAsync(lifetime.Token) is string line) frames.Read(line, DateTimeOffset.UtcNow); } catch (OperationCanceledException) { } });
-            _ = Task.Run(async () => { try { while (await helper.StandardError.ReadLineAsync(lifetime.Token) is not null) { } } catch (OperationCanceledException) { } });
-            while (!lifetime.IsCancellationRequested && !helper.HasExited)
+            var lastMetricsAt = DateTimeOffset.UtcNow;
+            var receivedMetrics = false;
+            var emptyRecoveryUsed = false;
+            while (!lifetime.IsCancellationRequested)
             {
-                Console.WriteLine(JsonSerializer.Serialize(new FpsReading(frames.Metrics(DateTimeOffset.UtcNow), "running"), MonitorJson.Options));
+                if (helper is null)
+                {
+                    StopOwnedTrace(session);
+                    helper = Process.Start(CreateHelperStartInfo(executable, session)) ?? throw new IOException();
+                    frames = new FpsFrames(); lastMetricsAt = DateTimeOffset.UtcNow; receivedMetrics = false;
+                    var currentHelper = helper; var currentFrames = frames;
+                    _ = Task.Run(async () =>
+                    { try { while (await currentHelper.StandardOutput.ReadLineAsync(lifetime.Token) is string line) currentFrames.Read(line, DateTimeOffset.UtcNow); } catch (OperationCanceledException) { } });
+                    _ = Task.Run(async () => { try { while (await currentHelper.StandardError.ReadLineAsync(lifetime.Token) is not null) { } } catch (OperationCanceledException) { } });
+                }
+                if (helper.HasExited) throw new IOException("PresentMon stopped unexpectedly");
+                var now = DateTimeOffset.UtcNow;
+                var metrics = frames.Metrics(now);
+                if (metrics.Count > 0) { receivedMetrics = true; emptyRecoveryUsed = false; lastMetricsAt = now; }
+                var quietFor = now - lastMetricsAt;
+                var status = metrics.Count == 0 && quietFor >= TimeSpan.FromSeconds(10) ? "no-frames" : "running";
+                Console.WriteLine(JsonSerializer.Serialize(new FpsReading(metrics, status), MonitorJson.Options));
+                if (metrics.Count == 0 && quietFor >= TimeSpan.FromSeconds(20) && (receivedMetrics || !emptyRecoveryUsed))
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "recovering"), MonitorJson.Options));
+                    try { helper.Kill(); helper.WaitForExit(3000); }
+                    catch (InvalidOperationException) { }
+                    helper.Dispose(); helper = null;
+                    StopOwnedTrace(session);
+                    emptyRecoveryUsed = true;
+                    await Task.Delay(TimeSpan.FromSeconds(2), lifetime.Token);
+                    continue;
+                }
                 await Task.Delay(250, lifetime.Token);
             }
         }
@@ -56,7 +82,7 @@ internal static class FpsAgent
         { if (!lifetime.IsCancellationRequested) Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "unavailable"), MonitorJson.Options)); }
         finally
         {
-            lifetime.Cancel(); StopOwnedTrace(args[3]);
+            lifetime.Cancel(); StopOwnedTrace(session);
             if (helper is not null) { try { if (!helper.HasExited) helper.Kill(); } catch (Exception e) when (e is InvalidOperationException or System.ComponentModel.Win32Exception) { } helper.Dispose(); }
         }
     }

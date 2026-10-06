@@ -40,7 +40,7 @@ internal sealed class FpsManager : IDisposable
             catch (Exception e) when (e is IOException or OperationCanceledException or JsonException or InvalidOperationException) { }
             finally
             {
-                if (Reading.Status is "running" or "starting") Volatile.Write(ref _reading, new([], "unavailable"));
+                if (Reading.Status is "running" or "starting" or "no-frames" or "recovering") Volatile.Write(ref _reading, new([], "unavailable"));
                 // This elevated worker can also reclaim its own random ETW session
                 // when the supervisor was killed and could not execute its finally.
                 if (_session is string session) FpsAgent.StopOwnedTrace(session);

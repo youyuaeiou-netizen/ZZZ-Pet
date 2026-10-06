@@ -155,6 +155,7 @@ internal static class Program
         var create = workerAssembly.GetType("DesktopPet.MonitorWorker.FpsAgent")!.GetMethod("CreateHelperStartInfo", BindingFlags.NonPublic | BindingFlags.Static)!;
         var start = (ProcessStartInfo)create.Invoke(null, [Path.Combine(AppContext.BaseDirectory, "monitor", "fps", "PresentMon.exe"), "DesktopPet.FPS." + Guid.NewGuid().ToString("N")])!;
         Check(!start.ArgumentList.Contains("dwm.exe") && start.ArgumentList.Contains("DesktopPet.exe"), "desktop compositor is captured while pet itself remains excluded");
+        Check(start.ArgumentList.Contains("--no_track_gpu") && start.ArgumentList.Contains("--no_track_input") && !start.ArgumentList.Contains("--no_track_display"), "FPS avoids GPU duration and input tracing while retaining desktop presentation tracking");
         start.ArgumentList.Add("--help"); // Usage only: validate the actual pinned CLI without starting an ETW session.
         using var process = Process.Start(start)!;
         var stdout = process.StandardOutput.ReadToEndAsync(); var stderr = process.StandardError.ReadToEndAsync();

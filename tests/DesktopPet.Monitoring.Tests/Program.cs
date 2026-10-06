@@ -37,7 +37,7 @@ var waitingFrames = legacyLive with { Capabilities = new() { ["fps-helper"] = "r
 Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start).Display == "等待帧数据", "no foreground frames share waiting state across surfaces");
 Check(waitingFrames.ForDisplay(liveMetric with { Value = null }, start).Display == "不可用", "missing sensors remain unavailable independently of FPS");
 Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", SampledAt = start.AddSeconds(-4) }, start).Display == "等待帧数据", "stale FPS clears before otherwise fresh hardware expires");
-foreach (var (helper, text) in new[] { ("starting", "FPS 正在启动"), ("requires-elevation", "FPS 需要管理员权限"), ("unavailable", "FPS 采集不可用") })
+foreach (var (helper, text) in new[] { ("starting", "FPS 正在启动"), ("requires-elevation", "FPS 需要管理员权限"), ("unavailable", "FPS 采集不可用"), ("no-frames", "FPS 采集无数据") })
     Check((waitingFrames with { Capabilities = new() { ["fps-helper"] = helper } }).ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start).Display == text, "FPS component state is distinct from no frames " + helper);
 MonitorMetric Temp(double? value, string device = "cpu") => new("CPU.Temp", "CPU", device, "CPU.Temp", "℃", value, "CPU Package");
 var episodes = new TemperatureEpisodes(); var rule = new TemperatureRule { Enabled = true };
