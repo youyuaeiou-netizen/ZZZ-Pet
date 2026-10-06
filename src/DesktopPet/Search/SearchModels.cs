@@ -16,7 +16,10 @@ internal sealed record SearchEntry(string Name, string Target, SearchKind Kind, 
     public string Location => Target.StartsWith("shell:AppsFolder\\", StringComparison.OrdinalIgnoreCase) ? "已安装应用" : Target;
     public string Category => Kind switch { SearchKind.Application => "应用", SearchKind.Folder => "目录", _ => "文件" };
 }
-internal sealed record SearchReply(IReadOnlyList<SearchEntry> Entries, string Status, double Milliseconds);
+internal sealed record SearchReply(IReadOnlyList<SearchEntry> Entries, string Status, double Milliseconds)
+{
+    internal bool Complete { get; init; } = true;
+}
 
 internal static class SearchMatch
 {

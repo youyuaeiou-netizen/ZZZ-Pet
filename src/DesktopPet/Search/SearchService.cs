@@ -114,7 +114,8 @@ internal sealed class SearchService : IDisposable
     internal async Task RefreshAsync()
     { await Applications(true); await _folders.RefreshAsync(); OnChanged(); }
 
-    internal async Task<SearchReply> QueryAsync(string query, SearchFilter filter, CancellationToken cancellation)
+    internal async Task<SearchReply> QueryAsync(string query, SearchFilter filter, CancellationToken cancellation,
+        IProgress<SearchReply>? progress = null)
     {
         using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellation, _lifetime.Token);
         var token = linked.Token; var watch = Stopwatch.StartNew();
@@ -168,6 +169,19 @@ internal sealed class SearchService : IDisposable
         }
         token.ThrowIfCancellationRequested();
         if (Error is not null) status.Add(Error);
+        if (filter != SearchFilter.Applications && !(Path.IsPathFullyQualified(query)
+            && (File.Exists(query) || Directory.Exists(query))))
+        {
+            var initial = entries.ToArray();
+            var scan = await DiskSearch.SearchAsync(plan, DiskSearch.Roots(scope), token, partial =>
+            {
+                var rankedPartial = SearchMatch.Rank(initial.Concat(partial.Entries)
+                    .Where(e => e.Kind == SearchKind.Application || scope.Contains(e.Target)), query, filter, plan: plan, aliases: aliases);
+                progress?.Report(new(rankedPartial, string.Join(" · ", status.Append(partial.Status)), watch.Elapsed.TotalMilliseconds)
+                    { Complete = false });
+            });
+            entries.AddRange(scan.Entries); status.Add(scan.Status);
+        }
         // A direct existing path works even outside every search index; no shell expression is evaluated.
         if (Path.IsPathFullyQualified(query) && (File.Exists(query) || Directory.Exists(query)))
             entries.Add(new(Path.GetFileName(query.TrimEnd('\\')), query, Directory.Exists(query) ? SearchKind.Folder : SearchKind.File, "直接路径"));

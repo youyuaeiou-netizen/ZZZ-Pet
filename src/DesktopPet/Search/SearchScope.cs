@@ -25,7 +25,7 @@ internal sealed record SearchScope
         {
             try
             {
-                if (drive.DriveType is DriveType.Fixed or DriveType.Removable or DriveType.CDRom && drive.IsReady)
+                if (drive.DriveType is DriveType.Fixed or DriveType.Removable or DriveType.Network or DriveType.CDRom && drive.IsReady)
                     options.Add(Parse(drive.Name));
             }
             catch (Exception e) when (e is IOException or UnauthorizedAccessException) { }

@@ -161,18 +161,26 @@ internal sealed class SearchWindow : Window
         if (IsClosing) return;
         var version = _revision; var query = _query.Text; var filter = (SearchFilter)_filter.SelectedIndex;
         _request = new(); var token = _request.Token;
+        var finished = false;
         try
         {
-            var reply = await _service.QueryAsync(query, filter, token);
+            var progress = new Progress<SearchReply>(partial =>
+            {
+                if (!finished && !_closed && version == _revision && !token.IsCancellationRequested) Render(partial);
+            });
+            var reply = await _service.QueryAsync(query, filter, token, progress);
+            finished = true;
             if (_closed || version != _revision || token.IsCancellationRequested) return;
             Render(reply);
         }
         catch (OperationCanceledException) { }
         catch (Exception) { if (!_closed && version == _revision) { _empty.Text = "搜索暂不可用"; SetStatus("请刷新后重试"); } }
+        finally { finished = true; }
     }
     internal void Render(SearchReply reply)
     {
         if (IsClosing) return;
+        var selected = Selected?.Target;
         _results.Items.Clear();
         foreach (var entry in reply.Entries)
         {
@@ -185,8 +193,11 @@ internal sealed class SearchWindow : Window
             System.Windows.Automation.AutomationProperties.SetName(item, entry.Category + " " + entry.Name + " " + entry.Location);
             _results.Items.Add(item);
         }
-        if (_results.Items.Count > 0) _results.SelectedIndex = 0;
-        _empty.Text = "未找到匹配项"; _empty.Visibility = reply.Entries.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+        if (_results.Items.Count > 0)
+            _results.SelectedItem = _results.Items.OfType<W.ListBoxItem>().FirstOrDefault(item =>
+                ((SearchEntry)item.Tag).Target.Equals(selected, StringComparison.OrdinalIgnoreCase)) ?? _results.Items[0];
+        _empty.Text = reply.Complete ? "未找到匹配项" : "正在搜索磁盘…";
+        _empty.Visibility = reply.Entries.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         SetStatus($"{reply.Entries.Count} 项 · {reply.Milliseconds:0} ms" + (reply.Status.Length > 0 ? " · " + reply.Status : "") + (reply.Entries.Count >= 80 ? " · 显示前 80 项" : ""));
         UpdateActions();
     }
@@ -197,7 +208,7 @@ internal sealed class SearchWindow : Window
         _alias.IsEnabled = Selected is not null;
         _reveal.IsEnabled = Selected is { } item && !item.Target.StartsWith("shell:AppsFolder\\", StringComparison.OrdinalIgnoreCase);
     }
-    private void SetStatus(string text) { if (_closed) return; _status.Text = text; _status.Visibility = text.Length == 0 ? Visibility.Collapsed : Visibility.Visible; }
+    private void SetStatus(string text) { if (_closed) return; _status.Text = text; _status.ToolTip = text; _status.Visibility = text.Length == 0 ? Visibility.Collapsed : Visibility.Visible; }
     private void OpenSelected(bool reveal)
     {
         if (Selected is not { } entry) return;

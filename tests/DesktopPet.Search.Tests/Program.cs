@@ -26,15 +26,117 @@ internal static class Program
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
         try
         {
-            Matching(); Protocol(); ServiceAndLive(); ClosingRegression(); SteamShortcuts(); Bilingual(); Scopes(); UiAndLifecycle();
+            if (args.Contains("--disk-search-check")) { Matching(); Protocol(); SteamShortcuts(); ClosingRegression(); DiskCoverage(); }
+            else { Matching(); Protocol(); ServiceAndLive(); ClosingRegression(); SteamShortcuts(); Bilingual(); Scopes(); UiAndLifecycle(); }
             File.WriteAllText(Path.Combine(_output, "result.json"), JsonSerializer.Serialize(new { passed = Passed, measurements = Measurements,
-                note = "isolated metadata fixtures; real installed apps and Windows Search; Everything IPC uses a local fake server, not real Everything; current DPI, no injected input or launched apps" }, new JsonSerializerOptions { WriteIndented = true }));
+                note = args.Contains("--disk-search-check") ? "Direct filesystem coverage fixtures plus live local C drive searches; isolated settings; no injected input or launched apps."
+                    : "isolated metadata fixtures; real installed apps and Windows Search; Everything IPC uses a local fake server, not real Everything; current DPI, no injected input or launched apps" }, new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine($"PASS {Passed.Count} search checks; {_output}"); return 0;
         }
         catch (Exception error) { File.WriteAllText(Path.Combine(_output, "failure.json"), JsonSerializer.Serialize(new { error = error.Message, passed = Passed, measurements = Measurements })); Console.Error.WriteLine(error); return 1; }
         finally { foreach (Window window in app.Windows.Cast<Window>().ToArray()) window.Close(); app.Shutdown(); }
     }
     private static void Check(bool pass, string name) { if (!pass) throw new Exception(name); Passed.Add(name); }
+    private static void DiskCoverage()
+    {
+        var root = Path.Combine(_output, "disk-a"); var other = Path.Combine(_output, "disk-b");
+        Directory.CreateDirectory(root); Directory.CreateDirectory(other);
+        var paths = new List<string>();
+        foreach (var folder in new[] { ".git", "bin", "obj", "node_modules", "normal" })
+        {
+            var directory = Path.Combine(root, folder); Directory.CreateDirectory(directory);
+            var file = Path.Combine(directory, "coverage_unique_9517.txt"); File.WriteAllText(file, "fixture"); paths.Add(file);
+        }
+        File.SetAttributes(paths[0], FileAttributes.Hidden);
+        var remoteFile = Path.Combine(other, "coverage_unique_9517.txt"); File.WriteAllText(remoteFile, "fixture");
+        var plan = SearchPlan.Literal("coverage_unique_9517");
+        var scan = Await(DiskSearch.SearchAsync(plan, [root], CancellationToken.None));
+        Check(scan.Complete && scan.Skipped == 0 && paths.All(path => scan.Entries.Any(e => e.Target == path)), "direct traversal includes hidden, .git, bin, obj and node_modules files without opt-in roots");
+        Check(scan.Entries.All(e => !e.Target.StartsWith(other)), "selected storage root cannot return another root");
+        scan = Await(DiskSearch.SearchAsync(plan, [root, other], CancellationToken.None));
+        Check(scan.Entries.Any(e => e.Target == remoteFile) && paths.All(path => scan.Entries.Any(e => e.Target == path)), "all storage roots contribute direct results");
+        scan = Await(DiskSearch.SearchAsync(plan, [root, Path.Combine(_output, "missing-drive")], CancellationToken.None));
+        Check(scan.Skipped == 1 && scan.Status.Contains("结果不完整") && scan.Entries.Count == paths.Count, "unreadable storage reports incomplete coverage while retaining readable results");
+        using (var canceled = new CancellationTokenSource())
+        {
+            canceled.Cancel();
+            try { Await(DiskSearch.SearchAsync(plan, [root], canceled.Token)); Check(false, "canceled scan"); }
+            catch (OperationCanceledException) { Check(true, "disk traversal respects cancellation"); }
+        }
+        for (var i = 0; i < 400; i++) File.WriteAllText(Path.Combine(root, $"exact9517-long-{i:D4}.txt"), "fixture");
+        var exact = Path.Combine(root, "exact9517.txt"); File.WriteAllText(exact, "fixture");
+        scan = Await(DiskSearch.SearchAsync(SearchPlan.Literal("exact9517"), [root], CancellationToken.None));
+        Check(scan.Visited > 400 && scan.Entries.Count == 80 && scan.Entries[0].Target == exact, "result display cap does not truncate traversal or hide later exact matches");
+        var rankedResults = scan.Entries;
+        var link = Path.Combine(root, "linked-storage");
+        using (var junction = Process.Start(new ProcessStartInfo("cmd.exe")
+        {
+            UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true,
+            ArgumentList = { "/c", "mklink", "/J", link, other }
+        })!)
+        {
+            junction.WaitForExit(); Check(junction.ExitCode == 0, "isolated cross-root junction fixture created");
+        }
+        scan = Await(DiskSearch.SearchAsync(SearchPlan.Literal("linked-storage"), [root], CancellationToken.None));
+        Check(scan.Links == 1 && scan.Entries.Any(e => e.Target == link) && scan.Entries.All(e => e.Target != Path.Combine(link, Path.GetFileName(remoteFile))),
+            "directory link itself is searchable without expanding another storage root");
+        var scopes = SearchScope.Available(SearchScope.All);
+        Check(scopes.Where(s => s.Root is not null).All(s => DiskSearch.Roots(SearchScope.All).Contains(s.Root!, StringComparer.OrdinalIgnoreCase)), "all computer traversal covers every currently selectable disk");
+        Check(DiskSearch.Roots(SearchScope.Parse("Z:\\")).SequenceEqual(new[] { "Z:\\" }), "unavailable selected disk never silently widens to all computer");
+        using (var canceled = new CancellationTokenSource())
+        {
+            var scanTask = DiskSearch.SearchAsync(plan, DiskSearch.Roots(SearchScope.All), canceled.Token, _ => canceled.Cancel());
+            try { Await(scanTask, 10000); Check(false, "active scan cancellation"); }
+            catch (OperationCanceledException) { Check(true, "active whole-disk scan cancels after its first progress update"); }
+        }
+        var serviceSettings = Path.Combine(_output, "direct-settings.json");
+        using var service = new SearchService(serviceSettings);
+        service.SetFileScope(SearchScope.Parse("C:\\"));
+        var progressCount = 0; SearchReply? last = null;
+        var progress = new InlineProgress<SearchReply>(reply => { progressCount++; last = reply; });
+        foreach (var name in new[] { "P3R", "Counter-Strike Global Offensive" })
+        {
+            var expected = Path.Combine(@"C:\steam app\steamapps\common", name);
+            var reply = Await(service.QueryAsync(name, SearchFilter.Files, CancellationToken.None, progress), 180000);
+            Check(reply.Complete && reply.Status.Contains("扫描完成") && reply.Entries.All(e => e.Target.StartsWith("C:\\", StringComparison.OrdinalIgnoreCase)), "live selected C disk completes direct coverage: " + name);
+            if (Directory.Exists(expected)) Check(reply.Entries.Any(e => e.Target.Equals(expected, StringComparison.OrdinalIgnoreCase)), "unindexed installed game folder is found: " + name);
+            Measurements.Add(new { name, milliseconds = reply.Milliseconds, status = reply.Status });
+        }
+        Check(progressCount > 0 && last is { Complete: false }, "live long search publishes provisional results and scanning state");
+        service.SetFileScope(SearchScope.All);
+        var all = Await(service.QueryAsync("coverage_unique_9517", SearchFilter.Files, CancellationToken.None), 180000);
+        Check(all.Entries.Any(e => e.Target == paths[0]) && all.Status.Contains("全部电脑"), "all computer finds a newly created hidden fixture without adding a directory or Windows indexing");
+        Measurements.Add(new { name = "all-computer", milliseconds = all.Milliseconds, status = all.Status });
+        service.SetFileScope(SearchScope.Parse("Z:\\"));
+        var unavailable = Await(service.QueryAsync("coverage_unique_9517", SearchFilter.Files, CancellationToken.None));
+        Check(unavailable.Entries.Count == 0 && unavailable.Status.Contains("结果不完整"), "selected missing disk yields truthful incomplete result instead of searching C");
+        var ui = new SearchWindow(service) { ShowActivated = false }; ui.Show(); Pump(40);
+        ui.Render(new([], "扫描中…", 10) { Complete = false });
+        Check(Field<W.TextBlock>(ui, "_empty").Text.Contains("正在搜索"), "unfinished disk scan never displays no matches");
+        ui.Render(new(rankedResults, "扫描中…", 10) { Complete = false });
+        var results = Field<W.ListBox>(ui, "_results"); results.SelectedIndex = 2;
+        var selected = ((SearchEntry)((W.ListBoxItem)results.SelectedItem).Tag).Target;
+        ui.Render(new(rankedResults, "扫描完成", 20));
+        Check(((SearchEntry)((W.ListBoxItem)results.SelectedItem).Tag).Target == selected, "progress rendering preserves the selected result");
+        ui.Close();
+        service.SetFileScope(SearchScope.All);
+        var liveUi = new SearchWindow(service) { ShowActivated = false }; liveUi.Show(); Pump(40);
+        Field<W.TextBox>(liveUi, "_query").Text = "P3R";
+        var liveResults = Field<W.ListBox>(liveUi, "_results");
+        var expectedGame = @"C:\steam app\steamapps\common\P3R";
+        if (Directory.Exists(expectedGame))
+        {
+            Until(() => liveResults.Items.OfType<W.ListBoxItem>().Any(item => ((SearchEntry)item.Tag).Target == expectedGame), 90000);
+            Check(Field<W.TextBlock>(liveUi, "_status").Text.Contains("磁盘直接检索"), "real search window finds P3R through direct disk traversal");
+            Capture(liveUi, "all-disks-p3r-live.png");
+        }
+        var activeRequest = Field<CancellationTokenSource?>(liveUi, "_request");
+        var activeToken = activeRequest?.Token;
+        liveUi.Close(); Pump(80);
+        Check(activeToken?.IsCancellationRequested == true, "closing real search UI cancels its active whole-disk request");
+    }
+    private sealed class InlineProgress<T>(Action<T> report) : IProgress<T>
+    { public void Report(T value) => report(value); }
     private static T Field<T>(object instance, string name) => (T)instance.GetType().GetField(name, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(instance)!;
     private static void Pump(int milliseconds)
     {
