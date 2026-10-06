@@ -26,7 +26,7 @@ internal static class Program
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
         try
         {
-            if (args.Contains("--disk-search-check")) { Matching(); Protocol(); SteamShortcuts(); ClosingRegression(); DiskCoverage(); }
+            if (args.Contains("--disk-search-check")) { Matching(); Protocol(); SteamShortcuts(); ClosingRegression(); StableResults(); DiskCoverage(); }
             else { Matching(); Protocol(); ServiceAndLive(); ClosingRegression(); SteamShortcuts(); Bilingual(); Scopes(); UiAndLifecycle(); }
             File.WriteAllText(Path.Combine(_output, "result.json"), JsonSerializer.Serialize(new { passed = Passed, measurements = Measurements,
                 note = args.Contains("--disk-search-check") ? "Direct filesystem coverage fixtures plus live local C drive searches; isolated settings; no injected input or launched apps."
@@ -37,6 +37,29 @@ internal static class Program
         finally { foreach (Window window in app.Windows.Cast<Window>().ToArray()) window.Close(); app.Shutdown(); }
     }
     private static void Check(bool pass, string name) { if (!pass) throw new Exception(name); Passed.Add(name); }
+    private static void StableResults()
+    {
+        using var service = new SearchService(Path.Combine(_output, "stable-settings.json"));
+        var window = new SearchWindow(service) { ShowActivated = false }; window.Show(); Pump(80);
+        Field<W.TextBox>(window, "_query").Text = "stability";
+        Field<DispatcherTimer>(window, "_debounce").Stop();
+        var first = new SearchEntry("first", Path.Combine(_output, "first.txt"), SearchKind.File, "fixture");
+        var second = new SearchEntry("second", Path.Combine(_output, "second.txt"), SearchKind.File, "fixture");
+        window.Render(new([first, second], "扫描中…", 10) { Complete = false });
+        var results = Field<W.ListBox>(window, "_results"); var firstRow = results.Items[0]; var secondRow = results.Items[1];
+        results.SelectedIndex = 1;
+        typeof(SearchService).GetMethod("OnChanged", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(service, []); Pump(60);
+        Check(results.Items.Count == 2 && ReferenceEquals(results.Items[0], firstRow), "background index changes never clear visible results or restart the query");
+        var late = new SearchEntry("late", Path.Combine(_output, "late.txt"), SearchKind.File, "fixture");
+        window.Render(new([late, second, first], "扫描中…", 20) { Complete = false });
+        Check(ReferenceEquals(results.Items[0], firstRow) && ReferenceEquals(results.Items[1], secondRow), "provisional results retain existing row objects and positions when provider ranking changes");
+        Check(ReferenceEquals(results.SelectedItem, secondRow), "incremental results preserve selection");
+        var status = Field<W.TextBlock>(window, "_status");
+        Check(status.Text.Contains("正在补全") && status.TextWrapping == TextWrapping.NoWrap, "results found state is explicit and progress cannot resize the result area");
+        window.Render(new([late, second, first], "扫描完成", 30));
+        Check(ReferenceEquals(results.Items[0], firstRow) && status.Text.Contains("检索完成"), "completed results stay in place and scanning state ends");
+        window.Close();
+    }
     private static void DiskCoverage()
     {
         var root = Path.Combine(_output, "disk-a"); var other = Path.Combine(_output, "disk-b");
@@ -127,7 +150,7 @@ internal static class Program
         if (Directory.Exists(expectedGame))
         {
             Until(() => liveResults.Items.OfType<W.ListBoxItem>().Any(item => ((SearchEntry)item.Tag).Target == expectedGame), 90000);
-            Check(Field<W.TextBlock>(liveUi, "_status").Text.Contains("磁盘直接检索"), "real search window finds P3R through direct disk traversal");
+            Check((Field<W.TextBlock>(liveUi, "_status").ToolTip as string)?.Contains("磁盘直接检索") == true, "real search window finds P3R through direct disk traversal");
             Capture(liveUi, "all-disks-p3r-live.png");
         }
         var activeRequest = Field<CancellationTokenSource?>(liveUi, "_request");
@@ -426,6 +449,7 @@ internal static class Program
         File.WriteAllText(file, "[InternetShortcut]\nURL=https://example.com");
         try { SearchActions.StartInfo(entry); Check(false, "changed Steam shortcut"); }
         catch (IOException) { Check(true, "opening revalidates a Steam shortcut changed after indexing"); }
+        File.Delete(file); // Do not leave fake game shortcuts in real whole-disk search results.
     }
     private static void ClosingRegression()
     {

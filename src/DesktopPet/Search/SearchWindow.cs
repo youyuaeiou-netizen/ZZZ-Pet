@@ -63,7 +63,9 @@ internal sealed class SearchWindow : Window
         var body = new W.Grid(); body.Children.Add(_results); _empty.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
         _empty.VerticalAlignment = VerticalAlignment.Center; body.Children.Add(_empty);
         W.Grid.SetRow(body, 2); grid.Children.Add(body);
-        _status.Margin = new Thickness(0, 8, 0, 0); W.Grid.SetRow(_status, 3); grid.Children.Add(_status);
+        _status.Margin = new Thickness(0, 8, 0, 0); _status.TextWrapping = TextWrapping.NoWrap;
+        _status.TextTrimming = TextTrimming.CharacterEllipsis;
+        W.Grid.SetRow(_status, 3); grid.Children.Add(_status);
         var actions = new W.WrapPanel();
         _launch = ToolsWindow.Button("打开", () => OpenSelected(false)); _reveal = ToolsWindow.Button("定位", () => OpenSelected(true));
         actions.Children.Add(_launch); actions.Children.Add(_reveal);
@@ -81,16 +83,15 @@ internal sealed class SearchWindow : Window
             if (W.ItemsControl.ContainerFromElement(_results, e.OriginalSource as DependencyObject) is W.ListBoxItem) OpenSelected(false);
         };
         PreviewKeyDown += Keys;
-        _service.Changed += ServiceChanged;
         Loaded += async (_, _) =>
         {
             _query.Focus();
-            try { await _service.InitializeAsync(); if (!_closed && _query.Text.Length > 0) Schedule(); }
+            try { await _service.InitializeAsync(); }
             catch (Exception e) when (e is not OperationCanceledException) { SetStatus("索引初始化失败，请刷新"); }
         };
         Closing += (_, _) => { _closing = true; _debounce.Stop(); CancelQuery(); };
         Deactivated += (_, _) => QueueDismiss();
-        Closed += (_, _) => { _closed = true; _revision++; _debounce.Stop(); CancelQuery(); _service.Changed -= ServiceChanged; };
+        Closed += (_, _) => { _closed = true; _revision++; _debounce.Stop(); CancelQuery(); };
         UpdateActions(); SetStatus("");
     }
     private void QueueDismiss()
@@ -136,17 +137,16 @@ internal sealed class SearchWindow : Window
         {
             var dialog = new SearchAliasWindow(entry.Name) { Owner = this };
             if (dialog.ShowDialog() == true)
-            { _service.AddAlias(entry, dialog.Alias); SetStatus(_service.BilingualEnabled ? "别名已保存" : "别名已保存，开启中英同时检索后生效"); }
+            {
+                _service.AddAlias(entry, dialog.Alias);
+                if (_service.BilingualEnabled) Schedule();
+                else SetStatus("别名已保存，开启中英同时检索后生效");
+            }
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException or ArgumentException or System.Text.Json.JsonException) { SetStatus(e.Message); }
         finally { _dialogOpen = false; }
     }
     private void CancelQuery() { _request?.Cancel(); _request?.Dispose(); _request = null; }
-    private void ServiceChanged()
-    {
-        if (IsClosing || Dispatcher.HasShutdownStarted) return;
-        Dispatcher.BeginInvoke(() => { if (!IsClosing && _query.Text.Trim().Length > 0) Schedule(); });
-    }
     private void Schedule()
     {
         if (IsClosing) return;
@@ -181,9 +181,20 @@ internal sealed class SearchWindow : Window
     {
         if (IsClosing) return;
         var selected = Selected?.Target;
-        _results.Items.Clear();
+        var targets = reply.Entries.Select(e => e.Target).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var item in _results.Items.OfType<W.ListBoxItem>().ToArray())
+            if (!targets.Contains(((SearchEntry)item.Tag).Target)) _results.Items.Remove(item);
         foreach (var entry in reply.Entries)
         {
+            var existing = _results.Items.OfType<W.ListBoxItem>().FirstOrDefault(item =>
+                ((SearchEntry)item.Tag).Target.Equals(entry.Target, StringComparison.OrdinalIgnoreCase));
+            if (existing is not null)
+            {
+                existing.Tag = entry;
+                var existingRow = (W.StackPanel)existing.Content;
+                ((W.TextBlock)existingRow.Children[0]).Text = entry.Name + (entry.MatchHint is null ? "" : "  · " + entry.MatchHint);
+                continue;
+            }
             var row = new W.StackPanel { Margin = new Thickness(8, 6, 8, 6) };
             var title = ToolsWindow.Text(entry.Name + (entry.MatchHint is null ? "" : "  · " + entry.MatchHint), 15); title.FontWeight = FontWeights.SemiBold; title.TextWrapping = TextWrapping.NoWrap; title.TextTrimming = TextTrimming.CharacterEllipsis;
             var path = ToolsWindow.Text(entry.Location, 13); path.TextWrapping = TextWrapping.NoWrap; path.TextTrimming = TextTrimming.CharacterEllipsis;
@@ -198,7 +209,11 @@ internal sealed class SearchWindow : Window
                 ((SearchEntry)item.Tag).Target.Equals(selected, StringComparison.OrdinalIgnoreCase)) ?? _results.Items[0];
         _empty.Text = reply.Complete ? "未找到匹配项" : "正在搜索磁盘…";
         _empty.Visibility = reply.Entries.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-        SetStatus($"{reply.Entries.Count} 项 · {reply.Milliseconds:0} ms" + (reply.Status.Length > 0 ? " · " + reply.Status : "") + (reply.Entries.Count >= 80 ? " · 显示前 80 项" : ""));
+        var state = reply.Complete ? "检索完成" : reply.Entries.Count > 0 ? "已找到结果，正在补全" : "正在检索…";
+        SetStatus($"{reply.Entries.Count} 项 · {state} · {_service.FileScope.Label}"
+            + (reply.Status.Contains("结果不完整", StringComparison.Ordinal) ? " · 部分位置不可读取" : "")
+            + (reply.Entries.Count >= 80 ? " · 显示前 80 项" : ""));
+        _status.ToolTip = $"{reply.Milliseconds:0} ms · {reply.Status}";
         UpdateActions();
     }
     private SearchEntry? Selected => (_results.SelectedItem as W.ListBoxItem)?.Tag as SearchEntry;
