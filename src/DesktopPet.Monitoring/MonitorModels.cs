@@ -23,18 +23,28 @@ public sealed record MonitorSnapshot(DateTimeOffset Timestamp, List<MonitorDevic
     }
     public MonitorMetric ForDisplay(MonitorMetric metric, DateTimeOffset now)
     {
-        if (!Fresh(now)) return metric with { Value = null, Text = Timestamp == DateTimeOffset.MinValue ? "已断开" : "数据延迟" };
+        if (!Fresh(now)) return metric with
+        {
+            Value = null,
+            Text = metric.Kind == "FPS" ? "—" : Timestamp == DateTimeOffset.MinValue ? "已断开" : "数据延迟",
+            Source = metric.Kind == "FPS" ? Timestamp == DateTimeOffset.MinValue ? "FPS 监控尚未连接。" : "FPS 监控数据延迟。" : metric.Source
+        };
         if (metric.Kind == "FPS" && metric.SampledAt is DateTimeOffset frameAt && (frameAt > now || now - frameAt > TimeSpan.FromSeconds(3)))
             metric = metric with { Value = null, Text = null };
         if (metric.Kind == "FPS" && !metric.Valid)
         {
             var helper = Capabilities?.GetValueOrDefault("fps-helper");
-            if (helper == "recovering") return metric with { Text = "FPS 采集正在恢复", Source = "长时间未收到帧，正在重新连接系统帧事件。" };
-            if (helper == "running") return metric with { Text = "等待帧数据", Source = "当前应用暂无可读取的连续帧；查看 Pet 时继续跟踪之前的应用。" };
-            if (helper == "no-frames") return metric with { Text = "FPS 采集无数据", Source = "采集器运行超过十秒仍无有效帧。可能是应用没有连续呈现或 ETW 采集异常；不代表 FPS 为零。" };
-            if (helper == "starting") return metric with { Text = "FPS 正在启动", Source = "正在启动帧率采集组件。" };
-            if (helper == "requires-elevation") return metric with { Text = "FPS 需要管理员权限" };
-            if (helper is "unavailable" or "helper-integrity-error") return metric with { Text = "FPS 采集不可用" };
+            var source = helper switch
+            {
+                "recovering" => "长时间未收到帧，正在重新连接系统帧事件。",
+                "running" => "当前没有可读取的连续呈现帧；静止画面没有可报告的 FPS。",
+                "no-frames" => "采集器运行超过十秒仍无有效帧。可能是应用没有连续呈现或系统帧事件采集异常；不代表 FPS 为零。",
+                "starting" => "正在启动帧率采集组件。",
+                "requires-elevation" => "FPS 采集需要管理员权限。",
+                "unavailable" or "helper-integrity-error" => "FPS 采集组件不可用。",
+                _ => metric.Source
+            };
+            return metric with { Text = "—", Source = source };
         }
         return metric;
     }
