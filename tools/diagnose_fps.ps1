@@ -34,9 +34,12 @@ if ($Offline) {
     # Own file-mode session only; never stop or reconfigure another application's trace.
     $session = 'DesktopPet.FPS.' + [guid]::NewGuid().ToString('N')
     $etl = Join-Path $output 'frames.etl'
+    $providers = Join-Path $output 'providers.txt'
+    @('{CA11C036-0102-4A2D-A6AD-F03CFED5D3C9} 0x2 5',
+      '{783ACA0A-790E-4D7F-8451-AA850511C6B9} 0xffffffffffffffff 5') | Set-Content -LiteralPath $providers -Encoding ascii
     $created = $false
     try {
-        $startLog = & logman.exe create trace $session -o $etl -f bincirc -max 16 -bs 64 -nb 16 64 -p Microsoft-Windows-DXGI 0x2 5 -p Microsoft-Windows-D3D9 0xffffffffffffffff 5 -ets 2>&1
+        $startLog = & logman.exe create trace $session -o $etl -f bincirc -max 16 -bs 64 -nb 16 64 -pf $providers -ets 2>&1
         $startLog | Set-Content -LiteralPath (Join-Path $output 'trace-start.txt')
         if ($LASTEXITCODE -ne 0) { throw "文件模式采集启动失败：$startLog" }
         $created = $true
