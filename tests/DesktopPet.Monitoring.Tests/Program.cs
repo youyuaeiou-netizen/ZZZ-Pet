@@ -34,11 +34,11 @@ Check(legacyLive.Fresh(start.AddSeconds(4.9)) && !legacyLive.Fresh(start.AddSeco
 var invalidInterval = legacyLive with { Capabilities = new() { ["sampling-ms"] = "999999999" } };
 Check(!invalidInterval.Fresh(start.AddSeconds(6)), "invalid sampling metadata cannot prolong stale data");
 var waitingFrames = legacyLive with { Capabilities = new() { ["fps-helper"] = "running" } };
-Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start).Display == "等待帧数据", "no foreground frames share waiting state across surfaces");
+Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start).Display == "—", "missing FPS stays visibly unavailable across surfaces");
 Check(waitingFrames.ForDisplay(liveMetric with { Value = null }, start).Display == "不可用", "missing sensors remain unavailable independently of FPS");
-Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", SampledAt = start.AddSeconds(-4) }, start).Display == "等待帧数据", "stale FPS clears before otherwise fresh hardware expires");
-foreach (var (helper, text) in new[] { ("starting", "FPS 正在启动"), ("requires-elevation", "FPS 需要管理员权限"), ("unavailable", "FPS 采集不可用"), ("no-frames", "FPS 采集无数据") })
-    Check((waitingFrames with { Capabilities = new() { ["fps-helper"] = helper } }).ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start).Display == text, "FPS component state is distinct from no frames " + helper);
+Check(waitingFrames.ForDisplay(liveMetric with { Kind = "FPS", SampledAt = start.AddSeconds(-4) }, start).Display == "—", "stale FPS clears before otherwise fresh hardware expires");
+foreach (var (helper, text) in new[] { ("starting", "正在启动帧率采集组件"), ("requires-elevation", "FPS 采集需要管理员权限"), ("unavailable", "FPS 采集组件不可用"), ("no-frames", "运行超过十秒仍无有效帧") })
+    Check((waitingFrames with { Capabilities = new() { ["fps-helper"] = helper } }).ForDisplay(liveMetric with { Kind = "FPS", Value = null }, start) is { Display: "—" } display && display.Source.Contains(text, StringComparison.Ordinal), "FPS component state is explained while unavailable " + helper);
 MonitorMetric Temp(double? value, string device = "cpu") => new("CPU.Temp", "CPU", device, "CPU.Temp", "℃", value, "CPU Package");
 var episodes = new TemperatureEpisodes(); var rule = new TemperatureRule { Enabled = true };
 bool Feed(int seconds, double? temp, bool quiet = false) => episodes.Observe("CPU", rule, Temp(temp), start.AddSeconds(seconds), start.AddSeconds(seconds), quiet);
@@ -188,8 +188,8 @@ var foregroundFrames = new MonitorSnapshot(start, [], [new("FPS.1", "background"
 var foregroundConfig = new MonitorConfig { FpsEnabled = true, FpsProcessId = 1 };
 Check(MonitorSelection.Resolve(foregroundFrames, foregroundConfig).First(m => m.Id == "FPS").Value == 60, "foreground window wins over legacy PID and faster background frames");
 Check(MonitorSelection.Resolve(foregroundFrames with { Metrics = foregroundFrames.Metrics.Where(m => m.DeviceId != "process/2").ToList() }, foregroundConfig).First(m => m.Id == "FPS").Value == 90, "foreground renderer family provides frames when window process has none");
-Check(!MonitorSelection.Resolve(foregroundFrames with { Capabilities = new() { ["fps-foreground"] = "4" } }, foregroundConfig).First(m => m.Id == "FPS").Valid, "foreground without frames never borrows background FPS");
-Check(!MonitorSelection.Resolve(foregroundFrames with { Capabilities = null }, foregroundConfig).First(m => m.Id == "FPS").Valid, "missing foreground metadata never guesses a target");
+Check(MonitorSelection.Resolve(foregroundFrames with { Capabilities = new() { ["fps-foreground"] = "4" } }, foregroundConfig).First(m => m.Id == "FPS").Value == 100, "no foreground frame falls back to another active process");
+Check(MonitorSelection.Resolve(foregroundFrames with { Capabilities = null }, foregroundConfig).First(m => m.Id == "FPS").Value == 100, "missing foreground metadata uses active process fallback");
 Check(MonitorSelection.Resolve(foregroundFrames with { Capabilities = null }, foregroundConfig, history: true).First(m => m.Id == "FPS").Value == 100, "legacy history preserves its previous PID selection without changing live behavior");
 foregroundConfig.FpsEnabled = false;
 Check(MonitorSelection.Resolve(foregroundFrames, foregroundConfig, history: true).First(m => m.Id == "FPS").Value == 60, "disabling capture leaves recorded foreground FPS available in history");
