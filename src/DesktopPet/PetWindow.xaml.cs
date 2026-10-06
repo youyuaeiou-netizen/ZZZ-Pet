@@ -138,7 +138,20 @@ public partial class PetWindow : Window
     private IEnumerable<FrameworkElement> TransientSurfaces()
     {
         yield return this;
-        if (ContextMenu.IsOpen) yield return ContextMenu;
+        if (ContextMenu.IsOpen)
+        {
+            yield return ContextMenu;
+            // WPF submenus use separate HWNDs. Include their items so a submenu
+            // click is not dismissed as an outside click before Click is raised.
+            var menus = new Stack<System.Windows.Controls.ItemsControl>();
+            menus.Push(ContextMenu);
+            while (menus.TryPop(out var menu))
+                foreach (var item in menu.Items.OfType<System.Windows.Controls.MenuItem>())
+                {
+                    yield return item;
+                    if (item.IsSubmenuOpen) menus.Push(item);
+                }
+        }
         if (_monitor.BubbleWindow is { IsVisible: true } bubble) yield return bubble;
         if (_usage.BubbleWindow is { IsVisible: true } usage) yield return usage;
     }

@@ -26,16 +26,19 @@ internal static class Program
     private static DpiScale _dpi;
 
     [STAThread]
-    private static int Main()
+    private static int Main(string[] args)
     {
         _output = Path.Combine(AppContext.BaseDirectory, "ui-evidence", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(_output);
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
         try
         {
-            Run();
+            if (args.Contains("--interaction-menu-check")) CheckNestedMenuClicks();
+            else Run();
             File.WriteAllText(Path.Combine(_output, "verification.json"), JsonSerializer.Serialize(new
-                { passed = Passed, dpi = _dpi, note = "Real current-DPI WPF; foreground unchanged; power transitions simulated, no system DPI changes." },
+                { passed = Passed, dpi = _dpi, note = args.Contains("--interaction-menu-check")
+                    ? "Real current-DPI WPF submenus; outside-hit detection and routed action dispatch; isolated user data, no injected mouse input."
+                    : "Real current-DPI WPF; foreground unchanged; power transitions simulated, no system DPI changes." },
                 new JsonSerializerOptions { WriteIndented = true }));
             Console.WriteLine($"PASS: {Passed.Count} WPF integration checks; evidence: {_output}");
             return 0;
@@ -46,6 +49,59 @@ internal static class Program
             foreach (Window window in app.Windows.Cast<Window>().ToArray()) window.Close();
             app.Shutdown();
         }
+    }
+
+    private static void CheckNestedMenuClicks()
+    {
+        var paths = new RuntimePaths(new StartupOptions(null, Path.Combine(_output, "data"), null));
+        var store = new SettingsStore(paths.SettingsPath);
+        var catalog = CharacterCatalog.Load(paths.CharacterRoot, paths.UserCharacterRoot);
+        var pet = new PetWindow(catalog.Characters, paths.CharacterRoot, "ellen-flat2d", store.Load(), store, paths);
+        System.Windows.Application.Current.MainWindow = pet;
+        pet.Show(); Pump(100);
+        _dpi = VisualTreeHelper.GetDpi(pet);
+        Field<DispatcherTimer>(pet, "_animationTimer").Stop();
+        var runner = Field<ActionRunner>(pet, "_runner");
+        var dismissal = Field<object>(pet, "_outsideClick");
+        void PointerDown(FrameworkElement surface)
+        {
+            var screen = surface.PointToScreen(new System.Windows.Point(surface.ActualWidth / 2, surface.ActualHeight / 2));
+            var pointType = dismissal.GetType().GetNestedType("ScreenPoint", BindingFlags.NonPublic)!;
+            var point = Activator.CreateInstance(pointType)!;
+            pointType.GetField("X")!.SetValue(point, (int)screen.X);
+            pointType.GetField("Y")!.SetValue(point, (int)screen.Y);
+            dismissal.GetType().GetMethod("PointerDown", BindingFlags.Instance | BindingFlags.NonPublic)!.Invoke(dismissal, [point]);
+            Pump(40);
+        }
+        var menu = Field<W.MenuItem>(pet, "_interactionMenu");
+        foreach (var category in menu.Items.OfType<W.MenuItem>().Where(item => item.HasItems))
+        foreach (var item in category.Items.OfType<W.MenuItem>())
+        {
+            runner.Trigger("drag_start"); runner.Trigger("drag_release");
+            runner.Advance(TimeSpan.FromMilliseconds(3001));
+            pet.ContextMenu.IsOpen = true; Pump(80);
+            menu.IsSubmenuOpen = true; Pump(80);
+            category.IsSubmenuOpen = true; Pump(80);
+            PointerDown(menu);
+            Check(pet.ContextMenu.IsOpen, "first submenu click remains inside menu");
+            PointerDown(item);
+            Check(pet.ContextMenu.IsOpen && category.IsSubmenuOpen, $"nested click stays open until action dispatch: {item.Header}");
+            item.RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent));
+            var action = catalog.Characters["ellen-flat2d"].Actions.Single(a => a.DisplayName == (string)item.Header);
+            Check(runner.Current.Id == action.Id, $"nested action dispatches: {action.Id}");
+            if (action.Frames.Count > 1)
+            {
+                var frame = runner.CurrentFramePath; runner.Advance(TimeSpan.FromMilliseconds(100));
+                Check(runner.CurrentFramePath != frame, $"requested action advances frames: {action.Id}");
+            }
+            pet.ContextMenu.IsOpen = false; Pump(30);
+        }
+        var outside = new Window { Width = 100, Height = 100, Left = 20, Top = 20, ShowActivated = false };
+        outside.Show(); Pump(50);
+        pet.ContextMenu.IsOpen = true; Pump(80);
+        PointerDown(outside);
+        Check(!pet.ContextMenu.IsOpen, "outside click still dismisses menu");
+        outside.Close(); pet.Close();
     }
 
     private static void Run()
