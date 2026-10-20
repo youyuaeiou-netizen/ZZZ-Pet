@@ -22,6 +22,7 @@ public sealed class CharacterDefinition
     public string? WakeActionId { get; set; }
     public bool AvoidRepeatedActions { get; set; }
     public List<ActionDefinition> Actions { get; set; } = [];
+    public Dictionary<string, CharacterDefinition>? Forms { get; set; }
 
     [JsonIgnore] public Dictionary<string, ActionDefinition> ActionMap { get; internal set; } = [];
 }
@@ -42,6 +43,7 @@ public sealed class ActionDefinition
     public int? DurationMs { get; set; }
     public MoveDefinition? Move { get; set; }
     public string? NextActionId { get; set; }
+    public string? ExitActionId { get; set; }
     public int? ViewportWidth { get; set; }
     public int? ViewportHeight { get; set; }
     public int? ViewportAnchorX { get; set; }
@@ -56,6 +58,9 @@ public sealed class FrameDefinition
 {
     public string Path { get; set; } = "";
     public int DurationMs { get; set; } = 180;
+    public double Rotation { get; set; }
+    public double ScaleX { get; set; } = 1;
+    public double ScaleY { get; set; } = 1;
     [JsonIgnore] public string FullPath { get; internal set; } = "";
 }
 

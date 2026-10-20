@@ -15,6 +15,7 @@ public sealed class UserSettings
     public bool AlwaysOnTop { get; set; } = true;
     public bool PetHidden { get; set; }
     public Dictionary<string, bool> AutomaticActions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public Behavior.DragonState? Dragon { get; set; }
     [JsonExtensionData] public Dictionary<string, JsonElement>? AdditionalFields { get; set; }
 }
 

@@ -17,6 +17,8 @@ internal sealed class UsageController : IDisposable
     private DateTimeOffset _lastAttempt;
     private string? _error;
     private bool _busy, _hidden, _disposed;
+    private bool _backgroundPolling;
+    internal event Action<CodexUsage?>? Updated;
     internal Window? BubbleWindow => _bubble;
     internal bool HasBubble => _bubble?.IsVisible == true;
     internal event Action? VisibilityChanged;
@@ -33,23 +35,31 @@ internal sealed class UsageController : IDisposable
         if (_bubble is null)
         {
             _bubble = new UsageBubble(() => _ = RefreshAsync(true), Dismiss) { Owner = _hidden ? null : _pet };
-            _bubble.IsVisibleChanged += (_, _) => { if (HasBubble) _timer.Start(); else _timer.Stop(); VisibilityChanged?.Invoke(); };
+            _bubble.IsVisibleChanged += (_, _) => { UpdateTimer(); VisibilityChanged?.Invoke(); };
             _bubble.SizeChanged += (_, _) => { if (HasBubble) _bubble.Position(_pet); };
         }
         Render(); _bubble.Show(); _bubble.Position(_pet); _ = RefreshAsync(false);
     }
     internal void Dismiss() => _bubble?.Hide();
+    internal void SetBackgroundPolling(bool enabled)
+    {
+        _backgroundPolling = enabled;
+        UpdateTimer();
+        if (enabled) _ = RefreshAsync(true);
+    }
+    private void UpdateTimer() { if (HasBubble || _backgroundPolling) _timer.Start(); else _timer.Stop(); }
     internal void SetPetHidden(bool hidden) { _hidden = hidden; if (hidden) Dismiss(); if (_bubble is not null) _bubble.Owner = hidden ? null : _pet; }
     private async Task RefreshAsync(bool force)
     {
-        if (_disposed || _busy || !HasBubble || DateTimeOffset.UtcNow - _lastAttempt < TimeSpan.FromSeconds(force ? 10 : 300)) return;
+        if (_disposed || _busy || !(HasBubble || _backgroundPolling) || DateTimeOffset.UtcNow - _lastAttempt < TimeSpan.FromSeconds(force ? 10 : _backgroundPolling ? 55 : 300)) return;
         _busy = true; _lastAttempt = DateTimeOffset.UtcNow; _error = null; Render();
-        try { _usage = await _read(_shutdown.Token); }
+        var succeeded = false;
+        try { _usage = await _read(_shutdown.Token); succeeded = true; }
         catch (OperationCanceledException) { if (!_disposed) _error = "读取超时，请稍后刷新。"; }
         catch (FileNotFoundException) { _error = "请先安装 Codex，并使用 ChatGPT 账号登录。"; }
         catch (Exception e) when (e is IOException or InvalidOperationException or JsonException or System.ComponentModel.Win32Exception or UnauthorizedAccessException or ArgumentException)
         { _error = "读取失败，请确认 Codex 已登录，然后刷新。" + (_usage is null ? "" : "\n已有数字为上次读取结果。"); }
-        finally { _busy = false; if (!_disposed) Render(); }
+        finally { _busy = false; if (!_disposed) { Render(); Updated?.Invoke(succeeded ? _usage : null); } }
     }
     private void Render() { _bubble?.Render(_usage, _error, _busy); }
     private void Moved(object? sender, EventArgs e) { if (HasBubble) _bubble!.Position(_pet); }

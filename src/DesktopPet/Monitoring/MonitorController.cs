@@ -31,7 +31,7 @@ internal sealed class MonitorController : IDisposable
         _timer.Tick += Tick;
         _pet.Loaded += Loaded; _pet.LocationChanged += Moved; _pet.SizeChanged += Sized;
         var entry = new W.MenuItem { Header = "系统监控" }; entry.Click += (_, _) => ShowPanel();
-        pet.ContextMenu.Items.Add(entry);
+        tools.Menu.Items.Add(entry);
     }
     private void Loaded(object sender, RoutedEventArgs e) { _service.Restore(); _timer.Start(); }
     public void Click()

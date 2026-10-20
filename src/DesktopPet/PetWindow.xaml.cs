@@ -61,7 +61,8 @@ public partial class PetWindow : Window
         _settings.AutomaticActions ??= new(StringComparer.OrdinalIgnoreCase);
         _settingsStore = settingsStore;
         _characterId = selectedCharacter;
-        var character = _characters[selectedCharacter];
+        InitializeDragon();
+        var character = CurrentCharacter;
         _settings.Scale = ClampScale(_settings.Scale);
         _runner = new ActionRunner(character);
         _runner.AutomaticActionsEnabled = !_settings.AutomaticActions.TryGetValue(_characterId, out var automatic) || automatic;
@@ -94,6 +95,7 @@ public partial class PetWindow : Window
         _monitor = new MonitorController(this, _tools, paths?.MonitorDirectory ?? Path.Combine(
             settingsStore.DataDirectory, "monitor"));
         _usage = new UsageController(this, () => { _monitor.DismissBubble(); ContextMenu.IsOpen = false; });
+        _usage.Updated += DragonQuotaUpdated;
         _outsideClick = new OutsideClickDismissal(Dispatcher, TransientSurfaces, DismissTransientSurfaces);
         _search = new SearchController(this, paths?.SearchSettingsPath ?? Path.Combine(settingsStore.DataDirectory, "search-settings.json"), DismissTransientSurfaces);
         _usage.VisibilityChanged += UpdateOutsideClick;
@@ -113,16 +115,19 @@ public partial class PetWindow : Window
             showTools: () => _tools.ShowPanel(), toggleQuiet: _tools.ToggleQuiet, getQuiet: () => _tools.Quiet,
             showMonitor: _monitor.ShowPanel,
             togglePet: () => SetPetHidden(!_settings.PetHidden), getPetHidden: () => _settings.PetHidden,
-            showPet: () => SetPetHidden(false), showUsage: _usage.Show, showSearch: _search.Show);
+            showPet: () => SetPetHidden(false), showUsage: _usage.Show, showSearch: _search.Show,
+            getDragonForm: () => IsDragon ? _settings.Dragon?.Form : null,
+            selectDragonForm: SelectDragonForm, feedDragon: FeedDragon);
         var search = new System.Windows.Controls.MenuItem { Header = "搜索文件／应用" };
-        search.Click += (_, _) => _search.Show(); ContextMenu.Items.Add(search);
+        search.Click += (_, _) => _search.Show(); _tools.Menu.Items.Add(search);
         var usage = new System.Windows.Controls.MenuItem { Header = "ChatGPT 额度" };
-        usage.Click += (_, _) => _usage.Show(); ContextMenu.Items.Add(usage);
+        usage.Click += (_, _) => _usage.Show(); _tools.Menu.Items.Add(usage);
         var hidePet = new System.Windows.Controls.MenuItem { Header = "隐藏 Q 宠" };
         hidePet.Click += (_, _) => SetPetHidden(true);
         ContextMenu.Items.Add(hidePet);
         ContextMenu.Items.Add(_interactionMenu);
         RebuildInteractionMenu();
+        SetupDragonMenus();
         MouseLeftButtonDown += OnLeftDown;
         MouseMove += OnMouseMove;
         MouseLeftButtonUp += OnLeftUp;
@@ -130,7 +135,7 @@ public partial class PetWindow : Window
         {
             if (_readyForPersistence && _gestures.IsDragging) QueueSave();
         };
-        Loaded += (_, _) => { _readyForPersistence = true; ApplyPetVisibility(); };
+        Loaded += (_, _) => { _readyForPersistence = true; ApplyPetVisibility(); if (IsDragon) QueueSave(); };
         SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
         Closed += OnClosed;
     }
@@ -189,6 +194,7 @@ public partial class PetWindow : Window
     }
     private void WakeForAttention()
     {
+        if (_chibiFalling) return;
         _attentionPending = false;
         _runner.Trigger("notification");
         ApplyViewport(); _player.Show(_runner); UpdateSleepIndicator();
@@ -219,13 +225,14 @@ public partial class PetWindow : Window
             }
             if (!result.BoundaryHit) _boundaryGeneration = -1;
         }
-        _runner.AutomaticActionsPaused = ContextMenu.IsOpen || _gestures.IsPressed;
-        _runner.Advance(elapsed);
+        _runner.AutomaticActionsPaused = ContextMenu.IsOpen || _gestures.IsPressed || _chibiFalling;
+        if (!AdvanceChibiFall(elapsed)) _runner.Advance(elapsed);
+        UpdateDragon();
         var gesture = _gestures.Advance(_clock.Elapsed.TotalMilliseconds);
         if (gesture is not null) HandleGesture(gesture);
-        if (_attentionPending && !_gestures.IsPressed && !_runner.IsDragging) WakeForAttention();
+        if (_attentionPending && !_gestures.IsPressed && !_runner.IsDragging && !_chibiFalling) WakeForAttention();
         ApplyViewport();
-        _player.Show(_runner);
+        _player.Show(_runner, ChibiAirFramePath);
         UpdateSleepIndicator();
         UpdateDebugTitle();
     }
@@ -252,9 +259,13 @@ public partial class PetWindow : Window
         ApplyViewport();
         if (_gestures.IsDragging)
         {
+            if (gesture == "drag_start" && IsChibi)
+                _pressLocal = new Point(CurrentCharacter.AnchorX * EffectiveScale(CurrentCharacter), 44 * EffectiveScale(CurrentCharacter));
+            point = e.GetPosition(this);
             Left += point.X - _pressLocal.X;
             Top += point.Y - _pressLocal.Y;
             UpdateGroundFromWindow();
+            KeepChibiSuspended();
         }
     }
 
@@ -275,12 +286,14 @@ public partial class PetWindow : Window
 
     private PointerGestures CreateGestures() => new((int)GetDoubleClickTime(),
         GetSystemMetrics(36), GetSystemMetrics(37), GetSystemMetrics(68), GetSystemMetrics(69),
-        immediateClick: _characters[_characterId].ImmediateClick
-            ?? _characters[_characterId].Actions.Any(a => a.ShowSleepIndicator));
+        immediateClick: CurrentCharacter.ImmediateClick
+            ?? CurrentCharacter.Actions.Any(a => a.ShowSleepIndicator));
 
     private void HandleGesture(string gesture)
     {
+        if (gesture == "drag_start") _chibiFalling = false;
         _runner.Trigger(gesture);
+        if (gesture == "drag_release") BeginChibiFall();
         if (gesture == "click") { _usage.Dismiss(); _monitor.Click(); }
         if (gesture == "drag_start") _monitor.Drag(true);
         if (gesture == "drag_release") _monitor.Drag(false);
@@ -289,8 +302,9 @@ public partial class PetWindow : Window
     private void RebuildInteractionMenu()
     {
         _interactionMenu.Items.Clear();
-        var actions = _characters[_characterId].Actions;
-        foreach (var group in actions.Where(a => !string.IsNullOrWhiteSpace(InteractionLabel(a)))
+        AddDragonInteractionItems();
+        var actions = CurrentCharacter.Actions;
+        foreach (var group in actions.Where(a => (a.Id != "feed" || !IsDragon) && !string.IsNullOrWhiteSpace(InteractionLabel(a)))
             .GroupBy(a => string.IsNullOrWhiteSpace(a.Category)
                 ? (a.ShowSleepIndicator || a.Triggers.Contains("idle_timeout") || a.Id == "wake" ? "休息" : a.Id == "wave" ? "回应" : "日常")
                 : a.Category))
@@ -331,6 +345,7 @@ public partial class PetWindow : Window
 
     private void PlayInteraction(string? actionId)
     {
+        if (_chibiFalling) return;
         _interactionRevision++;
         var played = actionId is null ? _runner.PlayRandomAction() : _runner.PlayAction(actionId);
         if (!played)
@@ -363,6 +378,7 @@ public partial class PetWindow : Window
         _search.SetPetHidden(_settings.PetHidden);
         if (_settings.PetHidden)
         {
+            _chibiFalling = false;
             ContextMenu.IsOpen = false;
             ReleaseMouseCapture();
             if (_runner.IsDragging) _runner.Trigger("drag_release");
@@ -419,11 +435,16 @@ public partial class PetWindow : Window
         var show = _runner.Current.ShowSleepIndicator;
         SleepIndicator.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
         if (!show) return;
-        var scale = EffectiveScale(_characters[_characterId]);
+        var scale = EffectiveScale(CurrentCharacter);
         var phase = (_runner.NowMs % 1800) / 1800.0;
         SleepIndicator.Text = phase < 1.0 / 3 ? "Z" : phase < 2.0 / 3 ? "ZZ" : "ZZZ";
         SleepIndicator.FontSize = 18 * scale;
         SleepIndicator.Margin = new Thickness(Width * 0.76, (12 + (1 - phase) * 14) * scale, 0, 0);
+        if (IsChibi)
+        {
+            SleepIndicator.FontSize = 14 * scale;
+            SleepIndicator.Margin = new Thickness(Width * .32, (120 + (1 - phase) * 8) * scale, 0, 0);
+        }
         SleepIndicator.Opacity = phase < 0.15 ? phase / 0.15
             : phase > 0.65 ? (1 - phase) / 0.35 : 1;
     }
@@ -434,7 +455,7 @@ public partial class PetWindow : Window
 
     private void UpdateGroundFromWindow()
     {
-        var character = _characters[_characterId];
+        var character = CurrentCharacter;
         var viewport = _runner.Current.GetViewport(character);
         var scale = EffectiveScale(character);
         _groundX = Left + viewport.AnchorX * scale;
@@ -444,7 +465,7 @@ public partial class PetWindow : Window
     private void ApplyViewport()
     {
         if (ReferenceEquals(_displayedAction, _runner.Current)) return;
-        var character = _characters[_characterId];
+        var character = CurrentCharacter;
         var viewport = _runner.Current.GetViewport(character);
         // WPF rounds the shown window to physical pixels. Reassigning the
         // same logical viewport on each pose change alters that rounded size.
@@ -464,10 +485,14 @@ public partial class PetWindow : Window
 
     private void SelectCharacter(string id)
     {
+        _chibiFalling = false;
         _interactionRevision++; _attentionSleep = null;
         if (!_characters.TryGetValue(id, out var character)) return;
         _characterId = id;
         _settings.SelectedCharacter = id;
+        _feeding = _feedSeen = false;
+        InitializeDragon();
+        character = CurrentCharacter;
         _runner = new ActionRunner(character);
         _runner.AutomaticActionsEnabled = !_settings.AutomaticActions.TryGetValue(id, out var automatic) || automatic;
         _player = new SpritePlayer(SpriteImage);
@@ -478,6 +503,8 @@ public partial class PetWindow : Window
         UpdateSleepIndicator();
         UpdateDebugTitle();
         RebuildInteractionMenu();
+        UpdateDragonMenus();
+        _usage.SetBackgroundPolling(IsDragon);
         QueueSave();
     }
 
@@ -498,8 +525,9 @@ public partial class PetWindow : Window
 
     private void ResetPosition()
     {
+        _chibiFalling = false;
         var work = SystemParameters.WorkArea;
-        var character = _characters[_characterId];
+        var character = CurrentCharacter;
         var viewport = _runner.Current.GetViewport(character);
         var scale = EffectiveScale(character);
         _groundX = work.Left + (work.Width - viewport.Width * scale) / 2 + viewport.AnchorX * scale;
@@ -539,7 +567,7 @@ public partial class PetWindow : Window
 
     private void SaveSettings()
     {
-        var character = _characters[_characterId];
+        var character = CurrentCharacter;
         var scale = EffectiveScale(character);
         _settings.WindowLeft = _groundX - character.AnchorX * scale;
         _settings.WindowTop = _groundY - character.AnchorY * scale;
@@ -552,6 +580,8 @@ public partial class PetWindow : Window
     {
         _monitor.BubbleVisibilityChanged -= UpdateOutsideClick;
         _usage.VisibilityChanged -= UpdateOutsideClick;
+        _usage.Updated -= DragonQuotaUpdated;
+        _dragonTimer?.Stop();
         _outsideClick.Dispose();
         _search.Dispose();
         _usage.Dispose();

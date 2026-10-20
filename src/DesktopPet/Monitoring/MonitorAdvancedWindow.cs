@@ -38,7 +38,7 @@ internal sealed class MonitorAdvancedWindow : Window
         _status.Foreground = MonitorFluentStyle.Brush("#6B687A"); _status.FontSize = 12;
         W.DockPanel.SetDock(_status, W.Dock.Bottom); content.Children.Add(_status);
         content.Children.Add(MonitorSettings.Scroll(_body));
-        Group("插件", () => service.Config.PluginsEnabled, () => MonitorFluentStyle.Card(new PluginPage(service)));
+        Group("插件", () => service.Config.PluginsEnabled || LocalModelExtension.Current.Enabled, () => MonitorFluentStyle.Card(new PluginPage(service)));
         Group("系统工具与内存", () => service.Config.AutoCleanOwnMemory || service.SystemTools.PreventSleep || service.SystemTools.Shutdown.Due is not null,
             () => new MonitorExtrasPage(service));
         Group("外观与布局", () => service.Config.ClickThrough || service.Config.AutoHide || service.Config.Visual.ShowGroups || service.Config.Visual.ShowBars || service.Config.Visual.SmoothValues,
@@ -49,7 +49,8 @@ internal sealed class MonitorAdvancedWindow : Window
         SizeChanged += (_, _) => { navigationColumn.Width = new GridLength(ActualWidth < 700 ? 136 : 184); ArrangeOverview(); };
         ShowPage(); Content = root; MonitorLocalizer.Attach(this, service);
         service.Changed += Refresh; service.SystemTools.Changed += Refresh;
-        Closed += (_, _) => { service.Changed -= Refresh; service.SystemTools.Changed -= Refresh; };
+        LocalModelExtension.Current.Changed += Refresh;
+        Closed += (_, _) => { service.Changed -= Refresh; service.SystemTools.Changed -= Refresh; LocalModelExtension.Current.Changed -= Refresh; };
         Refresh();
     }
     private void Group(string title, Func<bool> active, Func<UIElement> build)
@@ -176,7 +177,9 @@ internal sealed class MonitorAdvancedWindow : Window
             diagnostic.Text = $"Pet {version}\n" + _service.Status + "\n"
                 + $"后台 PID：{_service.WorkerProcessId?.ToString() ?? "—"} · {(s.Elevated ? "管理员权限" : "普通权限")}\n"
                 + $"CPU 温度：{_service.Catalog.FirstOrDefault(m => m.Id == "CPU.Temp")?.Display ?? "不可用"} · GPU 温度：{_service.Catalog.FirstOrDefault(m => m.Id == "GPU.Temp")?.Display ?? "不可用"}\n"
-                + $"FPS 组件：{s.Capabilities?.GetValueOrDefault("fps-helper") ?? "未启用"}";
+                + $"FPS 组件：{s.Capabilities?.GetValueOrDefault("fps-helper") ?? "未启用"}\n"
+                + $"FPS 自动恢复：{s.Capabilities?.GetValueOrDefault("fps-recoveries") ?? "0"} 次\n"
+                + $"{s.Capabilities?.GetValueOrDefault("fps-diagnostic") ?? ""}";
         });
         var retry = ToolsWindow.Button("重试监控权限", () => _service.RestartElevated());
         MonitorSettings.Watch(retry, _service, () => retry.IsEnabled = _service.Config.Enabled && _service.Store.Available);

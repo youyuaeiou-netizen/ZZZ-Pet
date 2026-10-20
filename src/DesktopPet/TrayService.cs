@@ -27,6 +27,9 @@ public sealed class TrayService : IDisposable
     private readonly Func<bool>? _getQuiet;
     private readonly Action? _togglePet;
     private readonly Func<bool>? _getPetHidden;
+    private readonly Func<string?>? _getDragonForm;
+    private readonly Action<string>? _selectDragonForm;
+    private readonly Action? _feedDragon;
 
     public TrayService(Func<IReadOnlyList<string>> getCharacters, Func<string> getSelectedCharacter,
         Func<double> getScale, Func<bool> getTopmost, Action<string> selectCharacter,
@@ -34,7 +37,8 @@ public sealed class TrayService : IDisposable
         Action? showAbout = null, Action? openHelp = null, Action? openUserCharacters = null,
         Action? openLogs = null, Func<string, string>? getCharacterName = null,
         Action? showTools = null, Action? toggleQuiet = null, Func<bool>? getQuiet = null, Action? showMonitor = null,
-        Action? togglePet = null, Func<bool>? getPetHidden = null, Action? showPet = null, Action? showUsage = null, Action? showSearch = null)
+        Action? togglePet = null, Func<bool>? getPetHidden = null, Action? showPet = null, Action? showUsage = null, Action? showSearch = null,
+        Func<string?>? getDragonForm = null, Action<string>? selectDragonForm = null, Action? feedDragon = null)
     {
         _getCharacters = getCharacters;
         _getSelectedCharacter = getSelectedCharacter;
@@ -58,6 +62,7 @@ public sealed class TrayService : IDisposable
         _getQuiet = getQuiet;
         _togglePet = togglePet;
         _getPetHidden = getPetHidden;
+        _getDragonForm = getDragonForm; _selectDragonForm = selectDragonForm; _feedDragon = feedDragon;
 
         using var iconStream = typeof(TrayService).Assembly.GetManifestResourceStream("DesktopPet.AppIcon.ico")
             ?? throw new InvalidOperationException("应用图标资源缺失。");
@@ -81,15 +86,23 @@ public sealed class TrayService : IDisposable
         _menu.Items.Clear();
         foreach (var oldItem in oldItems) oldItem.Dispose();
         AddOptional(_getPetHidden?.Invoke() == true ? "显示 Q 宠" : "隐藏 Q 宠", _togglePet);
-        AddOptional("轻工具：信息／提醒／专注", _showTools);
-        AddOptional("系统监控", _showMonitor);
-        AddOptional("搜索文件／应用", _showSearch);
-        AddOptional("ChatGPT 额度", _showUsage);
+        var tools = new System.Windows.Forms.ToolStripMenuItem("轻工具");
+        void Tool(string label, Action? action)
+        {
+            if (action is null) return;
+            var item = new System.Windows.Forms.ToolStripMenuItem(label);
+            item.Click += (_, _) => action(); tools.DropDownItems.Add(item);
+        }
+        Tool("信息／提醒／专注", _showTools);
+        Tool("系统监控", _showMonitor);
+        Tool("搜索文件／应用", _showSearch);
+        Tool("ChatGPT 额度", _showUsage);
+        _menu.Items.Add(tools);
         if (_toggleQuiet is not null)
         {
             var quiet = new System.Windows.Forms.ToolStripMenuItem("安静模式") { Checked = _getQuiet?.Invoke() == true };
             quiet.Click += (_, _) => _toggleQuiet();
-            _menu.Items.Add(quiet);
+            tools.DropDownItems.Add(quiet);
         }
         if (_showTools is not null) _menu.Items.Add(new System.Windows.Forms.ToolStripSeparator());
         var characters = new System.Windows.Forms.ToolStripMenuItem("角色");
@@ -104,6 +117,23 @@ public sealed class TrayService : IDisposable
             characters.DropDownItems.Add(item);
         }
         _menu.Items.Add(characters);
+        if (_getDragonForm?.Invoke() is { } form)
+        {
+            var interactions = new System.Windows.Forms.ToolStripMenuItem("互动动作");
+            if (_feedDragon is not null)
+            {
+                var feed = new System.Windows.Forms.ToolStripMenuItem("喂食");
+                feed.Click += (_, _) => _feedDragon();
+                interactions.DropDownItems.Add(feed);
+            }
+            foreach (var (id, label) in new[] { ("human", "龙娘变大（人物版）"), ("chibi", "龙娘变小（Q 版）") })
+            {
+                var item = new System.Windows.Forms.ToolStripMenuItem(label) { Checked = form == id };
+                item.Click += (_, _) => _selectDragonForm?.Invoke(id);
+                interactions.DropDownItems.Add(item);
+            }
+            _menu.Items.Add(interactions);
+        }
         _menu.Items.Add(new System.Windows.Forms.ToolStripSeparator());
 
         var scale = Math.Clamp(_getScale(), 0.5, 2.5);

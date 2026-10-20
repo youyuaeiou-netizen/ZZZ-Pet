@@ -16,6 +16,8 @@ $worker = Join-Path $artifacts 'worker'
 New-Item -ItemType Directory -Path $OutputRoot -Force | Out-Null
 & dotnet publish (Join-Path $repoRoot 'src/DesktopPet/DesktopPet.csproj') -c Release -r win-x64 --self-contained true --artifacts-path $artifacts -p:StageReferencedCharacters=true -p:ShareDesktopRuntime=true -o $publish
 if ($LASTEXITCODE -ne 0) { throw '桌宠构建失败。' }
+& dotnet publish (Join-Path $repoRoot 'src/DesktopPet.ModelGateway/DesktopPet.ModelGateway.csproj') -c Release -r win-x64 --self-contained true --artifacts-path $artifacts -o (Join-Path $publish 'model-gateway')
+if ($LASTEXITCODE -ne 0) { throw '本地模型网关构建失败。' }
 & dotnet publish (Join-Path $repoRoot 'src/DesktopPet.MonitorWorker/DesktopPet.MonitorWorker.csproj') -c Release -r win-x64 --self-contained true --artifacts-path $artifacts -p:RestoreLockedMode=true -p:ShareDesktopRuntime=true -o $worker
 if ($LASTEXITCODE -ne 0) { throw '监控后台构建失败。' }
 foreach ($file in Get-ChildItem $worker -Recurse -File | Where-Object Extension -NE '.pdb') {
@@ -63,15 +65,17 @@ start "" "%~dp0DesktopPet.exe" --character ellen-flat2d
 # Preserve notices for the exact restored dependencies and self-contained runtime.
 $assets = Get-Content (Join-Path $artifacts 'obj/DesktopPet.MonitorWorker/project.assets.json') -Raw | ConvertFrom-Json
 $appAssets = Get-Content (Join-Path $artifacts 'obj/DesktopPet/project.assets.json') -Raw | ConvertFrom-Json
+$gatewayAssets = Get-Content (Join-Path $artifacts 'obj/DesktopPet.ModelGateway/project.assets.json') -Raw | ConvertFrom-Json
 $packageRoot = $assets.packageFolders.PSObject.Properties.Name | Select-Object -First 1
 $deps = Get-Content (Join-Path $publish 'DesktopPet.deps.json') -Raw | ConvertFrom-Json
-$runtimePackages = @($deps.libraries.PSObject.Properties.Name | Where-Object { $_.StartsWith('runtimepack.') } | ForEach-Object {
+$gatewayDeps = Get-Content (Join-Path $publish 'model-gateway/DesktopPet.ModelGateway.deps.json') -Raw | ConvertFrom-Json
+$runtimePackages = @((@($deps.libraries.PSObject.Properties.Name) + @($gatewayDeps.libraries.PSObject.Properties.Name)) | Where-Object { $_.StartsWith('runtimepack.') } | Sort-Object -Unique | ForEach-Object {
     $identity = $_.Substring('runtimepack.'.Length)
     [pscustomobject]@{ Name = $identity; Value = [pscustomobject]@{ type = 'package'; path = $identity.ToLowerInvariant() } }
 })
 $notices = Join-Path $folder 'third_party/dependency-notices'
 New-Item -ItemType Directory -Path $notices -Force | Out-Null
-$packages = @($assets.libraries.PSObject.Properties) + @($appAssets.libraries.PSObject.Properties) + $runtimePackages
+$packages = @($assets.libraries.PSObject.Properties) + @($appAssets.libraries.PSObject.Properties) + @($gatewayAssets.libraries.PSObject.Properties) + $runtimePackages
 $noticeManifest = @($packages | Where-Object { $_.Value.type -eq 'package' } | Sort-Object Name -Unique | ForEach-Object {
     $packagePath = Join-Path $packageRoot $_.Value.path
     $spec = Get-ChildItem $packagePath -Filter '*.nuspec' | Select-Object -First 1

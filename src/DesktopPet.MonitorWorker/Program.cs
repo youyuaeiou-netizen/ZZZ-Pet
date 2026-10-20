@@ -50,6 +50,7 @@ try
         if (fps is null || hardwareSnapshot is null || command.Operation != "sample" || hardwareClock.ElapsedMilliseconds >= refreshMs)
         { hardwareClock.Restart(); hardwareSnapshot = await sampler.SampleAsync(lifetime.Token); }
         var snapshot = hardwareSnapshot with { Metrics = [.. hardwareSnapshot.Metrics], Devices = [.. hardwareSnapshot.Devices] };
+        fps?.Start(); // Recover an exited or unresponsive supervisor at the normal sample cadence.
         var reading = fps?.Reading ?? new([], "disabled");
         var fpsMetrics = reading.Metrics.Where(m => m.SampledAt is DateTimeOffset t && DateTimeOffset.UtcNow - t <= TimeSpan.FromSeconds(3)).ToList();
         snapshot.Metrics.AddRange(fpsMetrics); snapshot.Devices.AddRange(fpsMetrics.Select(m => new MonitorDevice(m.DeviceId, m.Name, "FPS")).DistinctBy(d => d.Id));
@@ -59,6 +60,7 @@ try
             ["cpu-temperature"] = snapshot.Metrics.Any(m => m.Kind == "CPU.Temp" && m.Valid) ? "ready" : "unavailable",
             ["gpu-temperature"] = snapshot.Metrics.Any(m => m.Kind == "GPU.Temp" && m.Valid) ? "ready" : "unavailable",
             ["driver-installation"] = "disabled", ["fps-helper"] = reading.Status, ["network-plugins"] = "normal-process-only",
+            ["fps-diagnostic"] = reading.Diagnostic ?? "", ["fps-recoveries"] = reading.Recoveries.ToString(System.Globalization.CultureInfo.InvariantCulture),
             ["obsui-shared"] = snapshot.Status.Contains("8085") ? "ready" : "not-connected"
         } };
         await writer.WriteLineAsync(JsonSerializer.Serialize(snapshot, MonitorJson.Options));

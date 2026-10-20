@@ -4,7 +4,7 @@ namespace DesktopPet.Behavior;
 
 public sealed class ActionRunner
 {
-    private readonly CharacterDefinition _character;
+    private CharacterDefinition _character;
     private readonly Random _random;
     private readonly Dictionary<string, double> _lastStarted = new(StringComparer.Ordinal);
     private double _nowMs;
@@ -15,6 +15,8 @@ public sealed class ActionRunner
     private readonly Dictionary<string, string> _lastChosen = new(StringComparer.Ordinal);
     private ActionDefinition? _pendingAction;
     private bool _manualActive;
+    private bool _exitAtLoopBoundary;
+    private double _loopExitAtMs;
 
     public bool AutomaticActionsEnabled { get; set; } = true;
     public bool AutomaticActionsPaused { get; set; }
@@ -24,7 +26,8 @@ public sealed class ActionRunner
     public int Facing { get; private set; }
     public long Generation { get; private set; }
     public double NowMs => _nowMs;
-    public string CurrentFramePath
+    public string CurrentFramePath => CurrentFrame.FullPath;
+    public FrameDefinition CurrentFrame
     {
         get
         {
@@ -33,10 +36,10 @@ public sealed class ActionRunner
             var position = Current.Loop ? _actionElapsedMs % total : Math.Min(_actionElapsedMs, total - 0.001);
             foreach (var frame in frames)
             {
-                if (position < frame.DurationMs) return frame.FullPath;
+                if (position < frame.DurationMs) return frame;
                 position -= frame.DurationMs;
             }
-            return frames[^1].FullPath;
+            return frames[^1];
         }
     }
 
@@ -98,12 +101,18 @@ public sealed class ActionRunner
     {
         var ms = Math.Max(0, elapsed.TotalMilliseconds);
         _nowMs += ms;
-        if (IsDragging && _character.WakeActionId is null) return;
+        if (IsDragging && _character.WakeActionId is null && !Current.Loop) return;
         _actionElapsedMs += ms;
         if (IsDragging) return;
 
         var frameDuration = Current.Frames.Sum(f => f.DurationMs);
-        if ((Current.DurationMs is int duration && _actionElapsedMs >= duration)
+        if (_exitAtLoopBoundary && _actionElapsedMs >= _loopExitAtMs
+            && Current.ExitActionId is { } exitId && _character.ActionMap.TryGetValue(exitId, out var ending))
+        {
+            if (_pendingAction?.Id == exitId) _pendingAction = null;
+            Start(ending);
+        }
+        else if ((Current.DurationMs is int duration && _actionElapsedMs >= duration)
             || (!Current.Loop && _actionElapsedMs >= frameDuration))
         {
             Complete();
@@ -125,6 +134,16 @@ public sealed class ActionRunner
     }
 
     public void Flip() => Facing *= -1;
+    public void SwitchForm(CharacterDefinition character)
+    {
+        if (IsDragging) throw new InvalidOperationException("Defer form changes until drag release.");
+        var currentId = Current.Id;
+        var pendingId = _pendingAction?.Id;
+        _character = character;
+        Current = character.ActionMap.GetValueOrDefault(currentId) ?? character.ActionMap[character.DefaultActionId];
+        _pendingAction = pendingId is null ? null : character.ActionMap.GetValueOrDefault(pendingId);
+        Generation++;
+    }
     public bool PlayAction(string id) => _character.ActionMap.TryGetValue(id, out var action) && RequestAction(action);
 
     public bool PlayRandomAction()
@@ -139,11 +158,37 @@ public sealed class ActionRunner
     private bool RequestAction(ActionDefinition action)
     {
         if (IsDragging) return false;
+        var exitingLoop = _character.Actions.FirstOrDefault(a => a.ExitActionId == action.Id);
+        if (exitingLoop is not null && Current.Id != exitingLoop.Id
+            && Current.NextActionId != exitingLoop.Id && Current.Id != action.Id) return false;
+        if (exitingLoop is not null && Current.Id == action.Id) return true;
+        if (action.Id == _character.WakeActionId && !IsSleeping(Current)) return false;
+        if (Current.ExitActionId is not null)
+        {
+            if (action.Id == Current.Id) return true;
+            _pendingAction = action;
+            _manualActive = true;
+            if (!_exitAtLoopBoundary)
+            {
+                var loopDuration = Current.Frames.Sum(f => f.DurationMs);
+                _loopExitAtMs = (Math.Floor(_actionElapsedMs / loopDuration) + 1) * loopDuration;
+            }
+            _exitAtLoopBoundary = true;
+            return true;
+        }
         _lastInteractionMs = _nowMs;
         _idleTimeoutFired = false;
         _nextRandomMs = _nowMs + Math.Max(1, _character.RandomIntervalMs);
         if (_character.WakeActionId is { } wakeId && _character.ActionMap.TryGetValue(wakeId, out var wake))
         {
+            if (IsSleeping(Current) && IsSleeping(action)) return false;
+            // Finish lying down before using the prone-to-standing wake clip.
+            if (IsSleeping(Current) && !Current.Loop && !IsSleeping(action))
+            {
+                _pendingAction = action;
+                _manualActive = true;
+                return true;
+            }
             if (Current.Id == wakeId && action.Id != wakeId)
             {
                 _pendingAction = action;
@@ -200,6 +245,20 @@ public sealed class ActionRunner
     {
         if (_pendingAction is { } pending)
         {
+            if (Current.NextActionId is { } loopId && _character.ActionMap.TryGetValue(loopId, out var loop)
+                && loop.ExitActionId is not null)
+            {
+                Start(loop);
+                _exitAtLoopBoundary = true;
+                _loopExitAtMs = loop.Frames.Sum(f => f.DurationMs);
+                return;
+            }
+            if (IsSleeping(Current) && !Current.Loop && _character.WakeActionId is { } wakeId
+                && pending.Id != wakeId && _character.ActionMap.TryGetValue(wakeId, out var wake))
+            {
+                Start(wake);
+                return;
+            }
             _pendingAction = null;
             Start(pending);
             return;
@@ -217,6 +276,7 @@ public sealed class ActionRunner
     private void Start(ActionDefinition action)
     {
         Current = action;
+        _exitAtLoopBoundary = false;
         if (action.Id == _character.DefaultActionId) _manualActive = false;
         _actionElapsedMs = 0;
         _lastStarted[action.Id] = _nowMs;

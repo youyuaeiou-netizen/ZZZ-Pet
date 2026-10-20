@@ -39,11 +39,14 @@ public sealed record MonitorSnapshot(DateTimeOffset Timestamp, List<MonitorDevic
                 "recovering" => "长时间未收到帧，正在重新连接系统帧事件。",
                 "running" => "当前没有可读取的连续呈现帧；静止画面没有可报告的 FPS。",
                 "no-frames" => "采集器运行超过十秒仍无有效帧。可能是应用没有连续呈现或系统帧事件采集异常；不代表 FPS 为零。",
+                "etw-events-lost" => "检测到系统帧事件丢失，采集器会尝试恢复；不代表 FPS 为零。",
                 "starting" => "正在启动帧率采集组件。",
                 "requires-elevation" => "FPS 采集需要管理员权限。",
                 "unavailable" or "helper-integrity-error" => "FPS 采集组件不可用。",
                 _ => metric.Source
             };
+            if (Capabilities?.GetValueOrDefault("fps-diagnostic") is string diagnostic && diagnostic.Length > 0)
+                source += " " + diagnostic;
             return metric with { Text = "—", Source = source };
         }
         return metric;

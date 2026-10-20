@@ -11,8 +11,10 @@
     <ApplicationIcon>..\..\assets\app-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../Shared/ModelRuntime.cs" Link="Tools/ModelRuntime.cs" />
     <InternalsVisibleTo Include="DesktopPet.MonitorUi" />
     <InternalsVisibleTo Include="DesktopPet.Search.Tests" />
+    <InternalsVisibleTo Include="DesktopPet.Dragon.Tests" />
     <ProjectReference Include="../DesktopPet.Monitoring/DesktopPet.Monitoring.csproj" />
     <ProjectReference Include="../DesktopPet.Plugins/DesktopPet.Plugins.csproj" />
     <ProjectReference Include="../DesktopPet.MonitorWorker/DesktopPet.MonitorWorker.csproj" ReferenceOutputAssembly="false" />
@@ -23,6 +25,11 @@
     <EmbeddedResource Include="../../third_party/CC-CEDICT/cedict_1_0_ts_utf-8_mdbg.txt.gz" LogicalName="DesktopPet.CC-CEDICT.gz" />
     <Content Include="..\..\characters\ellen-flat2d\**\character.json;..\..\characters\ellen-flat2d\**\*.png" Exclude="..\..\characters\**\masters\**\*"
              Link="characters\ellen-flat2d\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest">
+      <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' != 'true'">PreserveNewest</CopyToPublishDirectory>
+      <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' == 'true'">Never</CopyToPublishDirectory>
+    </Content>
+    <Content Include="../../characters/gpt-dragon/**/character.json;../../characters/gpt-dragon/**/*.png"
+             Link="characters/gpt-dragon/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest">
       <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' != 'true'">PreserveNewest</CopyToPublishDirectory>
       <CopyToPublishDirectory Condition="'$(StageReferencedCharacters)' == 'true'">Never</CopyToPublishDirectory>
     </Content>

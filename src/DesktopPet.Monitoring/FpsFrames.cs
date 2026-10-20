@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DesktopPet.Monitoring;
 
-public sealed record FpsReading(List<MonitorMetric> Metrics, string Status);
+public sealed record FpsReading(List<MonitorMetric> Metrics, string Status, string? Diagnostic = null, int Recoveries = 0);
 public sealed class FpsFrames
 {
     private sealed class Samples { public string Name = ""; public DateTimeOffset At; public readonly Queue<double> Times = new(); }

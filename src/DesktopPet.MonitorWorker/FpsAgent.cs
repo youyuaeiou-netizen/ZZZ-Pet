@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Principal;
-using System.Text;
 using System.Text.Json;
 using Microsoft.Win32.SafeHandles;
 using DesktopPet.Monitoring;
@@ -32,6 +31,20 @@ internal static class FpsAgent
         { Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "helper-integrity-error"), MonitorJson.Options)); return; }
         using var lifetime = new CancellationTokenSource(); using var job = new OwnedJob();
         Process? helper = null;
+        CancellationTokenSource? captureLifetime = null;
+        CaptureState? capture = null;
+        void StopHelper()
+        {
+            captureLifetime?.Cancel();
+            if (helper is not null)
+            {
+                try { if (!helper.HasExited) { helper.Kill(); helper.WaitForExit(3000); } }
+                catch (Exception e) when (e is InvalidOperationException or System.ComponentModel.Win32Exception) { }
+                helper.Dispose(); helper = null;
+            }
+            captureLifetime?.Dispose(); captureLifetime = null;
+            capture = null;
+        }
         var session = args[3];
         try
         {
@@ -42,33 +55,74 @@ internal static class FpsAgent
             _ = Task.Run(async () => { try { while (!lifetime.IsCancellationRequested) { if (owner.HasExited) { lifetime.Cancel(); return; } await Task.Delay(300, lifetime.Token); } } catch (OperationCanceledException) { } });
             _ = Task.Run(async () => { await Console.In.ReadLineAsync(); lifetime.Cancel(); });
             var frames = new FpsFrames();
-            var lastMetricsAt = DateTimeOffset.UtcNow;
+            var lastMetricsAt = Environment.TickCount64;
             var restartAfterQuietSeconds = 20;
+            var recoveries = 0;
+            string? recoveryReason = null;
+            FpsTraceStatistics? trace = null;
+            var lastTraceQuery = 0L;
+            var staleRecovery = new FpsStaleTraceRecovery();
             while (!lifetime.IsCancellationRequested)
             {
                 if (helper is null)
                 {
-                    StopOwnedTrace(session);
+                    if (!StopOwnedTrace(session)) throw new IOException("FPS trace cleanup failed");
                     helper = Process.Start(CreateHelperStartInfo(executable, session)) ?? throw new IOException();
-                    frames = new FpsFrames(); lastMetricsAt = DateTimeOffset.UtcNow;
+                    frames = new FpsFrames(); lastMetricsAt = Environment.TickCount64;
+                    trace = null; lastTraceQuery = 0;
+                    captureLifetime = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+                    capture = new();
+                    var currentCapture = capture; var captureToken = captureLifetime.Token;
                     var currentHelper = helper; var currentFrames = frames;
                     _ = Task.Run(async () =>
-                    { try { while (await currentHelper.StandardOutput.ReadLineAsync(lifetime.Token) is string line) currentFrames.Read(line, DateTimeOffset.UtcNow); } catch (OperationCanceledException) { } });
-                    _ = Task.Run(async () => { try { while (await currentHelper.StandardError.ReadLineAsync(lifetime.Token) is not null) { } } catch (OperationCanceledException) { } });
+                    {
+                        try { while (await currentHelper.StandardOutput.ReadLineAsync(captureToken) is string line) currentFrames.Read(line, DateTimeOffset.UtcNow); }
+                        catch (Exception e) when (e is OperationCanceledException or IOException or InvalidOperationException) { }
+                        finally { Volatile.Write(ref currentCapture.OutputEnded, 1); }
+                    });
+                    _ = Task.Run(async () =>
+                    {
+                        try
+                        {
+                            while (await currentHelper.StandardError.ReadLineAsync(captureToken) is string line)
+                                if (line.Contains("ETW events were lost", StringComparison.OrdinalIgnoreCase))
+                                    Volatile.Write(ref currentCapture.EventsLostWarning, 1);
+                        }
+                        catch (Exception e) when (e is OperationCanceledException or IOException or InvalidOperationException) { }
+                    });
                 }
-                if (helper.HasExited) throw new IOException("PresentMon stopped unexpectedly");
-                var now = DateTimeOffset.UtcNow;
-                var metrics = frames.Metrics(now);
-                if (metrics.Count > 0) { restartAfterQuietSeconds = 20; lastMetricsAt = now; }
-                var quietFor = now - lastMetricsAt;
-                var status = metrics.Count == 0 && quietFor >= TimeSpan.FromSeconds(10) ? "no-frames" : "running";
-                Console.WriteLine(JsonSerializer.Serialize(new FpsReading(metrics, status), MonitorJson.Options));
-                if (metrics.Count == 0 && quietFor >= TimeSpan.FromSeconds(restartAfterQuietSeconds))
+                if (helper.HasExited || Volatile.Read(ref capture!.OutputEnded) != 0)
                 {
-                    Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "recovering"), MonitorJson.Options));
-                    try { helper.Kill(); helper.WaitForExit(3000); }
-                    catch (InvalidOperationException) { }
-                    helper.Dispose(); helper = null;
+                    recoveryReason = helper.HasExited ? $"采集器退出（{helper.ExitCode}）" : "采集输出中断";
+                    recoveries++;
+                    Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "recovering", recoveryReason, recoveries), MonitorJson.Options));
+                    StopHelper(); StopOwnedTrace(session);
+                    await Task.Delay(TimeSpan.FromSeconds(2), lifetime.Token);
+                    continue;
+                }
+                var now = DateTimeOffset.UtcNow;
+                var tick = Environment.TickCount64;
+                if (tick - lastTraceQuery >= 1000) { trace = FpsTraceHealth.Read(session); lastTraceQuery = tick; }
+                var metrics = frames.Metrics(now);
+                if (metrics.Count > 0) { restartAfterQuietSeconds = 20; lastMetricsAt = tick; }
+                var quietFor = tick - lastMetricsAt;
+                var losing = trace is { EventsLost: > 0 } or { RealTimeBuffersLost: > 0 }
+                    || Volatile.Read(ref capture!.EventsLostWarning) != 0;
+                var stalled = metrics.Count == 0 && quietFor >= 10000;
+                var reclaimed = staleRecovery.Observe(tick, stalled && losing,
+                    stalled && losing ? FpsTraceHealth.Read("HWiNFO64") : null,
+                    FpsTraceHealth.HwInfoRunning, FpsTraceHealth.StopAbandonedHwInfo);
+                var detail = trace is null ? recoveryReason : $"ETW 丢失事件：{trace.EventsLost}；实时丢缓冲：{trace.RealTimeBuffersLost}"
+                    + (recoveryReason is null ? "" : $"；最近恢复：{recoveryReason}");
+                var status = stalled ? losing ? "etw-events-lost" : "no-frames" : "running";
+                Console.WriteLine(JsonSerializer.Serialize(new FpsReading(metrics, status, detail, recoveries), MonitorJson.Options));
+                if (reclaimed || metrics.Count == 0 && quietFor >= restartAfterQuietSeconds * 1000L)
+                {
+                    recoveryReason = reclaimed ? "已回收无运行进程且持续丢事件的 HWiNFO64 遗留会话"
+                        : losing ? "ETW 丢事件且无有效帧" : "长时间没有有效帧";
+                    recoveries++;
+                    Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "recovering", recoveryReason, recoveries), MonitorJson.Options));
+                    StopHelper();
                     StopOwnedTrace(session);
                     restartAfterQuietSeconds = Math.Min(120, restartAfterQuietSeconds * 2);
                     await Task.Delay(TimeSpan.FromSeconds(2), lifetime.Token);
@@ -78,27 +132,14 @@ internal static class FpsAgent
             }
         }
         catch (Exception e) when (e is IOException or InvalidOperationException or System.ComponentModel.Win32Exception or OperationCanceledException)
-        { if (!lifetime.IsCancellationRequested) Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "unavailable"), MonitorJson.Options)); }
+        { if (!lifetime.IsCancellationRequested) Console.WriteLine(JsonSerializer.Serialize(new FpsReading([], "unavailable", "采集启动或会话清理失败：" + e.GetType().Name), MonitorJson.Options)); }
         finally
         {
-            lifetime.Cancel(); StopOwnedTrace(session);
-            if (helper is not null) { try { if (!helper.HasExited) helper.Kill(); } catch (Exception e) when (e is InvalidOperationException or System.ComponentModel.Win32Exception) { } helper.Dispose(); }
+            lifetime.Cancel(); StopHelper(); StopOwnedTrace(session);
         }
     }
-    [DllImport("advapi32.dll", CharSet = CharSet.Unicode)] private static extern uint ControlTrace(ulong handle, string name, nint properties, uint command);
-    internal static void StopOwnedTrace(string name)
-    {
-        if (!name.StartsWith("DesktopPet.FPS.", StringComparison.Ordinal) || !Guid.TryParseExact(name[15..], "N", out _)) return;
-        // EVENT_TRACE_PROPERTIES is 120 bytes on Windows x64. Only this agent's generated session name is accepted.
-        var label = Encoding.Unicode.GetBytes(name + "\0"); var memory = Marshal.AllocHGlobal(120 + label.Length);
-        try
-        {
-            Marshal.Copy(new byte[120 + label.Length], 0, memory, 120 + label.Length);
-            Marshal.WriteInt32(memory, 120 + label.Length); Marshal.WriteInt32(memory, 116, 120); Marshal.Copy(label, 0, memory + 120, label.Length);
-            ControlTrace(0, name, memory, 1);
-        }
-        finally { Marshal.FreeHGlobal(memory); }
-    }
+    internal static bool StopOwnedTrace(string name) => FpsTraceHealth.StopOwned(name);
+    private sealed class CaptureState { public int OutputEnded, EventsLostWarning; }
     private sealed class OwnedJob : IDisposable
     {
         [StructLayout(LayoutKind.Sequential)] private struct BasicLimit { public long ProcessTime, JobTime; public uint Flags; public nuint Minimum, Maximum; public uint ActiveProcesses; public nuint Affinity; public uint Priority, Scheduling; }

@@ -27,6 +27,7 @@ public sealed class ToolsController : IDisposable
     private bool _petHidden;
     public bool Quiet => _service.State.Quiet;
     public bool HasBubble => _popup?.IsVisible == true;
+    public W.MenuItem Menu { get; } = new() { Header = "轻工具" };
 
     public ToolsController(Window pet, string statePath, Action<bool>? attention = null)
     {
@@ -48,11 +49,12 @@ public sealed class ToolsController : IDisposable
         {
             var item = new W.MenuItem { Header = label };
             item.Click += (_, _) => ShowPanel(tab);
-            menu.Items.Add(item);
+            Menu.Items.Add(item);
         }
         var quiet = new W.MenuItem { Header = "安静模式", IsCheckable = true };
         quiet.Click += (_, _) => ToggleQuiet();
-        menu.Items.Add(quiet);
+        Menu.Items.Add(quiet);
+        menu.Items.Add(Menu);
         menu.Opened += (_, _) => { quiet.IsChecked = Quiet; quiet.IsEnabled = _service.Available; };
         pet.ContextMenu = menu;
     }

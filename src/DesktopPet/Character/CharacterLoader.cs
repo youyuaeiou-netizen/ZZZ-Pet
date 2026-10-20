@@ -15,6 +15,11 @@ public static class CharacterLoader
         var jsonPath = Path.Combine(root, "character.json");
         var character = JsonSerializer.Deserialize<CharacterDefinition>(File.ReadAllText(jsonPath), Options)
             ?? throw new InvalidDataException("Character manifest is empty.");
+        return Validate(character, root);
+    }
+
+    private static CharacterLoadResult Validate(CharacterDefinition character, string root)
+    {
         if (character.SchemaVersion != 1)
             throw new InvalidDataException($"Unsupported schemaVersion: {character.SchemaVersion}.");
         if (!Version.TryParse(character.MinimumAppVersion, out var minimum)
@@ -76,6 +81,12 @@ public static class CharacterLoader
         // Invalid optional transitions are omitted; the default action remains playable.
         foreach (var action in playable.Values)
         {
+            if (action.ExitActionId is { Length: > 0 } exit
+                && (!action.Loop || !playable.TryGetValue(exit, out var ending) || ending.Loop))
+            {
+                warnings.Add($"Invalid exitActionId on {action.Id}: {exit}.");
+                action.ExitActionId = null;
+            }
             if (action.NextActionId is { Length: > 0 } next && !playable.ContainsKey(next))
             {
                 warnings.Add($"Invalid nextActionId on {action.Id}: {next}; using default action.");
@@ -90,6 +101,18 @@ public static class CharacterLoader
             character.WakeActionId = null;
         }
         character.ActionMap = playable;
+        if (character.Forms is not null)
+        {
+            foreach (var (id, form) in character.Forms)
+            {
+                if (string.IsNullOrWhiteSpace(id) || form is null || form.Forms is not null)
+                    throw new InvalidDataException("Invalid or nested character form.");
+                var loaded = Validate(form, root);
+                if (!character.ActionMap.Keys.ToHashSet().SetEquals(form.ActionMap.Keys))
+                    throw new InvalidDataException("Character forms must have matching action IDs.");
+                warnings.AddRange(loaded.Warnings.Select(w => $"{id}: {w}"));
+            }
+        }
         return new CharacterLoadResult(character, warnings);
     }
 
@@ -98,6 +121,9 @@ public static class CharacterLoader
         try
         {
             if (frame.DurationMs <= 0 || string.IsNullOrWhiteSpace(frame.Path)
+                || !double.IsFinite(frame.Rotation) || Math.Abs(frame.Rotation) > 30
+                || !double.IsFinite(frame.ScaleX) || frame.ScaleX is < 0.8 or > 1.2
+                || !double.IsFinite(frame.ScaleY) || frame.ScaleY is < 0.8 or > 1.2
                 || Path.IsPathRooted(frame.Path)) return false;
             var fullPath = Path.GetFullPath(Path.Combine(root, frame.Path));
             if (!fullPath.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)

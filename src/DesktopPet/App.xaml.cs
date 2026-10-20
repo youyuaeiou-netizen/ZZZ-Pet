@@ -54,6 +54,8 @@ public partial class App : System.Windows.Application
         var window = new PetWindow(packs, paths.CharacterRoot, selected, settings, settingsStore, paths);
         MainWindow = window;
         window.Show();
+        try { if (Tools.LocalModelExtension.Current.Enabled) Tools.LocalModelPage.StartGateway(); }
+        catch (Exception ex) { _log.Write("WARN", "本地模型网关启动失败，可从插件管理重试", ex); }
         _log.Write("INFO", $"角色已显示：{selected}");
         _instance.Listen(() =>
         {

@@ -103,7 +103,8 @@ internal sealed class MonitorTaskbarWindow : Window
             var metric = catalog.FirstOrDefault(m => m.Id == id);
             var name = MonitorLocalizer.Language.Key(c.Language, "Short." + id, metric?.Name ?? id);
             if (id == "FPS" && metric?.DeviceId == "desktop") name = MonitorLocalizer.Language.Text(c.Language, "桌面 FPS");
-            metric ??= new(id, name, "", "", "", null, "不可用");
+            metric ??= new(id, name, "", id == "FPS" ? "FPS" : "", id == "FPS" ? "FPS" : "", null,
+                id == "FPS" ? c.FpsEnabled ? "FPS 暂无有效帧。" : "FPS 采集未启用。" : "不可用");
             metric = _service.Snapshot.ForDisplay(metric, now);
             var row = new MonitorMetricRow(metric, name, c, _previous.TryGetValue(id, out var previous) ? previous : null, compact: true)
                 { Margin = new Thickness(4, 0, 8, 0), LayoutTransform = new Media.ScaleTransform(c.UiScale, c.UiScale) };

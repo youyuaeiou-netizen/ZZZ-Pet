@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DesktopPet.Behavior;
+using DesktopPet.Character;
 using Image = System.Windows.Controls.Image;
 
 namespace DesktopPet;
@@ -20,10 +21,11 @@ public sealed class SpritePlayer(Image image, long cacheBudgetBytes = 64L * 1024
     public int CachedImageCount => _contentCache.Count;
     private string? _shown;
     private int _facing;
+    private FrameDefinition? _transformFrame;
 
-    public void Show(ActionRunner runner)
+    public void Show(ActionRunner runner, string? framePath = null)
     {
-        var path = runner.CurrentFramePath;
+        var path = framePath ?? runner.CurrentFramePath;
         if (_shown != path)
         {
             if (!_cache.TryGetValue(path, out var bitmap))
@@ -65,10 +67,15 @@ public sealed class SpritePlayer(Image image, long cacheBudgetBytes = 64L * 1024
             image.Source = bitmap;
             _shown = path;
         }
-        if (_facing != runner.Facing)
+        var frame = runner.CurrentFrame;
+        if (_facing != runner.Facing || !ReferenceEquals(_transformFrame, frame))
         {
-            image.RenderTransform = new ScaleTransform(runner.Facing, 1);
+            var transforms = new TransformGroup();
+            transforms.Children.Add(new ScaleTransform(runner.Facing * frame.ScaleX, frame.ScaleY));
+            transforms.Children.Add(new RotateTransform(frame.Rotation * runner.Facing));
+            image.RenderTransform = transforms;
             _facing = runner.Facing;
+            _transformFrame = frame;
         }
     }
 
