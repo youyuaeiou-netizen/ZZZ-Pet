@@ -1,0 +1,88 @@
+{
+  "referenceStatus": "approved",
+  "referenceImage": "C:\\Users\\h\\Desktop\\素材\\gpt\\龙娘桌宠\\即梦制作包\\chibi\\首帧-站立.png",
+  "sourceRoot": "C:\\Users\\h\\Desktop\\素材\\gpt\\龙娘桌宠\\即梦制作包\\chibi\\source-videos",
+  "decodeSize": [
+    1920,
+    1080
+  ],
+  "layout": {
+    "width": 304,
+    "height": 464,
+    "anchorX": 152,
+    "anchorY": 446,
+    "standingHeight": 408
+  },
+  "character": {
+    "id": "gpt-dragon",
+    "name": "GPT 龙娘 · Q版",
+    "packVersion": "2.0.0",
+    "defaultScale": 1,
+    "defaultFacing": "right",
+    "immediateClick": true,
+    "sleepThresholdMs": 60000,
+    "wakeActionId": "wake",
+    "canvasWidth": 152,
+    "canvasHeight": 232,
+    "anchorX": 76,
+    "anchorY": 223
+  },
+  "actions": [
+    {
+      "id": "idle",
+      "displayName": "待机",
+      "category": "龙娘",
+      "loop": true,
+      "priority": 0,
+      "triggers": [
+        "app_start"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ]
+    },
+    {
+      "id": "heart",
+      "displayName": "比心",
+      "category": "龙娘",
+      "loop": false,
+      "priority": 10,
+      "triggers": [
+        "click",
+        "double_click"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification",
+        "idle_timeout"
+      ],
+      "nextActionId": "idle"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "idle",
+      "input": "idle.mp4",
+      "mode": "green",
+      "start": 0,
+      "end": 3
+    },
+    {
+      "id": "heart",
+      "input": "heart.mp4",
+      "mode": "green",
+      "start": 0,
+      "end": 3.5
+    }
+  ]
+}

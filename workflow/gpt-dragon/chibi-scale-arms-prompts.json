@@ -1,0 +1,14 @@
+{
+  "tool": "built-in ImageGen",
+  "version": "2.4.2",
+  "scope": "Only drag/release, all other actions unchanged",
+  "selected": [
+    {
+      "source": "poses/chibi/landing-keyframes.png",
+      "generatedSource": "exec-f73325c7-c6fd-4170-be0f-cdb4fe315377.png",
+      "prompt": "Edit this existing transparent 2 column by 4 row eight-frame dragon-girl animation sheet. Image 1 is AUTHORITATIVE physical body proportions and outfit, already accepted standing runtime sprite. Image 2 is edit target; retain its layout and landing story. Correct TWO problems: first two airborne sprites must have BOTH ARMS HANGING VERTICALLY DOWN alongside torso, elbows relaxed, wrists near hips/thighs, fingers loosely DOWN, never extended sideways, never shrugging, no outward open palms. Keep two legs naturally hanging separated downward exactly as target. For landing frames 3-6 only allow small natural elbow/knee bends, hands stay low alongside body, no skirt lifting. Second: character MUST keep IDENTICAL physical head diameter, face width, eye separation, shoulder width, torso length, and limb bone length across ALL eight drawings, including airborne, cushioning and standing. No change of camera zoom at all. Current sheet accidentally changes head size from frame to frame; correct this. Use the same head and torso drawing dimensions as last standing frame across every cell. Use image1 identity: two white horns, white/lavender hair, purple eyes, pointed ears and hair knot ornament, two lavender wings and exactly ONE scaled tail, original white dress with detached sleeves. Do NOT add clothing, ruffle layers, decorations, accessories or props. Keep clean simple original dress. 8 sequence cells in reading order: 1 airborne relaxed arms and legs down; 2 just before contact same down arms; 3 both shoe soles contact same local ground baseline and slightly bend knees; 4 mild knee cushioning pelvis/head slightly lower WITHOUT resizing head/body; 5 straighten knees; 6 nearly standing; 7 standing; 8 neutral standing matching image1. Each sprite complete uncropped in its own cell, head widths exactly equal throughout, subtle surprise then calm expressions allowed. Transparent background, no text/labels/scene/shadows/ground. Keep compact movement, no dramatic squat, no jump, no split legs, no seated pose. Anatomical size is fixed, only posture changes."
+    }
+  ],
+  "scaleReference": "Original idle 0000.png visible face width 114 px; uniform per-pose scale about fixed foot anchor",
+  "measurement": "Eight fitted keyframes: 115,114,114,114,114,114,114,114 px"
+}

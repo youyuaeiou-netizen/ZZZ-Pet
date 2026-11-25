@@ -1,0 +1,144 @@
+{
+  "referenceStatus": "approved",
+  "referenceImage": "C:\\pet\\ZZZ-Pet\\workflow\\gpt-dragon\\jimeng-v4-20261016\\references\\approved-turnaround-v4.png",
+  "sourceRoot": "C:/Users/h/Desktop/视频/Q版",
+  "decodeSize": [
+    1280,
+    720
+  ],
+  "alignment": {
+    "anchorX": 631,
+    "anchorY": 663,
+    "standingHeight": 634
+  },
+  "layout": {
+    "width": 640,
+    "height": 576,
+    "anchorX": 260,
+    "anchorY": 520,
+    "standingHeight": 408
+  },
+  "character": {
+    "id": "gpt-dragon-v4-preview",
+    "name": "GPT龙娘·新版Q版预览",
+    "packVersion": "0.1.0",
+    "defaultScale": 1,
+    "defaultFacing": "right",
+    "immediateClick": true,
+    "defaultActionId": "idle",
+    "randomIntervalMs": 0,
+    "sleepThresholdMs": 0,
+    "wakeActionId": null,
+    "canvasWidth": 320,
+    "canvasHeight": 288,
+    "anchorX": 130,
+    "anchorY": 260
+  },
+  "actions": [
+    {
+      "id": "idle",
+      "displayName": "待机·摆尾眨眼",
+      "category": "新版Q版预览",
+      "loop": true,
+      "priority": 0,
+      "triggers": [
+        "app_start"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification"
+      ]
+    },
+    {
+      "id": "heart",
+      "displayName": "比心·飞出爱心",
+      "category": "新版Q版预览",
+      "loop": false,
+      "priority": 10,
+      "triggers": [
+        "click",
+        "double_click"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification"
+      ],
+      "nextActionId": "idle"
+    },
+    {
+      "id": "drag",
+      "displayName": "悬空·惊慌",
+      "category": "新版Q版预览",
+      "loop": true,
+      "priority": 10,
+      "triggers": [
+        "drag_start"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification"
+      ]
+    },
+    {
+      "id": "release",
+      "displayName": "落地·举手欢呼",
+      "category": "新版Q版预览",
+      "loop": false,
+      "priority": 10,
+      "triggers": [
+        "drag_release"
+      ],
+      "weight": 1,
+      "cooldownMs": 0,
+      "interruptibleBy": [
+        "click",
+        "double_click",
+        "drag_start",
+        "notification"
+      ],
+      "nextActionId": "idle"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "idle",
+      "input": "待机.mp4",
+      "mode": "green",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "id": "heart",
+      "input": "比心.mp4",
+      "mode": "green",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "id": "drag",
+      "input": "悬空.mp4",
+      "mode": "green",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "id": "release",
+      "input": "下落.mp4",
+      "mode": "green",
+      "start": 0.25,
+      "end": 5
+    }
+  ]
+}

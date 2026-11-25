@@ -24,7 +24,9 @@ internal static class Program
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
         try
         {
-            if (args.Skip(1).Contains("--desktop-fps-only")) { FpsCli(); DesktopFpsDisplay(); PetInteraction(); }
+            if (args.Skip(1).Contains("--fps-live")) LiveFpsDisplay(int.Parse(args[^1]));
+            else if (args.Skip(1).Contains("--dragon-menu-only")) DragonInteractionMenus();
+            else if (args.Skip(1).Contains("--desktop-fps-only")) { FpsCli(); DesktopFpsDisplay(); PetInteraction(); }
             else if (args.Skip(1).Contains("--usage-live")) UsageLive();
             else if (args.Skip(1).Contains("--quota-only")) QuotaAndDismissal();
             else if (args.Skip(1).Contains("--interaction-only")) PetInteraction();
@@ -39,6 +41,28 @@ internal static class Program
         finally { foreach (Window w in app.Windows.Cast<Window>().ToArray()) w.Close(); app.Shutdown(); }
     }
     private static void Check(bool value, string name) { if (!value) throw new Exception(name); Passed.Add(name); }
+    private static void LiveFpsDisplay(int targetPid)
+    {
+        using var service = new MonitorService(Path.Combine(_output, "fps-live"), Dispatcher.CurrentDispatcher, () => true);
+        service.Config.Enabled = service.Config.FpsEnabled = true; service.Config.HistoryEnabled = false;
+        service.Config.TaskbarMetrics = ["FPS"]; service.Config.TaskbarLeft = 30; service.Config.TaskbarTop = 30;
+        service.FpsTargets = () => [targetPid]; service.Save(); service.Start(false);
+        Until(() => service.Snapshot.Metrics.Any(m => m.Id == "FPS." + targetPid && m.Valid), 25000,
+            "production worker receives real frames from the presenting test process");
+        var taskbar = new MonitorTaskbarWindow(service); taskbar.Show(); taskbar.Refresh(); Pump(300);
+        try
+        {
+            var text = string.Join(' ', Find<W.TextBlock>(taskbar).Select(t => t.Text));
+            Check(text.Contains("FPS") && text.Any(char.IsDigit) && !text.Contains("等待") && !text.Contains("—"),
+                "taskbar renders numeric FPS from real worker samples");
+            Check(service.Snapshot.Capabilities?.ContainsKey("fps-diagnostic") == true,
+                "production worker exposes trace health and recovery diagnostics");
+            Capture(taskbar, "fps-live-taskbar.png");
+            File.WriteAllText(Path.Combine(_output, "snapshot.json"), JsonSerializer.Serialize(new
+            { service.Snapshot.Capabilities, Metrics = service.Snapshot.Metrics.Where(m => m.Kind == "FPS"), Display = text }));
+        }
+        finally { taskbar.Close(); service.Stop(); }
+    }
     private static void DesktopFpsDisplay()
     {
         using var service = new MonitorService(Path.Combine(_output, "desktop-fps"), Dispatcher.CurrentDispatcher, () => true);
@@ -57,6 +81,141 @@ internal static class Program
             Capture(taskbar, "desktop-fps-taskbar.png");
         }
         finally { taskbar.Close(); }
+    }
+    private static void DragonInteractionMenus()
+    {
+        var paths = new RuntimePaths(new StartupOptions(null, Path.Combine(_output, "dragon-menu"), null));
+        new MonitorStore(paths.MonitorDirectory).Save(new() { Enabled = false });
+        var store = new SettingsStore(paths.SettingsPath);
+        var catalog = CharacterCatalog.Load(paths.CharacterRoot, paths.UserCharacterRoot);
+        var pet = new PetWindow(catalog.Characters, paths.CharacterRoot, "gpt-dragon", store.Load(), store, paths)
+            { ShowActivated = false };
+        pet.Show(); Pump(80);
+        try
+        {
+            var service = Field<MonitorService>(Field<MonitorController>(pet, "_monitor"), "_service");
+            service.Config.Enabled = service.Config.FpsEnabled = true;
+            service.Config.SelectedMetrics = ["CPU.Load", "FPS"];
+            var snapshot = new MonitorSnapshot(DateTimeOffset.UtcNow, [], [], "fixture");
+            typeof(MonitorService).GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance)!.Invoke(service, [snapshot]);
+            var originalSnapshot = service.Snapshot;
+            var interaction = pet.ContextMenu.Items.OfType<W.MenuItem>().Single(i => Equals(i.Header, "互动动作"));
+            W.MenuItem Item(string header) => interaction.Items.OfType<W.MenuItem>().Single(i => Equals(i.Header, header));
+            Check(!pet.ContextMenu.Items.OfType<W.MenuItem>().Any(i => Equals(i.Header, "喂食") || Equals(i.Header, "GPT 龙娘")),
+                "dragon controls have one interaction-menu entry point");
+            foreach (var (header, form) in new[] { ("龙娘变小（Q 版）", "chibi"), ("龙娘变大（人物版）", "human") })
+            {
+                Item(header).RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent));
+                Check(Field<string>(pet, "_shownDragonForm") == form, "interaction menu switches dragon form " + form);
+                Check(ReferenceEquals(service, Field<MonitorService>(Field<MonitorController>(pet, "_monitor"), "_service"))
+                    && service.Config.FpsEnabled && service.Config.SelectedMetrics.SequenceEqual(new[] { "CPU.Load", "FPS" })
+                    && ReferenceEquals(originalSnapshot, service.Snapshot), "form switch preserves shared monitoring and FPS configuration " + form);
+                if (form == "chibi")
+                {
+                    var runner = Field<DesktopPet.Behavior.ActionRunner>(pet, "_runner");
+                    var response = interaction.Items.OfType<W.MenuItem>().SelectMany(i => i.Items.OfType<W.MenuItem>())
+                        .Single(i => Equals(i.Header, "爱心回应"));
+                    response.RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent)); Pump(500);
+                    Check(runner.Current.Id == "heart" && runner.CurrentFramePath.Contains("animations" + Path.DirectorySeparatorChar + "chibi"),
+                        "Q interaction menu plays the installed sprite response");
+                    Capture(pet, "chibi-heart-live.png"); Pump(1700);
+                    Check(runner.Current.Id == "idle", "Q live response returns to idle");
+                    runner.Trigger("drag_start"); var firstFrame = runner.CurrentFramePath; Pump(250);
+                    Check(runner.IsDragging && runner.CurrentFramePath != firstFrame, "Q live dragging keeps animating");
+                    runner.Trigger("drag_release"); Pump(160); Capture(pet, "chibi-landing-live.png"); Pump(1400);
+                    Check(runner.Current.Id == "idle", "Q live landing completes");
+                    void InvokePet(string name, params object[] arguments) => typeof(PetWindow)
+                        .GetMethod(name, BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(pet,arguments);
+                    var floor=(double)typeof(PetWindow).GetProperty("ChibiFloor",BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(pet)!;
+                    typeof(PetWindow).GetField("_groundY",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(pet,floor-300);
+                    typeof(PetWindow).GetField("_displayedAction",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(pet,null);
+                    InvokePet("ApplyViewport");InvokePet("HandleGesture","drag_start");InvokePet("ApplyViewport");Pump(120);
+                    InvokePet("KeepChibiSuspended");Capture(pet,"chibi-picked-up-live.png");
+                    var animationTimer=Field<DispatcherTimer>(pet,"_animationTimer");animationTimer.Stop();
+                    InvokePet("HandleGesture","drag_release");InvokePet("ApplyViewport");
+                    Check(Field<bool>(pet,"_chibiFalling"), "Q release starts real window gravity");
+                    var landingY=Field<double>(pet,"_chibiFallFloor");
+                    Check(landingY < floor-200, "Q release stops near the release point above the desktop bottom");
+                    var fallDirectory=Path.Combine(_output,"fall-playback");Directory.CreateDirectory(fallDirectory);
+                    var cameraLeft=pet.Left-120;var cameraTop=landingY-400;var fallIndex=0;
+                    void FallFrame()
+                    {
+                        var image=new RenderTargetBitmap((int)Math.Ceiling(pet.ActualWidth),(int)Math.Ceiling(pet.ActualHeight),96,96,PixelFormats.Pbgra32);image.Render(pet);
+                        var visual=new DrawingVisual();using(var dc=visual.RenderOpen())
+                        {
+                            dc.DrawRectangle(new SolidColorBrush(System.Windows.Media.Color.FromRgb(38,38,51)),null,new Rect(0,0,400,620));
+                            dc.DrawImage(image,new Rect(pet.Left-cameraLeft,pet.Top-cameraTop,pet.ActualWidth,pet.ActualHeight));
+                        }
+                        var result=new RenderTargetBitmap(400,620,96,96,PixelFormats.Pbgra32);result.Render(visual);
+                        var png=new PngBitmapEncoder();png.Frames.Add(BitmapFrame.Create(result));
+                        using var file=File.Create(Path.Combine(fallDirectory,$"{fallIndex++:0000}.png"));png.Save(file);
+                    }
+                    void FallAdvance(int count)
+                    {
+                        for(var n=0;n<count;n++)
+                        {
+                            var elapsed=TimeSpan.FromMilliseconds(25);
+                            var falling=(bool)typeof(PetWindow).GetMethod("AdvanceChibiFall",BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(pet,[elapsed])!;
+                            if(!falling)runner.Advance(elapsed);
+                            InvokePet("ApplyViewport");
+                            var airPath=(string?)typeof(PetWindow).GetProperty("ChibiAirFramePath",BindingFlags.NonPublic|BindingFlags.Instance)!.GetValue(pet);
+                            Field<SpritePlayer>(pet,"_player").Show(runner,airPath);pet.UpdateLayout();FallFrame();
+                        }
+                    }
+                    FallFrame();var initialY=Field<double>(pet,"_groundY");var airFrame=runner.CurrentFramePath;FallAdvance(2);
+                    var airImage=Field<W.Image>(pet,"SpriteImage").Source;
+                    var firstY=Field<double>(pet,"_groundY");FallAdvance(2);var secondY=Field<double>(pet,"_groundY");
+                    Check(firstY>initialY && secondY-firstY>firstY-initialY, "Q downward window motion accelerates");
+                    Check(runner.CurrentFramePath==airFrame, "Q impact frame waits for actual contact");
+                    Check(!ReferenceEquals(airImage,Field<W.Image>(pet,"SpriteImage").Source), "Q falling velocity advances the hair, hem and tail inertia artwork");
+                    InvokePet("PlayInteraction","sleep_enter");
+                    Check(runner.Current.Id=="release" && Field<bool>(pet,"_chibiFalling"),"Q menu interaction cannot interrupt gravity into a floating pose");
+                    FallAdvance(8);Check(!Field<bool>(pet,"_chibiFalling") && Math.Abs(Field<double>(pet,"_groundY")-landingY)<1,
+                        "Q short drop stops at its local landing point without overshoot");
+                    Check(runner.Current.Id=="release", "Q landing starts the impact and rebound sequence");
+                    Capture(pet,"chibi-impact-live.png");FallAdvance(60);
+                    Check(runner.Current.Id=="idle", "Q physical falling and impact finish at idle");
+                    typeof(PetWindow).GetField("_lastTick",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(pet,Field<System.Diagnostics.Stopwatch>(pet,"_clock").Elapsed);
+                    animationTimer.Start();
+                    typeof(PetWindow).GetField("_groundY",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(pet,floor-10);
+                    InvokePet("HandleGesture","drag_start");InvokePet("KeepChibiSuspended");
+                    Check(Math.Abs(Field<double>(pet,"_groundY")-(floor-10))<1, "Q dragging near the bottom does not force a 120 DIP lift");
+                    InvokePet("HandleGesture","drag_release");Pump(350);
+                    Check(!Field<bool>(pet,"_chibiFalling") && Math.Abs(Field<double>(pet,"_groundY")-floor)<1, "Q near-bottom drop is shortened to the remaining distance");
+                    Pump(1000);InvokePet("HandleGesture","drag_start");InvokePet("HandleGesture","drag_release");
+                    Check(!Field<bool>(pet,"_chibiFalling") && !Path.GetFileName(runner.CurrentFramePath).StartsWith("air"), "Q release already at the bottom skips airborne frames");
+                    Pump(1000);
+                    var sleepItem=interaction.Items.OfType<W.MenuItem>().SelectMany(i=>i.Items.OfType<W.MenuItem>())
+                        .Single(i=>Equals(i.Header,"趴下入睡"));
+                    sleepItem.RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent));Pump(2100);
+                    Check(runner.Current.Id=="sleep", "Q sleep menu enters the prone breathing loop");
+                    Capture(pet,"chibi-prone-live.png");
+                    var source=new FormatConvertedBitmap((BitmapSource)Field<W.Image>(pet,"SpriteImage").Source,PixelFormats.Bgra32,null,0);
+                    var data=new byte[source.PixelWidth*source.PixelHeight*4];source.CopyPixels(data,source.PixelWidth*4,0);
+                    var minX=source.PixelWidth;var maxX=0;var minY=source.PixelHeight;var maxY=0;
+                    for(var y=0;y<source.PixelHeight;y++)for(var x=0;x<source.PixelWidth;x++)
+                        if(data[(y*source.PixelWidth+x)*4+3]>16){minX=Math.Min(minX,x);maxX=Math.Max(maxX,x);minY=Math.Min(minY,y);maxY=Math.Max(maxY,y);}
+                    Check(maxX-minX>1.6*(maxY-minY), "Q sleeping artwork is lying horizontally rather than standing with closed eyes");
+                    var wakeItem=interaction.Items.OfType<W.MenuItem>().SelectMany(i=>i.Items.OfType<W.MenuItem>())
+                        .Single(i=>Equals(i.Header,"起身醒来"));
+                    wakeItem.RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent));Pump(2100);
+                    Check(runner.Current.Id=="idle", "Q wake menu rises and restores the original standing pose");
+                }
+            }
+            Item("喂食").RaiseEvent(new RoutedEventArgs(W.MenuItem.ClickEvent));
+            Check(Field<DesktopPet.Behavior.ActionRunner>(pet, "_runner").Current.Id == "feed", "interaction menu starts feeding video");
+            service.Config.FpsEnabled = false;
+            service.Config.TaskbarMetrics = ["FPS"]; service.Config.TaskbarLeft = 30; service.Config.TaskbarTop = 30;
+            var taskbar = new MonitorTaskbarWindow(service); taskbar.Show(); taskbar.Refresh(); Pump(50);
+            try
+            {
+                var text = string.Join(' ', Find<W.TextBlock>(taskbar).Select(t => t.Text));
+                Check(text.Contains("—") && !text.Contains("不可用"), "disabled FPS placeholder remains dash with fresh hardware data");
+                Capture(taskbar, "disabled-fps-taskbar.png");
+            }
+            finally { taskbar.Close(); }
+        }
+        finally { pet.Close(); }
     }
     private static CodexUsage UsageFixture()
     {

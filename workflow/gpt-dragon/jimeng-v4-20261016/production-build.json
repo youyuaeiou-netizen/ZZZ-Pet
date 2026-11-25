@@ -1,0 +1,19 @@
+{
+  "characterId": "gpt-dragon-chibi-v4",
+  "frameCount": 243,
+  "fps": 12,
+  "sourceVideos": "C:/Users/h/Desktop/视频/Q版",
+  "releaseTrim": [
+    0.25,
+    5
+  ],
+  "airFrames": 6,
+  "airFrameSource": "drag frames 18,20,22,24,26,28; used only during physical descent",
+  "fixedClipTranslationY": {
+    "idle": 0,
+    "heart": -2,
+    "drag": -2,
+    "release": -7
+  },
+  "productionDeployment": "installed_and_running"
+}

@@ -115,7 +115,7 @@ def prepare(output: Path):
         encoding="utf-8")
 
 
-def key_green(rgba: np.ndarray) -> np.ndarray:
+def key_green(rgba: np.ndarray, *, preserve_interior: bool = False) -> np.ndarray:
     rgb = rgba[..., :3].astype(np.float32) / 255
     hi, lo = rgb.max(axis=2), rgb.min(axis=2)
     delta = hi - lo
@@ -137,11 +137,13 @@ def key_green(rgba: np.ndarray) -> np.ndarray:
     soft = np.array(clean.filter(ImageFilter.GaussianBlur(.4)), dtype=np.float32) / 255
     result = rgba.copy()
     result[..., 3] = np.minimum(rgba[..., 3], np.rint(soft * 255).astype(np.uint8))
+    edge = np.array(clean.filter(ImageFilter.MinFilter(5))) < 255
     for channel in range(3):
         weighted = Image.fromarray(np.rint(rgba[..., channel] * solid).astype(np.uint8))
         blurred = np.array(weighted.filter(ImageFilter.GaussianBlur(.4)), dtype=np.float32)
         result[..., channel] = np.rint(np.clip(blurred / np.maximum(soft, 1 / 255), 0, 255)).astype(np.uint8)
-    edge = np.array(clean.filter(ImageFilter.MinFilter(5))) < 255
+        if preserve_interior:
+            result[..., channel][~edge] = rgba[..., channel][~edge]
     result[..., 1] = np.where(edge, np.minimum(result[..., 1], np.maximum(result[..., 0], result[..., 2])), result[..., 1])
     result[result[..., 3] == 0] = 0
     return result
@@ -156,7 +158,7 @@ def bbox(rgba: np.ndarray):
     return int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1
 
 
-def decode(job, root: Path, cache: Path, ffmpeg: str, ffprobe: str):
+def decode(job, root: Path, cache: Path, ffmpeg: str, ffprobe: str, decode_size=(1280,720)):
     src = (root / job["input"]).resolve()
     if not src.is_relative_to(root) or not src.is_file():
         raise ValueError(f"Missing input or input outside sourceRoot: {job['input']}")
@@ -180,7 +182,7 @@ def decode(job, root: Path, cache: Path, ffmpeg: str, ffprobe: str):
     if job["mode"] == "alpha" and src.suffix.lower() == ".webm":
         cmd += ["-c:v", "libvpx-vp9"]
     cmd += ["-i", str(src), "-ss", str(start), "-t", str(end - start), "-an", "-vf",
-            f"scale=1280:720,fps={FPS}", "-pix_fmt", "rgba", str(target / "%05d.png")]
+            f"scale={decode_size[0]}:{decode_size[1]},fps={FPS}", "-pix_fmt", "rgba", str(target / "%05d.png")]
     subprocess.run(cmd, check=True, capture_output=True)
     paths = sorted(target.glob("*.png"))
     if not paths:
@@ -192,7 +194,7 @@ def decode(job, root: Path, cache: Path, ffmpeg: str, ffprobe: str):
         if job["mode"] == "green":
             rgba = key_green(rgba)
         box = bbox(rgba)
-        if box[0] <= 1 or box[1] <= 1 or box[2] >= 1279 or box[3] >= 719:
+        if box[0] <= 1 or box[1] <= 1 or box[2] >= decode_size[0]-1 or box[3] >= decode_size[1]-1:
             raise ValueError(f"Foreground touches source edge: {path.name}")
         boxes.append(box)
         Image.fromarray(rgba).save(path)
@@ -200,17 +202,19 @@ def decode(job, root: Path, cache: Path, ffmpeg: str, ffprobe: str):
                           "start": start, "end": end, "decodedFrames": len(paths), "mode": job["mode"]}
 
 
-def normalize(paths, alignment, output: Path):
+def normalize(paths, alignment, output: Path, layout=None, decode_size=(1280,720)):
     height = float(alignment["standingHeight"])
     ax, ay = float(alignment["anchorX"]), float(alignment["anchorY"])
-    if not all(math.isfinite(v) for v in (height, ax, ay)) or height <= 0 or not 0 <= ax <= 1280 or not 0 <= ay <= 720:
+    if not all(math.isfinite(v) for v in (height, ax, ay)) or height <= 0 or not 0 <= ax <= decode_size[0] or not 0 <= ay <= decode_size[1]:
         raise ValueError("Invalid alignment coordinates")
-    scale = 540 / height
-    resized = (round(1280 * scale), round(720 * scale))
-    offset = (round(308 - ax * scale), round(630 - ay * scale))
+    layout = layout or dict(width=616,height=656,anchorX=308,anchorY=630,standingHeight=540)
+    size=(layout['width'],layout['height'])
+    scale = layout['standingHeight'] / height
+    resized = (round(decode_size[0] * scale), round(decode_size[1] * scale))
+    offset = (round(layout['anchorX'] - ax * scale), round(layout['anchorY'] - ay * scale))
     if max(resized) > 8192:
         raise ValueError("Alignment scale is too large")
-    frames, previous, union = [], None, [SIZE[0], SIZE[1], 0, 0]
+    frames, previous, union = [], None, [size[0], size[1], 0, 0]
     output.mkdir(parents=True)
     for index, path in enumerate(paths):
         with Image.open(path) as source:
@@ -218,9 +222,9 @@ def normalize(paths, alignment, output: Path):
             box = bbox(source_rgba)
             transformed = (box[0] * scale + offset[0], box[1] * scale + offset[1],
                            box[2] * scale + offset[0], box[3] * scale + offset[1])
-            if transformed[0] < 2 or transformed[1] < 2 or transformed[2] > 614 or transformed[3] > 654:
+            if transformed[0] < 2 or transformed[1] < 2 or transformed[2] > size[0]-2 or transformed[3] > size[1]-2:
                 raise ValueError(f"Action would be clipped on shared canvas: frame {index}")
-            canvas = Image.new("RGBA", SIZE)
+            canvas = Image.new("RGBA", size)
             canvas.paste(source.resize(resized, Image.Resampling.LANCZOS), offset)
         rgba = np.array(canvas)
         bound = bbox(rgba)
@@ -267,10 +271,12 @@ def build(jobs_path: Path, output: Path, pilot: bool, ffmpeg: str, ffprobe: str)
     if not reference.is_file():
         raise ValueError("Approved reference image is missing")
     requested = {str(job.get("id", "")) for job in config.get("jobs", [])}
-    known = {action[0] for action in ACTIONS}
-    if not {"idle", "wave"}.issubset(requested) or not requested.issubset(known):
+    custom_actions=config.get('actions')
+    known = {a['id'] for a in custom_actions} if custom_actions else {action[0] for action in ACTIONS}
+    required={'idle'} if custom_actions else {'idle','wave'}
+    if not required.issubset(requested) or not requested.issubset(known):
         raise ValueError("Jobs must contain idle and wave and use known action ids")
-    if not pilot:
+    if not pilot and not custom_actions:
         if requested & {"sleep_enter", "sleep_idle", "wake"}:
             for pose_id in ("stand_masked", "sit_masked"):
                 pose = config.get("poseReferences", {}).get(pose_id, {})
@@ -296,7 +302,7 @@ def build(jobs_path: Path, output: Path, pilot: bool, ffmpeg: str, ffprobe: str)
     try:
         decoded = {}
         for job in jobs:
-            decoded[job["id"]] = decode(job, root, cache, ffmpeg, ffprobe)
+            decoded[job["id"]] = decode(job, root, cache, ffmpeg, ffprobe, tuple(config.get('decodeSize',[1280,720])))
         first = decoded["idle"][1][0]
         alignment = config.get("alignment") or {"anchorX": (first[0] + first[2]) / 2,
                                                "anchorY": first[3], "standingHeight": first[3] - first[1]}
@@ -304,19 +310,26 @@ def build(jobs_path: Path, output: Path, pilot: bool, ffmpeg: str, ffprobe: str)
         frame_map = {}
         for job in jobs:
             paths, _, detail = decoded[job["id"]]
-            frames, union = normalize(paths, job.get("alignment") or alignment, output / "animations" / job["id"])
+            frames, union = normalize(paths, job.get("alignment") or alignment, output / "animations" / job["id"],
+                                      config.get('layout'),tuple(config.get('decodeSize',[1280,720])))
             frame_map[job["id"]] = frames
             report["actions"].append({"id": job["id"], **detail, "uniqueFrames": len(frames),
                                        "durationMs": sum(f["durationMs"] for f in frames), "contentBounds": union})
         (output / "masters").mkdir()
         shutil.copyfile(reference, output / "masters" / "approved-reference.png")
-        write_json(output / "character.json", {
+        manifest={
             "schemaVersion": 1, "id": "ellen-flat2d", "name": "艾莲布 · 2D手绘预览",
             "packVersion": "0.1.0", "minimumAppVersion": "0.3.1", "immediateClick": True,
             "defaultActionId": "idle", "defaultScale": .75, "canvasWidth": 308, "canvasHeight": 328,
             "anchorX": 154, "anchorY": 315, "randomIntervalMs": 12000,
             "sleepThresholdMs": 0 if pilot else 60000, "wakeActionId": None if pilot else "wake",
-            "avoidRepeatedActions": True, "actions": manifest_actions(frame_map)})
+            "avoidRepeatedActions": True, "actions": manifest_actions(frame_map)}
+        if custom_actions:
+            manifest.update(config['character'])
+            manifest['actions']=[dict(a,frames=frame_map[a['id']]) for a in custom_actions if a['id'] in frame_map]
+            report['pendingActions']=sorted(known-requested)
+            if pilot: manifest.update(sleepThresholdMs=0,wakeActionId=None)
+        write_json(output / "character.json",manifest)
         report["status"] = "mechanical_checks_passed_visual_pending"
     except Exception as error:
         report["status"] = "failed"

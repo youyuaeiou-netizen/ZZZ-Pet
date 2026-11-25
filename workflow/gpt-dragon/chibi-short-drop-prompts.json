@@ -1,0 +1,13 @@
+{
+  "tool": "built-in ImageGen",
+  "version": "2.4.1",
+  "scope": "Only drag and release. Other six actions remain unchanged.",
+  "selected": [
+    {
+      "source": "poses/chibi/landing-keyframes.png",
+      "generatedSource": "exec-dcf69f44-c1e0-420f-9e48-693349c8fbb9.png",
+      "prompt": "Edit reference character animation sheet. Image 1 is authoritative ORIGINAL character anatomy and outfit. Image 2 is layout and size reference only, its poses are rejected. Output transparent 1024x1536 sprite sheet, exact 2 columns x 4 equal rows, eight full-body keyframes reading left-to-right then top-to-bottom, each contained in its 512x384 cell. Keep identical physical head and body size in every cell, comparable to image 2. Same white/lavender hair, two horns, pointed ears, purple eyes, hair knot ornament, two lavender dragon wings, ONE scaled tail. Outfit must match image 1, no extra garment, no added skirt layers/ruffles, no extra accessories. Simple clean silhouette and consistent details. Sequence for being held then a SHORT drop then gentle landing: frame 1 suspended vertical torso, two legs hanging naturally downward SEPARATELY with relaxed knees, feet visibly spaced about hip width, no knees together, no crossed legs, no seated or tucked pose; arms loosely hanging, surprise. Frame 2 same legs down, slight hair/hem lag, feet approach contact. Frame 3 both soles touch the same ground line, feet remain naturally spaced, tiny knee flex. Frame 4 modest cushioning squat, both knees visibly flex over their feet, pelvis lowers slightly, torso balanced, arms slightly apart for balance, hands do NOT lift skirt; frame 5 begin standing back up; frame 6 nearly upright; frame 7 calm standing; frame 8 standing original neutral pose. All ground-contact frames shoe soles at identical cell ground height, landing squat lowers head and pelvis naturally without scaling head/body. A gentle 50-pixel drop needs small cushioning, not sitting, jumping, deep curtsey or skirt lifting. No scene, text, ground drawing, panels, glow, blanket, pillow. Preserve original dress only with restrained draping, never invent clothing."
+    }
+  ],
+  "assembly": "Shared scale 1.06; original idle endpoint retained. Complete warped keyframe selected without alpha-dissolving faces. Short drop capped at 48 times display scale DIP; cushion 875 ms. Sleep revision discarded after user narrowed scope."
+}
